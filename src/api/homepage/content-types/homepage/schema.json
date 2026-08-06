@@ -68,7 +68,8 @@
         "blocks.cards",
         "blocks.image",
         "blocks.button",
-        "blocks.quote"
+        "blocks.quote",
+        "blocks.gallery"
       ],
       "pluginOptions": {
         "i18n": {

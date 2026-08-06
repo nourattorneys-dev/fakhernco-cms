@@ -127,6 +127,7 @@ const COMPONENT = {
   faq: 'blocks.faq',
   cards: 'blocks.cards',
   image: 'blocks.image',
+  gallery: 'blocks.gallery',
   button: 'blocks.button',
   quote: 'blocks.quote',
 };
@@ -188,6 +189,15 @@ function toComponent(block, stats) {
       if (fileId) stats.imagesLinked += 1; else if (block.src) stats.imagesUnlinked += 1;
       return { __component, alt: block.alt || null, legacySrc: block.src || null, file: fileId };
     }
+    case 'gallery':
+      return {
+        __component,
+        items: (block.items ?? []).map((i) => {
+          const fileId = MEDIA[i.src] ?? null;
+          if (fileId) stats.imagesLinked += 1; else if (i.src) stats.imagesUnlinked += 1;
+          return { alt: i.alt || null, legacySrc: i.src || null, file: fileId };
+        }),
+      };
     case 'button':
       return { __component, text: block.text, href: block.href };
     case 'quote':

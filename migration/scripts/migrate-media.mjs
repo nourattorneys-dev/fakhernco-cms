@@ -72,9 +72,15 @@ async function collectReferenced() {
     for (const f of await readdir(path.join(CONTENT, kind))) {
       const doc = JSON.parse(await readFile(path.join(CONTENT, kind, f), 'utf8'));
       for (const b of doc.blocks) {
-        if (b.type === 'image' && b.src) {
-          const url = originalUpload(b.src);
-          if (!refs.has(url) || (!refs.get(url) && b.alt)) refs.set(url, b.alt || '');
+        // Gallery items hold images too. Missing them here means the files are
+        // never uploaded and every carousel image stays pointing at the
+        // legacy origin — which disappears when WordPress is retired.
+        const sources =
+          b.type === 'image' ? [b] : b.type === 'gallery' ? (b.items ?? []) : [];
+        for (const item of sources) {
+          if (!item.src) continue;
+          const url = originalUpload(item.src);
+          if (!refs.has(url) || (!refs.get(url) && item.alt)) refs.set(url, item.alt || '');
         }
       }
       if (doc.seo?.ogImageUrl) {

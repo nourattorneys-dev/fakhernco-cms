@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_blocks_gallery_items",
+  "info": { "displayName": "Gallery item", "icon": "picture" },
+  "options": {},
+  "attributes": {
+    "file": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "alt": { "type": "string" },
+    "legacySrc": { "type": "string" }
+  }
+}

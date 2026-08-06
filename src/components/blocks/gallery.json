@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_blocks_galleries",
+  "info": {
+    "displayName": "Gallery",
+    "icon": "picture",
+    "description": "A set of images shown together. Carousels on the WordPress site import as galleries — a slider is one piece of content, not N stacked figures."
+  },
+  "options": {},
+  "attributes": {
+    "items": { "type": "component", "repeatable": true, "component": "blocks.gallery-item" }
+  }
+}

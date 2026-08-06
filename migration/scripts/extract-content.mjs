@@ -61,6 +61,28 @@ export function originalUpload(url) {
 const hasClass = (n, c) => (n.getAttribute?.("class") ?? "").split(/\s+/).includes(c);
 const classOf = (n) => n.getAttribute?.("class") ?? "";
 
+/**
+ * Theme decoration that must never become content.
+ *
+ * Avantage paints section backgrounds and edge treatments with real <img>
+ * tags — `bgn-triangle-bottom.png` and friends, whose alt attribute is
+ * literally the CSS class that positions them. Extracted naively they become
+ * full-width figures in the middle of an article.
+ */
+const DECORATIVE_CLASS = /coverage_image|background_image_holder|bt_bb_separator/;
+const DECORATIVE_FILE = /^(bgn-|bg-|pattern|triangle|shape[-_])/i;
+
+function isDecorative(node, src, alt) {
+  if (/^bt_bb_/.test(alt ?? "")) return true;
+  const file = (src ?? "").split("/").pop() ?? "";
+  if (DECORATIVE_FILE.test(file)) return true;
+  let n = node.parentNode;
+  for (let depth = 0; n && depth < 6; depth += 1, n = n.parentNode) {
+    if (DECORATIVE_CLASS.test(classOf(n))) return true;
+  }
+  return false;
+}
+
 /** Keep light inline markup, drop everything else, so rich text stays rich. */
 function inlineHtml(node) {
   let out = "";
@@ -108,7 +130,8 @@ function blocksFromProse(node, blocks) {
       if (rows.length || headers.length) blocks.push({ type: "table", headers, rows });
     } else if (tag === "img") {
       const src = originalUpload(el.getAttribute("src"));
-      if (src) blocks.push({ type: "image", src, alt: clean(el.getAttribute("alt")) });
+      const alt = clean(el.getAttribute("alt"));
+      if (src && !isDecorative(el, src, alt)) blocks.push({ type: "image", src, alt });
     } else if (tag === "blockquote") {
       const html = inlineHtml(el);
       if (html) blocks.push({ type: "quote", html });
@@ -181,10 +204,28 @@ function extract(html) {
       return;
     }
 
+    // Carousels.
+    //
+    // A slider is ONE piece of content, not N. Flattened naively, the
+    // seven-item slider on /our-unwavering-principles became seven stacked
+    // full-width figures — a wall of images with no text between them.
+    if (hasClass(node, "bt_bb_slider")) {
+      const items = node.querySelectorAll("img")
+        .map((img) => ({
+          src: originalUpload(img.getAttribute("src")),
+          alt: clean(img.getAttribute("alt")),
+        }))
+        .filter((i) => i.src && !isDecorative(node, i.src, i.alt));
+      if (items.length > 1) blocks.push({ type: "gallery", items });
+      else if (items.length === 1) blocks.push({ type: "image", ...items[0] });
+      return;
+    }
+
     // Images.
     if (tag === "img") {
       const src = originalUpload(node.getAttribute("src"));
-      if (src) blocks.push({ type: "image", src, alt: clean(node.getAttribute("alt")) });
+      const alt = clean(node.getAttribute("alt"));
+      if (src && !isDecorative(node, src, alt)) blocks.push({ type: "image", src, alt });
       return;
     }
 
@@ -249,6 +290,7 @@ const textOfBlocks = (blocks) =>
       case "table": return [...b.headers, ...b.rows.flat()].join(" ").replace(/<[^>]+>/g, "");
       case "faq": return b.items.map((i) => `${i.question} ${i.answer}`).join(" ");
       case "cards": return b.items.map((i) => `${i.title} ${i.text}`).join(" ");
+      case "gallery": return b.items.map((i) => i.alt).join(" ");
       case "button": return b.text;
       default: return "";
     }
