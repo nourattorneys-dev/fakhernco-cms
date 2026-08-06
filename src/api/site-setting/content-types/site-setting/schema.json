@@ -81,6 +81,10 @@
           "localized": true
         }
       }
+    },
+    "aboutLinks": {
+      "type": "json",
+      "description": "Secondary nav under About Us: [{title, slug}]. Seeded from the legacy mega-menu."
     }
   }
 }

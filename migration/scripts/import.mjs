@@ -108,7 +108,18 @@ async function navGroups() {
     if (ROUTE_SLUGS.has(slug) || !slug) { current = null; continue; }
     if (current) parentOf.set(slug, current);
   }
-  return parentOf;
+
+  // The About group: everything between /about-us/ and /services/ in menu
+  // order. Without this those three pages are orphaned — /why-choose-fakherco/
+  // ended up with no inbound link at all in the rebuild.
+  const start = ordered.indexOf('/about-us/');
+  const end = ordered.indexOf('/services/');
+  const about =
+    start >= 0 && end > start
+      ? ordered.slice(start + 1, end).map((p) => p.replace(/^\/|\/$/g, ''))
+      : [];
+
+  return { parentOf, about };
 }
 
 // ----------------------------------------------------------- block mapping
@@ -232,7 +243,7 @@ async function main() {
     console.warn('No media-map.json — image blocks will keep only legacySrc. Run: npm run wp:media');
   }
 
-  const parentOf = await navGroups();
+  const { parentOf, about: aboutSlugs } = await navGroups();
   const rawCats = JSON.parse(await readFile(path.join(RAW, 'categories.json'), 'utf8'));
 
   const load = async (kind) => {
@@ -382,6 +393,12 @@ async function main() {
       tagline: 'Trusted Litigation Specialists',
       logo: asset('2025/12/Fakher-Logo.png'),
       footerText: 'Trusted litigation specialists in the UAE since 2011.',
+      aboutLinks: aboutSlugs
+        .map((slug) => {
+          const page = pages.find((p) => p.slug === slug);
+          return page ? { title: page.title, slug } : null;
+        })
+        .filter(Boolean),
     });
 
     await upsertSingle('api::homepage.homepage', {
