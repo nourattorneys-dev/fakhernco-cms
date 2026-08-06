@@ -83,6 +83,61 @@ function isDecorative(node, src, alt) {
   return false;
 }
 
+/**
+ * Recover lists that the theme authored as one paragraph.
+ *
+ * Bold Builder subheadlines carry bullet lists as plain text separated by
+ * <br><br>, each item prefixed with a bullet glyph and a tab:
+ *
+ *   ...our approach is meticulous.<br><br> •\tImmediate Intervention: ...
+ *   <br><br> •\tThorough Investigation: ...
+ *
+ * Collapsing <br> to a space — which is right for a genuine line break —
+ * merges the whole list into a single unreadable paragraph. This affected 77
+ * paragraphs across 47 documents, over half the site.
+ */
+const BULLET = /^\s*[•▪◦●‣·]\s*|^\s*[-–—]\s+/;
+
+function segmentsToBlocks(html, blocks) {
+  const segments = html
+    .split(/<br\s*\/?>/i)
+    .map((s) => clean(s.replace(/<[^>]+>/g, '').replace(/\t/g, ' ')))
+    .filter(Boolean);
+
+  // No <br> structure, but bullet glyphs run inline — split on those instead.
+  if (segments.length <= 1) {
+    const text = segments[0] ?? '';
+    const parts = text.split(/\s*[•▪◦●‣]\s*/).map((s) => s.trim()).filter(Boolean);
+    if (parts.length > 2) {
+      const [lead, ...items] = parts;
+      if (lead) blocks.push({ type: 'paragraph', html: lead });
+      blocks.push({ type: 'list', ordered: false, items });
+      return true;
+    }
+    if (text) blocks.push({ type: 'paragraph', html: text });
+    return Boolean(text);
+  }
+
+  let pending = [];
+  const flush = () => {
+    if (pending.length) {
+      blocks.push({ type: 'list', ordered: false, items: pending });
+      pending = [];
+    }
+  };
+
+  for (const segment of segments) {
+    if (BULLET.test(segment)) {
+      pending.push(segment.replace(BULLET, '').trim());
+    } else {
+      flush();
+      blocks.push({ type: 'paragraph', html: segment });
+    }
+  }
+  flush();
+  return true;
+}
+
 /** Keep light inline markup, drop everything else, so rich text stays rich. */
 function inlineHtml(node) {
   let out = "";
@@ -178,8 +233,11 @@ function extract(html) {
         ? Number(tagEl.rawTagName[1]) : 2;
       const text = clean(node.querySelector(".bt_bb_headline_content")?.text ?? node.text);
       if (text) blocks.push({ type: "heading", level, text });
-      const sub = clean(node.querySelector(".bt_bb_headline_subheadline")?.text);
-      if (sub && sub !== text) blocks.push({ type: "paragraph", html: sub });
+      const subEl = node.querySelector(".bt_bb_headline_subheadline");
+      if (subEl) {
+        const subText = clean(subEl.text);
+        if (subText && subText !== text) segmentsToBlocks(subEl.innerHTML, blocks);
+      }
       return;
     }
 

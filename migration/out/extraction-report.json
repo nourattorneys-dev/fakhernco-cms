@@ -35,11 +35,11 @@
     "kind": "pages",
     "slug": "our-federation-partners",
     "words": 1107,
-    "blocks": 32,
+    "blocks": 55,
     "coverage": 0.9937444146559428,
     "counts": {
       "heading": 15,
-      "paragraph": 15,
+      "paragraph": 38,
       "button": 2
     },
     "h1": 0,
@@ -50,41 +50,41 @@
     "kind": "pages",
     "slug": "the-integrated-service-model",
     "words": 692,
-    "blocks": 16,
+    "blocks": 31,
     "coverage": 0.9885550786838341,
     "counts": {
       "heading": 7,
-      "paragraph": 7,
+      "paragraph": 22,
       "button": 2
     },
     "h1": 0,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "the-client-advantage",
     "words": 669,
-    "blocks": 16,
+    "blocks": 20,
     "coverage": 0.9853157121879589,
     "counts": {
       "heading": 7,
-      "paragraph": 7,
+      "paragraph": 11,
       "button": 2
     },
     "h1": 0,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "skp-business-federation",
     "words": 418,
-    "blocks": 15,
+    "blocks": 18,
     "coverage": 0.9811764705882353,
     "counts": {
       "heading": 9,
-      "paragraph": 4,
+      "paragraph": 7,
       "button": 2
     },
     "h1": 0,
@@ -253,39 +253,41 @@
     "kind": "pages",
     "slug": "case-study-family-business",
     "words": 663,
-    "blocks": 10,
+    "blocks": 22,
     "coverage": 0.9910313901345291,
     "counts": {
       "heading": 5,
-      "paragraph": 5
+      "paragraph": 15,
+      "list": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "case-study-foreign-judgment",
     "words": 612,
-    "blocks": 12,
+    "blocks": 20,
     "coverage": 0.9887820512820513,
     "counts": {
       "heading": 6,
-      "paragraph": 6
+      "paragraph": 13,
+      "list": 1
     },
     "h1": 5,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "real-estate-law-buyers-guide",
     "words": 790,
-    "blocks": 24,
+    "blocks": 25,
     "coverage": 0.9925,
     "counts": {
       "heading": 9,
-      "paragraph": 9,
+      "paragraph": 10,
       "list": 4,
       "button": 2
     },
@@ -297,11 +299,11 @@
     "kind": "pages",
     "slug": "navigating-employment-law",
     "words": 744,
-    "blocks": 29,
+    "blocks": 30,
     "coverage": 0.9920212765957447,
     "counts": {
       "heading": 10,
-      "paragraph": 10,
+      "paragraph": 11,
       "list": 7,
       "button": 2
     },
@@ -313,11 +315,11 @@
     "kind": "pages",
     "slug": "importance-of-shareholder-agreement",
     "words": 729,
-    "blocks": 23,
+    "blocks": 26,
     "coverage": 0.9892761394101877,
     "counts": {
       "heading": 5,
-      "paragraph": 14,
+      "paragraph": 17,
       "list": 2,
       "button": 2
     },
@@ -329,11 +331,11 @@
     "kind": "pages",
     "slug": "choosing-a-company-structure",
     "words": 716,
-    "blocks": 34,
+    "blocks": 35,
     "coverage": 0.9916782246879334,
     "counts": {
       "heading": 7,
-      "paragraph": 15,
+      "paragraph": 16,
       "list": 9,
       "table": 1,
       "button": 2
@@ -346,27 +348,28 @@
     "kind": "pages",
     "slug": "litigation-vs-arbitration",
     "words": 864,
-    "blocks": 13,
+    "blocks": 35,
     "coverage": 0.9930715935334873,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 27,
       "table": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "understanding-legal-costs",
     "words": 827,
-    "blocks": 20,
+    "blocks": 27,
     "coverage": 0.9879807692307693,
     "counts": {
       "heading": 9,
-      "paragraph": 9,
+      "paragraph": 11,
+      "list": 5,
       "button": 2
     },
     "h1": 7,
@@ -377,41 +380,44 @@
     "kind": "pages",
     "slug": "local-sponsor-service-agent-services",
     "words": 622,
-    "blocks": 12,
+    "blocks": 16,
     "coverage": 0.9870967741935484,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 8,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "business-closure-liquidation",
     "words": 559,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9875,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 9,
+      "list": 3,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "commercial-transactions-due-diligence",
     "words": 590,
-    "blocks": 14,
+    "blocks": 18,
     "coverage": 0.984641638225256,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 7,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
@@ -422,56 +428,60 @@
     "kind": "pages",
     "slug": "mergers-acquisitions-advisory",
     "words": 585,
-    "blocks": 12,
+    "blocks": 17,
     "coverage": 0.9864864864864865,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 9,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "corporate-governance-restructuring",
     "words": 507,
-    "blocks": 12,
+    "blocks": 18,
     "coverage": 0.9842209072978304,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 10,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "offshore-company-formation",
     "words": 551,
-    "blocks": 12,
+    "blocks": 18,
     "coverage": 0.9851851851851852,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 10,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "free-zone-company-formation",
     "words": 586,
-    "blocks": 12,
+    "blocks": 16,
     "coverage": 0.9862778730703259,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 7,
+      "list": 2,
       "button": 2
     },
     "h1": 3,
@@ -482,11 +492,12 @@
     "kind": "pages",
     "slug": "mainland-company-formation",
     "words": 566,
-    "blocks": 12,
+    "blocks": 15,
     "coverage": 0.9857142857142858,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 6,
+      "list": 2,
       "button": 2
     },
     "h1": 3,
@@ -497,26 +508,28 @@
     "kind": "pages",
     "slug": "e-commerce-terms-conditions",
     "words": 545,
-    "blocks": 14,
+    "blocks": 19,
     "coverage": 0.9833641404805915,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 9,
+      "list": 2,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "legal-document-and-agreement-review",
     "words": 538,
-    "blocks": 14,
+    "blocks": 18,
     "coverage": 0.9849340866290018,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 7,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
@@ -527,26 +540,28 @@
     "kind": "pages",
     "slug": "drafting-declaration-of-heirs",
     "words": 605,
-    "blocks": 14,
+    "blocks": 19,
     "coverage": 0.9851973684210527,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 8,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "drafting-consent-letters",
     "words": 569,
-    "blocks": 13,
+    "blocks": 17,
     "coverage": 0.9838709677419355,
     "counts": {
       "heading": 6,
-      "paragraph": 5,
+      "paragraph": 6,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
@@ -557,11 +572,12 @@
     "kind": "pages",
     "slug": "drafting-of-affidavits",
     "words": 566,
-    "blocks": 14,
+    "blocks": 18,
     "coverage": 0.9856115107913669,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 7,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
@@ -572,116 +588,123 @@
     "kind": "pages",
     "slug": "real-estate-contracts",
     "words": 514,
-    "blocks": 12,
+    "blocks": 17,
     "coverage": 0.9882583170254403,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 10,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "construction-contracts",
     "words": 572,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.9860383944153578,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "employment-contracts",
     "words": 594,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.986644407345576,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "distribution-agreements",
     "words": 590,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.9866888519134775,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "non-compete-agreements",
     "words": 565,
-    "blocks": 14,
+    "blocks": 19,
     "coverage": 0.9863013698630136,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 9,
+      "list": 2,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "non-disclosure-agreements",
     "words": 568,
-    "blocks": 12,
+    "blocks": 20,
     "coverage": 0.9861351819757366,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 12,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "master-service-agreements",
     "words": 552,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.985663082437276,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "franchise-agreements",
     "words": 609,
-    "blocks": 14,
+    "blocks": 18,
     "coverage": 0.9851239669421488,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 7,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
@@ -692,71 +715,76 @@
     "kind": "pages",
     "slug": "partnership-agreements",
     "words": 538,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.9853479853479854,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "joint-venture-agreements",
     "words": 568,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.9859154929577465,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "shareholder-agreements",
     "words": 521,
-    "blocks": 12,
+    "blocks": 20,
     "coverage": 0.9867924528301887,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 12,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "wills-and-estate-planning",
     "words": 662,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9894259818731118,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 10,
+      "list": 2,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "lawyer-attestation",
     "words": 498,
-    "blocks": 11,
+    "blocks": 15,
     "coverage": 0.9879275653923542,
     "counts": {
       "heading": 5,
-      "paragraph": 4,
+      "paragraph": 6,
+      "list": 2,
       "button": 2
     },
     "h1": 3,
@@ -767,71 +795,76 @@
     "kind": "pages",
     "slug": "document-attestation-services",
     "words": 619,
-    "blocks": 14,
+    "blocks": 30,
     "coverage": 0.9841017488076311,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 21,
+      "list": 1,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "certified-true-copy-services",
     "words": 575,
-    "blocks": 14,
+    "blocks": 19,
     "coverage": 0.9876543209876543,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 8,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "power-of-attorney",
     "words": 633,
-    "blocks": 14,
+    "blocks": 19,
     "coverage": 0.987220447284345,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 9,
+      "list": 2,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "judgment-execution-and-enforcement",
     "words": 578,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9863713798977853,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "debt-recovery",
     "words": 571,
-    "blocks": 12,
+    "blocks": 15,
     "coverage": 0.9858906525573192,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 6,
+      "list": 2,
       "button": 2
     },
     "h1": 3,
@@ -842,193 +875,206 @@
     "kind": "pages",
     "slug": "compensation-claims",
     "words": 593,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9866888519134775,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "criminal-cases",
     "words": 570,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9858906525573192,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "medical-malpractice-claims",
     "words": 554,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9856373429084381,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "intellectual-property-disputes",
     "words": 539,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9853747714808044,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "construction-disputes",
     "words": 545,
-    "blocks": 12,
+    "blocks": 20,
     "coverage": 0.9852670349907919,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 12,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "insurance-disputes",
     "words": 569,
-    "blocks": 14,
+    "blocks": 22,
     "coverage": 0.9842931937172775,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "banking-and-financial-disputes",
     "words": 537,
-    "blocks": 12,
+    "blocks": 20,
     "coverage": 0.9849906191369606,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 12,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "real-estate-and-rental-disputes",
     "words": 558,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9855334538878843,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "employment-and-labor-disputes",
     "words": 616,
-    "blocks": 14,
+    "blocks": 23,
     "coverage": 0.985553772070626,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 14,
+      "list": 1,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "commercial-and-business-disputes",
     "words": 584,
-    "blocks": 12,
+    "blocks": 19,
     "coverage": 0.9864636209813875,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 11,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "urgent-and-temporary-measures",
     "words": 649,
-    "blocks": 12,
+    "blocks": 21,
     "coverage": 0.9892141756548536,
     "counts": {
       "heading": 5,
-      "paragraph": 5,
+      "paragraph": 13,
+      "list": 1,
       "button": 2
     },
     "h1": 3,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "uae-courts-litigation-process",
     "words": 739,
-    "blocks": 14,
+    "blocks": 21,
     "coverage": 0.99039780521262,
     "counts": {
       "heading": 6,
-      "paragraph": 6,
+      "paragraph": 10,
+      "list": 3,
       "button": 2
     },
     "h1": 4,
     "unhandled": 0,
-    "shape": "layout"
+    "shape": "prose"
   },
   {
     "kind": "pages",
     "slug": "contact-us",
     "words": 478,
-    "blocks": 21,
+    "blocks": 29,
     "coverage": 0.9642857142857143,
     "counts": {
       "heading": 7,
-      "paragraph": 11,
+      "paragraph": 18,
       "image": 1,
-      "cards": 2
+      "cards": 2,
+      "list": 1
     },
     "h1": 4,
     "unhandled": 0,
@@ -1038,11 +1084,11 @@
     "kind": "pages",
     "slug": "legal-insights",
     "words": 394,
-    "blocks": 29,
+    "blocks": 30,
     "coverage": 0.907035175879397,
     "counts": {
       "heading": 12,
-      "paragraph": 9,
+      "paragraph": 10,
       "button": 8
     },
     "h1": 1,
@@ -1198,11 +1244,11 @@
     "kind": "pages",
     "slug": "home",
     "words": 1223,
-    "blocks": 71,
+    "blocks": 75,
     "coverage": 0.9137096774193548,
     "counts": {
       "heading": 28,
-      "paragraph": 23,
+      "paragraph": 27,
       "button": 18,
       "image": 1,
       "cards": 1
