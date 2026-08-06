@@ -129,6 +129,27 @@ async function main() {
     });
   });
 
+  // Harvest the firm's own Arabic navigation labels from the /ar/ homepage.
+  //
+  // These are their approved terminology — "الدعاوى القضائية وحل النزاعات" for
+  // Litigation & Dispute Resolution — and using them beats inventing
+  // translations for a law firm's practice areas.
+  const arHome = await fetch('https://fakhernco.com/ar/', { headers: { 'User-Agent': UA } });
+  if (arHome.ok) {
+    const root = parse(await arHome.text());
+    const labels = {};
+    for (const a of root.querySelectorAll('a')) {
+      const href = a.getAttribute('href') ?? '';
+      if (!href.includes('fakhernco.com')) continue;
+      const text = a.text.replace(/\s+/g, ' ').trim();
+      if (!text || text.length > 60 || !/[؀-ۿ]/.test(text)) continue;
+      const slug = new URL(href).pathname.replace(/^\/ar\/?/, '').replace(/\/$/, '');
+      if (!labels[slug || 'home']) labels[slug || 'home'] = text;
+    }
+    await writeFile(path.join(OUT, 'arabic-labels.json'), JSON.stringify(labels, null, 2) + '\n');
+    console.log(`\n  harvested ${Object.keys(labels).length} Arabic nav labels`);
+  }
+
   const ok = report.filter((r) => !r.error);
   const bad = report.filter((r) => r.error);
 

@@ -244,6 +244,9 @@ async function main() {
   }
 
   const { parentOf, about: aboutSlugs } = await navGroups();
+
+  const labelsFile = path.join(OUT, 'arabic-labels.json');
+  const AR_LABELS = existsSync(labelsFile) ? JSON.parse(await readFile(labelsFile, 'utf8')) : {};
   const rawCats = JSON.parse(await readFile(path.join(RAW, 'categories.json'), 'utf8'));
 
   const load = async (kind) => {
@@ -254,7 +257,7 @@ async function main() {
   const pages = await load('pages');
   const posts = await load('posts');
 
-  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], created: {}, updated: {}, ignored: [] };
+  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, created: {}, updated: {}, ignored: [] };
   const bump = (bucket, uid) => { stats[bucket][uid] = (stats[bucket][uid] ?? 0) + 1; };
 
   if (DRY) {
@@ -401,6 +404,27 @@ async function main() {
         .filter(Boolean),
     });
 
+    // Arabic site chrome, using the firm's own navigation labels rather than
+    // invented translations. Harvested by fetch-arabic.mjs.
+    const labelsPath = path.join(OUT, 'arabic-labels.json');
+    if (existsSync(labelsPath)) {
+      const labels = JSON.parse(await readFile(labelsPath, 'utf8'));
+      await upsertSingle(
+        'api::site-setting.site-setting',
+        {
+          siteName: 'مكتب فاخر ومشاركوه',
+          tagline: 'متخصصون في التقاضي',
+          logo: asset('2025/12/Fakher-Logo.png'),
+          footerText: 'متخصصون في التقاضي في دولة الإمارات منذ عام 2011.',
+          aboutLinks: aboutSlugs
+            .filter((slug) => labels[slug])
+            .map((slug) => ({ title: labels[slug], slug })),
+        },
+        'ar',
+      );
+      stats.arLabels = Object.keys(labels).length;
+    }
+
     await upsertSingle('api::homepage.homepage', {
       heroEyebrow: 'Trusted Law Firm in Abu Dhabi & Dubai',
       heroTitle: 'Expert Legal Services in the UAE',
@@ -454,7 +478,10 @@ async function main() {
           locale: 'ar',
           status: 'published',
           data: {
-            title: doc.title || english.title,
+            // Prefer the firm's own nav label over a scraped H1 when the H1
+            // came back English — some pages translate the body but not the
+            // heading.
+            title: /[؀-ۿ]/.test(doc.title) ? doc.title : (AR_LABELS[doc.slug] ?? doc.title ?? english.title),
             slug: doc.slug,
             legacyUrl: doc.legacyUrl,
             blocks: doc.blocks.map((b) => toComponent(b, stats)).filter(Boolean),
@@ -495,6 +522,7 @@ async function main() {
   console.log(`images linked to media:      ${stats.imagesLinked}`);
   console.log(`images still origin-only:    ${stats.imagesUnlinked}`);
   console.log(`arabic localisations:        ${stats.arImported}`);
+  console.log(`arabic nav labels:           ${stats.arLabels}`);
   if (stats.arSkipped.length) {
     console.log(`  skipped (no english doc):  ${stats.arSkipped.join(', ')}`);
   }
