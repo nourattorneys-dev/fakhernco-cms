@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_submissions",
+  "info": {
+    "singularName": "contact-submission",
+    "pluralName": "contact-submissions",
+    "displayName": "Contact submission",
+    "description": "Enquiries from the contact form. Never publicly readable."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "service": {
+      "type": "string",
+      "description": "Matches the enquiry-type select on the form"
+    },
+    "message": {
+      "type": "text",
+      "required": true
+    },
+    "sourcePage": {
+      "type": "string"
+    },
+    "submittedLocale": {
+      "type": "string",
+      "description": "en or ar, so the auto-reply matches"
+    },
+    "consent": {
+      "type": "boolean",
+      "default": false
+    },
+    "handled": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

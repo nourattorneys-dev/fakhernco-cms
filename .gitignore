@@ -1,9 +1,35 @@
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Strapi
+.strapi/
+.strapi-updater.json
+.strapi-cloud.json
+dist/
+build/
+.cache/
+.tmp/
+exports/
+*.db
+*.sqlite
+
+# Uploaded media is content, not code. It lives on the server's persistent
+# disk and is backed up separately — a repo clone carries none of it.
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Secrets
 .env
 .env.*
 !.env.example
-.next/
-dist/
+.seed-token
+
+# Migration cache — a re-fetchable snapshot of the live WordPress site.
+# out/ IS committed: those are decision artifacts.
+migration/data/
+
+# OS / editor
 .DS_Store
-migration/data/raw/
-migration/data/content/
+*.log

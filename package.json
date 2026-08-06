@@ -1,15 +1,49 @@
 {
   "name": "fakhernco-cms",
+  "version": "0.1.0",
   "private": true,
-  "type": "module",
   "description": "Strapi 5 CMS for fakhernco.com, plus the WordPress migration tooling",
   "scripts": {
+    "build": "strapi build",
+    "console": "strapi console",
+    "deploy": "strapi deploy",
+    "dev": "strapi develop",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
     "wp:fetch": "node migration/scripts/fetch-wp.mjs",
     "wp:map": "node migration/scripts/build-consolidation-map.mjs",
     "wp:validate": "node migration/scripts/validate-consolidation.mjs",
     "wp:extract": "node migration/scripts/extract-content.mjs"
   },
+  "dependencies": {
+    "@strapi/database": "5.51.1",
+    "@strapi/plugin-cloud": "5.51.1",
+    "@strapi/plugin-users-permissions": "5.51.1",
+    "@strapi/strapi": "5.51.1",
+    "better-sqlite3": "12.8.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.30.3",
+    "styled-components": "^6.0.0",
+    "@strapi/provider-email-nodemailer": "^5.51.1",
+    "mysql2": "^3.23.2"
+  },
   "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5",
     "node-html-parser": "^7.0.1"
+  },
+  "engines": {
+    "node": ">=20.0.0 <=26.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": "1bb349d5-de5a-44ec-a207-d9deb875a341",
+    "installId": "a0f6d2a0135e00cc95bc736e3660c27edcb1404d2aded165502561bdaa9883ad"
   }
 }
