@@ -67,7 +67,7 @@ async function main() {
   }
 
   for (const i of infra) {
-    rules.push({ source: norm(i.from), destination: i.to, status: 301, reason: i.note });
+    rules.push({ source: norm(i.from), destination: norm(i.to), status: 301, reason: i.note });
   }
 
   // Guard: a source that is also a destination would create a chain.

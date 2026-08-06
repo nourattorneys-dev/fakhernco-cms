@@ -282,8 +282,12 @@ async function main() {
   // ---- Non-page URL classes that also 404 at cutover if left unhandled ----
   const infra = [
     ...cats.filter((c) => c.count > 0).map((c) => ({
-      from: `/category/${c.slug}/`, to: `/insights/${c.slug}/`,
-      note: `Category archive, ${c.count} posts. Needs a real route in the new site.`,
+      from: `/category/${c.slug}/`, to: `/legal-insights/${c.slug}/`,
+      // Namespaced under /legal-insights/ deliberately: three category slugs
+      // collide with practice-area slugs at the root (litigation-dispute-
+      // resolution, company-formation-corporate-services, ...), so a flat
+      // /<slug> archive would fight the service page for the same URL.
+      note: `Category archive, ${c.count} posts.`,
     })),
     { from: "/author/fakher/", to: "/about-us/", note: "Author archive — single author, thin. 301 rather than rebuild." },
     { from: "/sitemap_index.xml", to: "/sitemap.xml", note: "Yoast index registered in Search Console." },

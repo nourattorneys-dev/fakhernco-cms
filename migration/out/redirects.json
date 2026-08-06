@@ -55,49 +55,49 @@
   },
   {
     "source": "/category/company-formation-corporate-services",
-    "destination": "/insights/company-formation-corporate-services/",
+    "destination": "/legal-insights/company-formation-corporate-services",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/category/contracts-real-estate",
-    "destination": "/insights/contracts-real-estate/",
+    "destination": "/legal-insights/contracts-real-estate",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/category/corporate-compliance-contracts",
-    "destination": "/insights/corporate-compliance-contracts/",
+    "destination": "/legal-insights/corporate-compliance-contracts",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/category/emerging-areas-private-notary-integration",
-    "destination": "/insights/emerging-areas-private-notary-integration/",
+    "destination": "/legal-insights/emerging-areas-private-notary-integration",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/category/ip-emerging-legal-areas",
-    "destination": "/insights/ip-emerging-legal-areas/",
+    "destination": "/legal-insights/ip-emerging-legal-areas",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/category/litigation-dispute-resolution",
-    "destination": "/insights/litigation-dispute-resolution/",
+    "destination": "/legal-insights/litigation-dispute-resolution",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/category/skp-business-federation-integration",
-    "destination": "/insights/skp-business-federation-integration/",
+    "destination": "/legal-insights/skp-business-federation-integration",
     "status": 301,
-    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+    "reason": "Category archive, 20 posts."
   },
   {
     "source": "/author/fakher",
-    "destination": "/about-us/",
+    "destination": "/about-us",
     "status": 301,
     "reason": "Author archive — single author, thin. 301 rather than rebuild."
   },
