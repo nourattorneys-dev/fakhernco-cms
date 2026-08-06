@@ -1,0 +1,146 @@
+[
+  {
+    "source": "/criminal-cases-representation",
+    "destination": "/criminal-cases",
+    "status": 301,
+    "reason": "v1 service page superseded by the nav-linked /criminal-cases/."
+  },
+  {
+    "source": "/lawyer-attestation-2",
+    "destination": "/lawyer-attestation",
+    "status": 301,
+    "reason": "WordPress slug collision — the '-2' suffix means the base slug was already taken."
+  },
+  {
+    "source": "/litigation",
+    "destination": "/litigation-dispute-resolution",
+    "status": 301,
+    "reason": "v1 service page ('OUR FOCUS' template) superseded by the litigation pillar."
+  },
+  {
+    "source": "/private-notary-services",
+    "destination": "/private-notary-attestation-services",
+    "status": 301,
+    "reason": "v1 service page superseded by the notary pillar."
+  },
+  {
+    "source": "/wills_for_non_muslims",
+    "destination": "/wills-and-estate-planning",
+    "status": 301,
+    "reason": "v1 service page superseded. Note: the only slug on the site using underscores."
+  },
+  {
+    "source": "/drafting-and-reviewing-contracts",
+    "destination": "/contracts-legal-document-drafting",
+    "status": 301,
+    "reason": "v1 service page superseded by the contracts pillar."
+  },
+  {
+    "source": "/true-copies-for-documents",
+    "destination": "/certified-true-copy-services",
+    "status": 301,
+    "reason": "v1 service page superseded by the nav-linked equivalent."
+  },
+  {
+    "source": "/legal-articles",
+    "destination": "/legal-insights",
+    "status": 301,
+    "reason": "Second blog archive competing with /legal-insights/. Keep one hub."
+  },
+  {
+    "source": "/footer",
+    "destination": null,
+    "status": 410,
+    "reason": "Bold Builder template page, indexed with the title \"Footer\". Serve 410."
+  },
+  {
+    "source": "/category/company-formation-corporate-services",
+    "destination": "/insights/company-formation-corporate-services/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/category/contracts-real-estate",
+    "destination": "/insights/contracts-real-estate/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/category/corporate-compliance-contracts",
+    "destination": "/insights/corporate-compliance-contracts/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/category/emerging-areas-private-notary-integration",
+    "destination": "/insights/emerging-areas-private-notary-integration/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/category/ip-emerging-legal-areas",
+    "destination": "/insights/ip-emerging-legal-areas/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/category/litigation-dispute-resolution",
+    "destination": "/insights/litigation-dispute-resolution/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/category/skp-business-federation-integration",
+    "destination": "/insights/skp-business-federation-integration/",
+    "status": 301,
+    "reason": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "source": "/author/fakher",
+    "destination": "/about-us/",
+    "status": 301,
+    "reason": "Author archive — single author, thin. 301 rather than rebuild."
+  },
+  {
+    "source": "/sitemap_index.xml",
+    "destination": "/sitemap.xml",
+    "status": 301,
+    "reason": "Yoast index registered in Search Console."
+  },
+  {
+    "source": "/page-sitemap.xml",
+    "destination": "/sitemap.xml",
+    "status": 301,
+    "reason": "Yoast child sitemap."
+  },
+  {
+    "source": "/post-sitemap.xml",
+    "destination": "/sitemap.xml",
+    "status": 301,
+    "reason": "Yoast child sitemap."
+  },
+  {
+    "source": "/category-sitemap.xml",
+    "destination": "/sitemap.xml",
+    "status": 301,
+    "reason": "Yoast child sitemap."
+  },
+  {
+    "source": "/author-sitemap.xml",
+    "destination": "/sitemap.xml",
+    "status": 301,
+    "reason": "Yoast child sitemap."
+  },
+  {
+    "source": "/feed",
+    "destination": "/rss.xml",
+    "status": 301,
+    "reason": "RSS — serves 200 today; third-party readers still request it."
+  },
+  {
+    "source": "/comments/feed",
+    "destination": "/rss.xml",
+    "status": 301,
+    "reason": "Comment feed."
+  }
+]

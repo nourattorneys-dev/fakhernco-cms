@@ -264,6 +264,25 @@ async function main() {
   const app = await createStrapi(await compileStrapi()).load();
   app.log.level = 'error';
 
+  /**
+   * Single types need an explicit create-vs-update branch.
+   *
+   * Calling documents().update() with an undefined documentId is a SILENT
+   * NO-OP on a single type — no error, no write, nothing in the admin panel.
+   */
+  async function upsertSingle(uid, data, locale = 'en') {
+    const existing = await app.documents(uid).findFirst({ locale });
+    if (existing) {
+      await app.documents(uid).update({
+        documentId: existing.documentId, locale, data, status: 'published',
+      });
+      bump('updated', uid);
+    } else {
+      await app.documents(uid).create({ locale, data, status: 'published' });
+      bump('created', uid);
+    }
+  }
+
   /** Upsert by slug within a locale. */
   async function upsert(uid, slug, data, { publish = true, locale = 'en' } = {}) {
     const existing = await app.documents(uid).findFirst({ filters: { slug }, locale });
@@ -340,7 +359,30 @@ async function main() {
       }, { publish: action !== 'review' });
     }
 
-    // 4. Blog posts.
+    // 4. Single types.
+    //
+    // These have no WordPress equivalent to migrate — the theme built the
+    // homepage and the site chrome from builder layout rather than content.
+    // Seeded here so the front end reads brand assets from the CMS instead of
+    // hardcoding upload paths, and so the firm can change them without a deploy.
+    const asset = (legacy) => MEDIA[`https://fakhernco.com/wp-content/uploads/${legacy}`] ?? null;
+
+    await upsertSingle('api::site-setting.site-setting', {
+      siteName: 'Fakher & Co',
+      tagline: 'Trusted Litigation Specialists',
+      logo: asset('2025/12/Fakher-Logo.png'),
+      footerText: 'Trusted litigation specialists in the UAE since 2011.',
+    });
+
+    await upsertSingle('api::homepage.homepage', {
+      heroEyebrow: 'Trusted Law Firm in Abu Dhabi & Dubai',
+      heroTitle: 'Expert Legal Services in the UAE',
+      heroText:
+        'We are your dedicated legal partners for litigation, company formation, real estate law and criminal defence across Abu Dhabi and Dubai.',
+      heroImage: asset('2026/01/business-team-in-dubai-2025-03-18-15-08-40-utc-scaled.jpg'),
+    });
+
+    // 5. Blog posts.
     for (const p of posts) {
       await upsert('api::post.post', p.slug, {
         title: p.title,
