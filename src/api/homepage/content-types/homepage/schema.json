@@ -86,6 +86,19 @@
           "localized": true
         }
       }
+    },
+    "sectionImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "description": "Photography used to break up the long editorial sections. Ordered."
     }
   }
 }

@@ -37,8 +37,33 @@ const CONTENT = join(ROOT, "data", "content");
 
 const INLINE_OK = new Set(["strong", "b", "em", "i", "a", "u", "br", "sup", "sub", "code", "span"]);
 
-const clean = (s) =>
+/**
+ * Decode the typographic entities WordPress stores, and only those.
+ *
+ * Content arrives with curly quotes, dashes and apostrophes as numeric
+ * entities: "&#8220;Fakher &#038; Co stood by us...&#8221;". Browsers render
+ * them correctly so it is invisible on screen, but it makes the stored text
+ * hostile to work with — pattern matching on quotation marks fails, and an
+ * editor in the Strapi admin sees the entity rather than the character.
+ *
+ * Deliberately does NOT decode &lt; &gt; or &amp;: those would inject literal
+ * angle brackets into HTML that is later rendered as markup. &#038; becomes
+ * &amp; for the same reason.
+ */
+const decodeTypography = (s) =>
   (s ?? "")
+    .replace(/&#8216;|&#8217;|&#x2019;/g, "\u2019")
+    .replace(/&#8220;|&#x201C;/g, "\u201C")
+    .replace(/&#8221;|&#x201D;/g, "\u201D")
+    .replace(/&#8211;/g, "\u2013")
+    .replace(/&#8212;/g, "\u2014")
+    .replace(/&#8230;/g, "\u2026")
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?38;/g, "&amp;");
+
+const clean = (s) =>
+  decodeTypography(s)
     .replace(/&nbsp;/gi, " ")
     .replace(/ /g, " ")
     .replace(/\s+/g, " ")

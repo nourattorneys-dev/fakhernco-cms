@@ -390,6 +390,15 @@ async function main() {
       heroText:
         'We are your dedicated legal partners for litigation, company formation, real estate law and criminal defence across Abu Dhabi and Dubai.',
       heroImage: asset('2026/01/business-team-in-dubai-2025-03-18-15-08-40-utc-scaled.jpg'),
+      // Photography for the editorial sections. Only the 2026/01 uploads are
+      // current-brand imagery; the 2017/2019 blog-post-*.jpg files are
+      // Avantage theme demo stock and are deliberately not used here.
+      sectionImages: [
+        asset('2026/01/group-business-people-and-lawyers-legal-contract-2025-03-08-13-26-33-utc-scaled.jpg'),
+        asset('2026/01/close-up-photo-of-business-woman-and-man-signing-a-2025-04-10-00-26-29-utc-scaled.jpg'),
+        asset('2026/01/hand-man-stamping-documents-notary-public-in-offic-2025-03-09-13-11-43-utc-scaled.jpg'),
+        asset('2026/01/business-and-lawyers-discussing-contract-papers-wi-2025-12-22-14-21-12-utc-scaled.jpg'),
+      ].filter(Boolean),
     });
 
     // 5. Blog posts.
