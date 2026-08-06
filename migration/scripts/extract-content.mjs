@@ -201,6 +201,7 @@ function extract(html) {
   const root = parse(html);
   const blocks = [];
   const unhandled = [];
+  let duplicates = 0;
 
   const visit = (node) => {
     if (node.nodeType === 3) {
@@ -215,6 +216,13 @@ function extract(html) {
 
     // Pure spacing / decoration.
     if (hasClass(node, "bt_bb_separator") || hasClass(node, "bt_bb_background_image_holder_wrapper")) return;
+
+    // NOTE: responsive duplicates are NOT skipped here by their
+    // `bt_bb_hidden_*` classes. That was tried and dropped real content —
+    // page coverage fell from 98% to 90.9% — because those classes also sit
+    // on columns holding copy that appears nowhere else. They are removed
+    // after the walk instead, by exact-match dedup, which cannot lose
+    // anything that is genuinely unique.
 
     // FAQ accordions.
     if (hasClass(node, "bt_bb_accordion")) {
@@ -309,14 +317,52 @@ function extract(html) {
 
   visit(root);
 
-  // The theme renders some headlines twice for responsive variants. Collapse
-  // consecutive identical blocks so the same copy is not imported twice.
-  const deduped = blocks.filter((b, i) => i === 0 || JSON.stringify(b) !== JSON.stringify(blocks[i - 1]));
+  /**
+   * Remove responsive duplicates.
+   *
+   * The theme ships two copies of some sections — one for small screens, one
+   * for large — and hides each with CSS. Both are in the DOM, so the same
+   * heading, paragraph and CTA get imported twice. Adjacent-only dedup misses
+   * it because a button usually sits between the two copies.
+   *
+   * Exact match across the whole document, and only for text blocks: two
+   * identical paragraphs or headings in one page are always the responsive
+   * pair, never intentional. Buttons and images are left alone — a repeated
+   * CTA is a real editorial choice.
+   *
+   * Coverage is measured BEFORE this runs, so the metric keeps its ability to
+   * catch a parser collapse; duplicates removed are reported separately.
+   */
+  const DEDUPE_TYPES = new Set(["heading", "paragraph", "list", "cards", "faq"]);
+  const seen = new Set();
+  const deduped = blocks.filter((b) => {
+    if (!DEDUPE_TYPES.has(b.type)) return true;
+    const key = JSON.stringify(b);
+    if (seen.has(key)) { duplicates += 1; return false; }
+    seen.add(key);
+    return true;
+  });
 
   // Cards arrive one per builder column. Collapse each run into a single grid
   // block so the model stores "a grid of six values", not six loose cards.
+  /**
+   * Collapse consecutive identical blocks of ANY type.
+   *
+   * Runs AFTER the exact-match pass, not before. The responsive pair is
+   * [heading, paragraph, button] twice over; the two buttons only become
+   * adjacent once the duplicate heading and paragraph between them are gone.
+   * Collapsing first therefore missed them entirely.
+   *
+   * Only adjacent repeats are removed, so a CTA deliberately placed at both
+   * the top and the bottom of a long page survives.
+   */
+  const collapsed = deduped.filter(
+    (b, i) => i === 0 || JSON.stringify(b) !== JSON.stringify(deduped[i - 1]),
+  );
+  duplicates += deduped.length - collapsed.length;
+
   const grouped = [];
-  for (const b of deduped) {
+  for (const b of collapsed) {
     const last = grouped[grouped.length - 1];
     if (b.type === "card") {
       const { type, ...item } = b;
@@ -324,7 +370,7 @@ function extract(html) {
       else grouped.push({ type: "cards", items: [item] });
     } else grouped.push(b);
   }
-  return { blocks: grouped, unhandled };
+  return { blocks: grouped, unhandled, duplicates, rawBlocks: blocks };
 }
 
 const BLOCK_LEVEL = /^(section|div|header|footer|article|aside|nav|table|ul|ol|h[1-6])$/;
@@ -430,10 +476,12 @@ async function main() {
   async function run(items, kind) {
     for (const item of items) {
       const html = item.content?.rendered ?? "";
-      const { blocks, unhandled } = extract(html);
+      const { blocks, unhandled, duplicates, rawBlocks } = extract(html);
 
       const src = visibleText(html);
-      const got = clean(textOfBlocks(blocks));
+      // Pre-dedup, so removing a responsive duplicate does not look like lost
+      // content — the source genuinely contains that text twice.
+      const got = clean(textOfBlocks(rawBlocks));
       const coverage = tokenRecall(src, got);
 
       const record = {
@@ -459,6 +507,7 @@ async function main() {
         blocks: blocks.length, coverage, counts,
         h1: headings.filter((h) => h.level === 1).length,
         unhandled: unhandled.length,
+        duplicates,
         shape: (counts.paragraph ?? 0) >= 8 ? "prose" : "layout",
       });
     }
@@ -501,6 +550,10 @@ async function main() {
   for (const [k, v] of Object.entries(totals).sort((a, b) => b[1] - a[1])) {
     console.log(`  ${k.padEnd(10)} ${String(v).padStart(5)}`);
   }
+
+  const dupTotal = report.reduce((n, r) => n + (r.duplicates ?? 0), 0);
+  const dupDocs = report.filter((r) => (r.duplicates ?? 0) > 0).length;
+  console.log(`\nresponsive duplicates removed: ${dupTotal} block(s) across ${dupDocs} document(s)`);
 
   const multiH1 = report.filter((r) => r.h1 > 1);
   console.log(`\ndocuments with more than one H1: ${multiH1.length}`);
