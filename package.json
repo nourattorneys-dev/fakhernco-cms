@@ -17,7 +17,8 @@
     "wp:map": "node migration/scripts/build-consolidation-map.mjs",
     "wp:validate": "node migration/scripts/validate-consolidation.mjs",
     "wp:extract": "node migration/scripts/extract-content.mjs",
-    "wp:import": "node migration/scripts/import.mjs"
+    "wp:import": "node migration/scripts/import.mjs",
+    "wp:media": "node migration/scripts/migrate-media.mjs"
   },
   "dependencies": {
     "@strapi/database": "5.51.1",

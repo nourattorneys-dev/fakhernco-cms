@@ -113,6 +113,9 @@ async function navGroups() {
 
 // ----------------------------------------------------------- block mapping
 
+/** legacy WordPress URL -> uploaded Strapi file id, from migrate-media.mjs. */
+let MEDIA = {};
+
 /** Longer than this and it is prose, not a heading. Column limit is 255. */
 const HEADING_MAX = 200;
 
@@ -177,10 +180,14 @@ function toComponent(block, stats) {
           title, text: text ?? null, href: href ?? null,
         })),
       };
-    case 'image':
-      // `file` stays null until media migration runs; legacySrc preserves the
-      // origin URL so the image can still render and be resolved later.
-      return { __component, alt: block.alt || null, legacySrc: block.src || null };
+    case 'image': {
+      // migrate-media.mjs maps legacy WordPress URLs onto uploaded Strapi file
+      // ids. legacySrc is kept either way, so an image whose file has not been
+      // migrated still renders from the origin instead of vanishing.
+      const fileId = MEDIA[block.src] ?? null;
+      if (fileId) stats.imagesLinked += 1; else if (block.src) stats.imagesUnlinked += 1;
+      return { __component, alt: block.alt || null, legacySrc: block.src || null, file: fileId };
+    }
     case 'button':
       return { __component, text: block.text, href: block.href };
     case 'quote':
@@ -209,6 +216,12 @@ async function main() {
     parseCsv(await readFile(path.join(OUT, 'consolidation-map.csv'), 'utf8'))
       .map((r) => [r.slug, r]),
   );
+  const mediaPath = path.join(OUT, 'media-map.json');
+  MEDIA = existsSync(mediaPath) ? JSON.parse(await readFile(mediaPath, 'utf8')) : {};
+  if (!Object.keys(MEDIA).length) {
+    console.warn('No media-map.json — image blocks will keep only legacySrc. Run: npm run wp:media');
+  }
+
   const parentOf = await navGroups();
   const rawCats = JSON.parse(await readFile(path.join(RAW, 'categories.json'), 'utf8'));
 
@@ -220,7 +233,7 @@ async function main() {
   const pages = await load('pages');
   const posts = await load('posts');
 
-  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, created: {}, updated: {}, ignored: [] };
+  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, created: {}, updated: {}, ignored: [] };
   const bump = (bucket, uid) => { stats[bucket][uid] = (stats[bucket][uid] ?? 0) + 1; };
 
   if (DRY) {
@@ -355,6 +368,8 @@ async function main() {
   for (const s of stats.ignored) console.log(`  - ${s}`);
   console.log(`\nH1s demoted to H2:           ${stats.demotedHeadings}`);
   console.log(`over-long headings -> prose: ${stats.headingsToParagraph}`);
+  console.log(`images linked to media:      ${stats.imagesLinked}`);
+  console.log(`images still origin-only:    ${stats.imagesUnlinked}`);
   if (stats.skipped.length) {
     const t = stats.skipped.reduce((a, k) => ({ ...a, [k]: (a[k] ?? 0) + 1 }), {});
     console.log(`unmapped block types: ${JSON.stringify(t)}`);
