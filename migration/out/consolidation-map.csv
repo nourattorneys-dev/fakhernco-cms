@@ -1,0 +1,81 @@
+slug,path,title,words,in_nav,action,redirect_to,confidence,method,reason
+litigation-dispute-resolution,/litigation-dispute-resolution/,Litigation Dispute Resolution,2507,yes,keep,,High,pillar,Service pillar — top of the mega-menu.
+company-formation-corporate-services,/company-formation-corporate-services/,Company Formation Corporate Services,2415,yes,keep,,High,pillar,Service pillar — top of the mega-menu.
+private-notary-attestation-services,/private-notary-attestation-services/,Private Notary Attestation Services,2395,yes,keep,,High,pillar,Service pillar — top of the mega-menu.
+contracts-legal-document-drafting,/contracts-legal-document-drafting/,Contracts Legal Document Drafting,2313,yes,keep,,High,pillar,Service pillar — top of the mega-menu.
+personal-criminal-legal-services,/personal-criminal-legal-services/,Personal Criminal Legal Services,1987,yes,keep,,High,pillar,Service pillar — top of the mega-menu.
+legal-document-drafting-review,/legal-document-drafting-review/,Legal Document Drafting Review,1758,yes,keep,,High,nav-child,Linked from the mega-menu.
+home,/,Home,1319,yes,keep,,High,nav-child,Linked from the mega-menu.
+our-federation-partners,/our-federation-partners/,Our Federation Partners,1149,no,keep,,High,explicit_override,"Supports /skp-business-federation/ (nav-linked via its logo). Longest orphan at 1,139 words. Link it from the federation page."
+uae-courts-litigation-process,/uae-courts-litigation-process/,UAE Courts Litigation Process,749,yes,keep,,High,nav-child,Linked from the mega-menu.
+the-integrated-service-model,/the-integrated-service-model/,The Integrated Service Model,702,no,keep,,High,explicit_override,Federation section page. Link from /skp-business-federation/.
+the-client-advantage,/the-client-advantage/,The Client Advantage,692,no,keep,,High,explicit_override,Federation section page. Link from /skp-business-federation/.
+wills-and-estate-planning,/wills-and-estate-planning/,Wills And Estate Planning,671,yes,keep,,High,nav-child,Linked from the mega-menu.
+urgent-and-temporary-measures,/urgent-and-temporary-measures/,Urgent And Temporary Measures,658,yes,keep,,High,nav-child,Linked from the mega-menu.
+power-of-attorney,/power-of-attorney/,Power Of Attorney,643,yes,keep,,High,nav-child,Linked from the mega-menu.
+local-sponsor-service-agent-services,/local-sponsor-service-agent-services/,Local Sponsor Service Agent Services,631,yes,keep,,High,nav-child,Linked from the mega-menu.
+document-attestation-services,/document-attestation-services/,Document Attestation Services,630,yes,keep,,High,nav-child,Linked from the mega-menu.
+employment-and-labor-disputes,/employment-and-labor-disputes/,Employment And Labor Disputes,626,yes,keep,,High,nav-child,Linked from the mega-menu.
+franchise-agreements,/franchise-agreements/,Franchise Agreements,619,yes,keep,,High,nav-child,Linked from the mega-menu.
+drafting-declaration-of-heirs,/drafting-declaration-of-heirs/,Drafting Declaration Of Heirs,616,yes,keep,,High,nav-child,Linked from the mega-menu.
+employment-contracts,/employment-contracts/,Employment Contracts,603,yes,keep,,High,nav-child,Linked from the mega-menu.
+compensation-claims,/compensation-claims/,Compensation Claims,602,yes,keep,,High,nav-child,Linked from the mega-menu.
+commercial-transactions-due-diligence,/commercial-transactions-due-diligence/,Commercial Transactions Due Diligence,600,yes,keep,,High,nav-child,Linked from the mega-menu.
+distribution-agreements,/distribution-agreements/,Distribution Agreements,600,yes,keep,,High,nav-child,Linked from the mega-menu.
+free-zone-company-formation,/free-zone-company-formation/,Free-zone Company Formation,596,yes,keep,,High,nav-child,Linked from the mega-menu.
+privacy-policy-2,/privacy-policy-2/,Privacy Policy,594,yes,keep,,High,nav-child,Linked from the mega-menu.
+mergers-acquisitions-advisory,/mergers-acquisitions-advisory/,Mergers Acquisitions (M A) Advisory,594,yes,keep,,High,nav-child,Linked from the mega-menu.
+commercial-and-business-disputes,/commercial-and-business-disputes/,Commercial And Business Disputes,593,yes,keep,,High,nav-child,Linked from the mega-menu.
+judgment-execution-and-enforcement,/judgment-execution-and-enforcement/,Judgment Execution And Enforcement,587,yes,keep,,High,nav-child,Linked from the mega-menu.
+certified-true-copy-services,/certified-true-copy-services/,Certified True Copy Services,585,yes,keep,,High,nav-child,Linked from the mega-menu.
+construction-contracts,/construction-contracts/,Construction Contracts,584,yes,keep,,High,nav-child,Linked from the mega-menu.
+debt-recovery,/debt-recovery/,Debt Recovery,580,yes,keep,,High,nav-child,Linked from the mega-menu.
+insurance-disputes,/insurance-disputes/,Insurance Disputes,580,yes,keep,,High,nav-child,Linked from the mega-menu.
+criminal-cases,/criminal-cases/,Criminal Cases,579,yes,keep,,High,nav-child,Linked from the mega-menu.
+drafting-consent-letters,/drafting-consent-letters/,Drafting Consent Letters,578,yes,keep,,High,nav-child,Linked from the mega-menu.
+non-disclosure-agreements,/non-disclosure-agreements/,Non Disclosure Agreements,578,yes,keep,,High,nav-child,Linked from the mega-menu.
+joint-venture-agreements,/joint-venture-agreements/,Joint Venture Agreements,578,yes,keep,,High,nav-child,Linked from the mega-menu.
+mainland-company-formation,/mainland-company-formation/,Mainland Company Formation,576,yes,keep,,High,nav-child,Linked from the mega-menu.
+drafting-of-affidavits,/drafting-of-affidavits/,Drafting Of Affidavits,576,yes,keep,,High,nav-child,Linked from the mega-menu.
+non-compete-agreements,/non-compete-agreements/,Non Compete Agreements,576,yes,keep,,High,nav-child,Linked from the mega-menu.
+about-us,/about-us/,About Us,575,yes,keep,,High,nav-child,Linked from the mega-menu.
+business-closure-liquidation,/business-closure-liquidation/,Business Closure Liquidation,568,yes,keep,,High,nav-child,Linked from the mega-menu.
+real-estate-and-rental-disputes,/real-estate-and-rental-disputes/,Real Estate And Rental Disputes,567,yes,keep,,High,nav-child,Linked from the mega-menu.
+medical-malpractice-claims,/medical-malpractice-claims/,Medical Malpractice Claims,563,yes,keep,,High,nav-child,Linked from the mega-menu.
+master-service-agreements,/master-service-agreements/,Master Service Agreements,561,yes,keep,,High,nav-child,Linked from the mega-menu.
+offshore-company-formation,/offshore-company-formation/,Offshore Company Formation,560,yes,keep,,High,nav-child,Linked from the mega-menu.
+e-commerce-terms-conditions,/e-commerce-terms-conditions/,E-commerce Terms Conditions,555,yes,keep,,High,nav-child,Linked from the mega-menu.
+construction-disputes,/construction-disputes/,Construction Disputes,554,yes,keep,,High,nav-child,Linked from the mega-menu.
+legal-document-and-agreement-review,/legal-document-and-agreement-review/,Legal Document And Agreement Review,549,yes,keep,,High,nav-child,Linked from the mega-menu.
+intellectual-property-disputes,/intellectual-property-disputes/,Intellectual Property Disputes,549,yes,keep,,High,nav-child,Linked from the mega-menu.
+partnership-agreements,/partnership-agreements/,Partnership Agreements,548,yes,keep,,High,nav-child,Linked from the mega-menu.
+banking-and-financial-disputes,/banking-and-financial-disputes/,Banking And Financial Disputes,546,yes,keep,,High,nav-child,Linked from the mega-menu.
+shareholder-agreements,/shareholder-agreements/,Shareholder Agreements,532,yes,keep,,High,nav-child,Linked from the mega-menu.
+why-choose-fakherco,/why-choose-fakherco/,Why Choose FakherCo,529,yes,keep,,High,nav-child,Linked from the mega-menu.
+real-estate-contracts,/real-estate-contracts/,Real Estate Contracts,523,yes,keep,,High,nav-child,Linked from the mega-menu.
+corporate-governance-restructuring,/corporate-governance-restructuring/,Corporate Governance Restructuring,516,yes,keep,,High,nav-child,Linked from the mega-menu.
+lawyer-attestation,/lawyer-attestation/,Lawyer Attestation,506,yes,keep,,High,nav-child,Linked from the mega-menu.
+contact-us,/contact-us/,Contact Us,495,yes,keep,,High,nav-child,Linked from the mega-menu.
+our-unwavering-principles,/our-unwavering-principles/,Our Unwavering Principles,471,yes,keep,,High,nav-child,Linked from the mega-menu.
+skp-business-federation,/skp-business-federation/,SKP Business Federation,435,yes,keep,,High,nav-child,Linked from the mega-menu.
+legal-insights,/legal-insights/,Legal Insights,428,yes,keep,,High,nav-child,Linked from the mega-menu.
+services,/services/,Services,196,yes,keep,,High,nav-child,Linked from the mega-menu.
+meet-your-advocates,/meet-your-advocates/,Meet Your Advocates,140,yes,keep,,High,nav-child,Linked from the mega-menu.
+litigation-vs-arbitration,/litigation-vs-arbitration/,Litigation Vs Arbitration,873,no,convert,,High,"explicit_override,become=insight","Editorial guide ('Courtroom or Conference Room?'), not a service page. 871 words of real top-of-funnel content."
+understanding-legal-costs,/understanding-legal-costs/,Understanding Legal Costs,840,no,convert,,High,"explicit_override,become=insight",Editorial guide on fee transparency — strong trust content for a law firm.
+real-estate-law-buyers-guide,/real-estate-law-buyers-guide/,Real Estate Law Buyers Guide,797,no,convert,,High,"explicit_override,become=insight",Editorial guide to buying UAE property.
+navigating-employment-law,/navigating-employment-law/,Navigating Employment Law,751,no,convert,,High,"explicit_override,become=insight",Editorial guide aimed at employers.
+importance-of-shareholder-agreement,/importance-of-shareholder-agreement/,Importance Of Shareholder Agreement,738,no,convert,,High,"explicit_override,become=insight",Editorial guide on shareholder agreements.
+choosing-a-company-structure,/choosing-a-company-structure/,Choosing A Company Structure,720,no,convert,,High,"explicit_override,become=insight",Editorial guide comparing mainland / free zone / offshore.
+case-study-family-business,/case-study-family-business/,Case Study Family Business,669,no,convert,,High,"explicit_override,become=case-study","Anonymised case study. Needs a Case Study content type — proof content a law firm should surface, not bury."
+case-study-foreign-judgment,/case-study-foreign-judgment/,Case Study Foreign Judgment,619,no,convert,,High,"explicit_override,become=case-study",Anonymised case study on cross-border judgment enforcement.
+criminal-cases-representation,/criminal-cases-representation/,Criminal Cases Representation,637,no,redirect,/criminal-cases/,High,explicit_override,v1 service page superseded by the nav-linked /criminal-cases/.
+lawyer-attestation-2,/lawyer-attestation-2/,Lawyer Attestations,628,no,redirect,/lawyer-attestation/,High,explicit_override,WordPress slug collision — the '-2' suffix means the base slug was already taken.
+litigation,/litigation/,Litigation,615,no,redirect,/litigation-dispute-resolution/,High,explicit_override,v1 service page ('OUR FOCUS' template) superseded by the litigation pillar.
+private-notary-services,/private-notary-services/,Private Notary Services,582,no,redirect,/private-notary-attestation-services/,High,explicit_override,v1 service page superseded by the notary pillar.
+wills_for_non_muslims,/wills_for_non_muslims/,Wills for Non Muslims,582,no,redirect,/wills-and-estate-planning/,High,explicit_override,v1 service page superseded. Note: the only slug on the site using underscores.
+drafting-and-reviewing-contracts,/drafting-and-reviewing-contracts/,Drafting and Reviewing Contracts,580,no,redirect,/contracts-legal-document-drafting/,High,explicit_override,v1 service page superseded by the contracts pillar.
+true-copies-for-documents,/true-copies-for-documents/,True Copies for Documents,551,no,redirect,/certified-true-copy-services/,High,explicit_override,v1 service page superseded by the nav-linked equivalent.
+legal-articles,/legal-articles/,Legal Articles,0,yes,redirect,/legal-insights/,High,explicit_override,Second blog archive competing with /legal-insights/. Keep one hub.
+legal-consultations,/legal-consultations/,Legal Consultations,615,no,review,,Low,explicit_override,"v1 service page, but nothing replaced it — 'Legal Consultations' has no equivalent in the current menu. Either restore it as a service or retire it. Firm decides."
+footer,/footer/,Footer,108,no,delete,,High,template,"Bold Builder template page, indexed with the title ""Footer"". Serve 410."

@@ -1,0 +1,77 @@
+[
+  {
+    "from": "/category/company-formation-corporate-services/",
+    "to": "/insights/company-formation-corporate-services/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/category/contracts-real-estate/",
+    "to": "/insights/contracts-real-estate/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/category/corporate-compliance-contracts/",
+    "to": "/insights/corporate-compliance-contracts/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/category/emerging-areas-private-notary-integration/",
+    "to": "/insights/emerging-areas-private-notary-integration/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/category/ip-emerging-legal-areas/",
+    "to": "/insights/ip-emerging-legal-areas/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/category/litigation-dispute-resolution/",
+    "to": "/insights/litigation-dispute-resolution/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/category/skp-business-federation-integration/",
+    "to": "/insights/skp-business-federation-integration/",
+    "note": "Category archive, 20 posts. Needs a real route in the new site."
+  },
+  {
+    "from": "/author/fakher/",
+    "to": "/about-us/",
+    "note": "Author archive — single author, thin. 301 rather than rebuild."
+  },
+  {
+    "from": "/sitemap_index.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast index registered in Search Console."
+  },
+  {
+    "from": "/page-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/post-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/category-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/author-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/feed/",
+    "to": "/rss.xml",
+    "note": "RSS — serves 200 today; third-party readers still request it."
+  },
+  {
+    "from": "/comments/feed/",
+    "to": "/rss.xml",
+    "note": "Comment feed."
+  }
+]
