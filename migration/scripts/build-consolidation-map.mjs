@@ -102,7 +102,12 @@ const DECISIONS = {
   "the-client-advantage": { action: "keep", to: "", why: "Federation section page. Link from /skp-business-federation/." },
 
   // Open question for the firm.
-  "legal-consultations": { action: "review", to: "", why: "v1 service page, but nothing replaced it — 'Legal Consultations' has no equivalent in the current menu. Either restore it as a service or retire it. Firm decides." },
+  // Kept, not held for review. It is live on WordPress today and 22 blog
+  // posts link to it, so leaving it unpublished 404s every one of those
+  // links. Publishing restores parity; whether it belongs in the navigation
+  // is still the firm's call and does not require the page to be broken in
+  // the meantime.
+  "legal-consultations": { action: "keep", to: "", why: "v1 service page that nothing replaced. Live today and linked from 22 posts, so it stays published. Open question: does it belong in the menu?" },
 
   // Two blog archives for one blog.
   "legal-articles": { action: "redirect", to: "/legal-insights/", why: "Second blog archive competing with /legal-insights/. Keep one hub." },

@@ -18,6 +18,7 @@ document-attestation-services,/document-attestation-services/,Document Attestati
 employment-and-labor-disputes,/employment-and-labor-disputes/,Employment And Labor Disputes,626,yes,keep,,High,nav-child,Linked from the mega-menu.
 franchise-agreements,/franchise-agreements/,Franchise Agreements,619,yes,keep,,High,nav-child,Linked from the mega-menu.
 drafting-declaration-of-heirs,/drafting-declaration-of-heirs/,Drafting Declaration Of Heirs,616,yes,keep,,High,nav-child,Linked from the mega-menu.
+legal-consultations,/legal-consultations/,Legal Consultations,615,no,keep,,High,explicit_override,"v1 service page that nothing replaced. Live today and linked from 22 posts, so it stays published. Open question: does it belong in the menu?"
 employment-contracts,/employment-contracts/,Employment Contracts,603,yes,keep,,High,nav-child,Linked from the mega-menu.
 compensation-claims,/compensation-claims/,Compensation Claims,602,yes,keep,,High,nav-child,Linked from the mega-menu.
 commercial-transactions-due-diligence,/commercial-transactions-due-diligence/,Commercial Transactions Due Diligence,600,yes,keep,,High,nav-child,Linked from the mega-menu.
@@ -77,5 +78,4 @@ wills_for_non_muslims,/wills_for_non_muslims/,Wills for Non Muslims,582,no,redir
 drafting-and-reviewing-contracts,/drafting-and-reviewing-contracts/,Drafting and Reviewing Contracts,580,no,redirect,/contracts-legal-document-drafting/,High,explicit_override,v1 service page superseded by the contracts pillar.
 true-copies-for-documents,/true-copies-for-documents/,True Copies for Documents,551,no,redirect,/certified-true-copy-services/,High,explicit_override,v1 service page superseded by the nav-linked equivalent.
 legal-articles,/legal-articles/,Legal Articles,0,yes,redirect,/legal-insights/,High,explicit_override,Second blog archive competing with /legal-insights/. Keep one hub.
-legal-consultations,/legal-consultations/,Legal Consultations,615,no,review,,Low,explicit_override,"v1 service page, but nothing replaced it — 'Legal Consultations' has no equivalent in the current menu. Either restore it as a service or retire it. Firm decides."
 footer,/footer/,Footer,108,no,delete,,High,template,"Bold Builder template page, indexed with the title ""Footer"". Serve 410."

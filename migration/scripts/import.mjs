@@ -127,6 +127,49 @@ async function navGroups() {
 /** legacy WordPress URL -> uploaded Strapi file id, from migrate-media.mjs. */
 let MEDIA = {};
 
+/** Slugs that genuinely exist in Arabic. Set before the Arabic import runs. */
+let AR_SLUGS = new Set();
+
+/** Legacy path -> final destination, so in-content links skip the redirect. */
+let REDIRECTS = new Map();
+
+/**
+ * Repair links inside imported HTML.
+ *
+ * Two problems, both from scraping a live WordPress site:
+ *
+ * 1. Arabic bodies link to /ar/<slug> for pages that were never translated.
+ *    Those URLs do not exist in the rebuild, so the link 404s. Point it at
+ *    the English page — a working English page beats a broken Arabic one.
+ *
+ * 2. Cloudflare rewrites email addresses to /cdn-cgi/l/email-protection and
+ *    decodes them with JavaScript. Scraped, that becomes a dead internal link.
+ */
+/** The same repairs, for a bare href rather than a blob of HTML. */
+function repairHref(href) {
+  if (typeof href !== 'string' || !href) return href;
+  const repaired = repairLinks(`href="${href}"`, null);
+  return (repaired.match(/href="([^"]*)"/) ?? [])[1] ?? href;
+}
+
+function repairLinks(html, locale) {
+  if (typeof html !== 'string') return html;
+  return html
+    .replace(/href="[^"]*\/cdn-cgi\/l\/email-protection[^"]*"/g, 'href="mailto:info@fakhernco.com"')
+    .replace(/href="(?:https?:\/\/(?:www\.)?fakhernco\.com)?\/ar\/([^"\/]+)\/?"/g, (match, slug) =>
+      AR_SLUGS.has(slug) ? `href="/ar/${slug}"` : `href="/${slug}"`,
+    )
+    .replace(/href="https?:\/\/(?:www\.)?fakhernco\.com\/([^"]*)"/g, 'href="/$1"')
+    // Point at the final destination rather than a URL we are about to 301.
+    // A link that redirects still works, but it costs a round trip and wastes
+    // crawl budget on every page that carries it.
+    .replace(/href="(\/[^"#?]*)"/g, (match, path) => {
+      const key = path.length > 1 ? path.replace(/\/$/, '') : path;
+      const target = REDIRECTS.get(key);
+      return target ? `href="${target}"` : `href="${key}"`;
+    });
+}
+
 /** Longer than this and it is prose, not a heading. Column limit is 255. */
 const HEADING_MAX = 200;
 
@@ -171,12 +214,12 @@ function toComponent(block, stats) {
       return { __component, level, text: block.text };
     }
     case 'paragraph':
-      return { __component, html: block.html };
+      return { __component, html: repairLinks(block.html, stats.locale) };
     case 'list':
       return {
         __component,
         ordered: Boolean(block.ordered),
-        items: (block.items ?? []).map((text) => ({ text })),
+        items: (block.items ?? []).map((text) => ({ text: repairLinks(text, stats.locale) })),
       };
     case 'table':
       return { __component, headers: block.headers ?? [], rows: block.rows ?? [] };
@@ -189,7 +232,9 @@ function toComponent(block, stats) {
       return {
         __component,
         items: (block.items ?? []).map(({ title, text, href }) => ({
-          title, text: text ?? null, href: href ?? null,
+          title,
+          text: text ?? null,
+          href: href ? repairHref(href) : null,
         })),
       };
     case 'image': {
@@ -210,9 +255,9 @@ function toComponent(block, stats) {
         }),
       };
     case 'button':
-      return { __component, text: block.text, href: block.href };
+      return { __component, text: block.text, href: repairHref(block.href) };
     case 'quote':
-      return { __component, html: block.html, attribution: block.attribution ?? null };
+      return { __component, html: repairLinks(block.html, stats.locale), attribution: block.attribution ?? null };
     default:
       return null;
   }
@@ -244,6 +289,14 @@ async function main() {
   }
 
   const { parentOf, about: aboutSlugs } = await navGroups();
+
+  const redirectsFile = path.join(OUT, 'redirects.json');
+  if (existsSync(redirectsFile)) {
+    const rules = JSON.parse(await readFile(redirectsFile, 'utf8'));
+    REDIRECTS = new Map(
+      rules.filter((r) => r.destination).map((r) => [r.source, r.destination]),
+    );
+  }
 
   const labelsFile = path.join(OUT, 'arabic-labels.json');
   const AR_LABELS = existsSync(labelsFile) ? JSON.parse(await readFile(labelsFile, 'utf8')) : {};
@@ -370,7 +423,12 @@ async function main() {
           });
         } else {
           await upsert('api::post.post', p.slug, {
-            ...common, excerpt: p.seo?.metaDescription ?? null,
+            ...common,
+            excerpt: p.seo?.metaDescription ?? null,
+            // These were Pages, so they carry no publish date — and without
+            // one they sort to the bottom of the archive and never surface.
+            // The page's own last-modified date is the honest stand-in.
+            publishedDate: (p.modified ?? p.date ?? '').slice(0, 10) || null,
           });
         }
         continue;
@@ -451,6 +509,7 @@ async function main() {
     // on that page, which is the honest outcome.
     const arDir = path.join(CONTENT, 'ar', 'pages');
     if (existsSync(arDir)) {
+      AR_SLUGS = new Set((await readdir(arDir)).map((f) => f.replace(/\.json$/, '')));
       for (const file of await readdir(arDir)) {
         const doc = JSON.parse(await readFile(path.join(arDir, file), 'utf8'));
         const decision = decisions.get(doc.slug);
