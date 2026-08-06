@@ -254,7 +254,7 @@ async function main() {
   const pages = await load('pages');
   const posts = await load('posts');
 
-  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, created: {}, updated: {}, ignored: [] };
+  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], created: {}, updated: {}, ignored: [] };
   const bump = (bucket, uid) => { stats[bucket][uid] = (stats[bucket][uid] ?? 0) + 1; };
 
   if (DRY) {
@@ -418,7 +418,53 @@ async function main() {
       ].filter(Boolean),
     });
 
-    // 5. Blog posts.
+    // 5. Arabic localisations.
+    //
+    // Only the pages that are genuinely translated — 53 of 220 URLs. The rest
+    // serve the English page under an /ar/ path, and importing those would
+    // create "Arabic" pages that are actually English. The language switcher
+    // keys off what exists here, so an absent locale simply means no switcher
+    // on that page, which is the honest outcome.
+    const arDir = path.join(CONTENT, 'ar', 'pages');
+    if (existsSync(arDir)) {
+      for (const file of await readdir(arDir)) {
+        const doc = JSON.parse(await readFile(path.join(arDir, file), 'utf8'));
+        const decision = decisions.get(doc.slug);
+        const action = decision?.action ?? 'keep';
+        if (action === 'redirect' || action === 'delete') continue;
+
+        // The English document must exist first — a localisation attaches to
+        // it, it is not a separate record.
+        const uid = PILLARS.includes(doc.slug)
+          ? 'api::practice-area.practice-area'
+          : action === 'convert'
+            ? decision.method.includes('case-study')
+              ? 'api::case-study.case-study'
+              : 'api::post.post'
+            : 'api::page.page';
+
+        const english = await app.documents(uid).findFirst({
+          filters: { slug: doc.slug },
+          locale: 'en',
+        });
+        if (!english) { stats.arSkipped.push(doc.slug); continue; }
+
+        await app.documents(uid).update({
+          documentId: english.documentId,
+          locale: 'ar',
+          status: 'published',
+          data: {
+            title: doc.title || english.title,
+            slug: doc.slug,
+            legacyUrl: doc.legacyUrl,
+            blocks: doc.blocks.map((b) => toComponent(b, stats)).filter(Boolean),
+          },
+        });
+        stats.arImported += 1;
+      }
+    }
+
+    // 6. Blog posts.
     for (const p of posts) {
       await upsert('api::post.post', p.slug, {
         title: p.title,
@@ -448,6 +494,10 @@ async function main() {
   console.log(`over-long headings -> prose: ${stats.headingsToParagraph}`);
   console.log(`images linked to media:      ${stats.imagesLinked}`);
   console.log(`images still origin-only:    ${stats.imagesUnlinked}`);
+  console.log(`arabic localisations:        ${stats.arImported}`);
+  if (stats.arSkipped.length) {
+    console.log(`  skipped (no english doc):  ${stats.arSkipped.join(', ')}`);
+  }
   if (stats.skipped.length) {
     const t = stats.skipped.reduce((a, k) => ({ ...a, [k]: (a[k] ?? 0) + 1 }), {});
     console.log(`unmapped block types: ${JSON.stringify(t)}`);

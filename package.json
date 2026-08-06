@@ -19,7 +19,9 @@
     "wp:extract": "node migration/scripts/extract-content.mjs",
     "wp:import": "node migration/scripts/import.mjs",
     "wp:media": "node migration/scripts/migrate-media.mjs",
-    "wp:redirects": "node migration/scripts/build-redirects.mjs"
+    "wp:redirects": "node migration/scripts/build-redirects.mjs",
+    "wp:scan-ar": "node migration/scripts/scan-arabic.mjs",
+    "wp:fetch-ar": "node migration/scripts/fetch-arabic.mjs"
   },
   "dependencies": {
     "@strapi/database": "5.51.1",

@@ -221,8 +221,15 @@ function blocksFromProse(node, blocks) {
   }
 }
 
-/** Walk the builder tree, emitting blocks and never descending into a handled node. */
-function extract(html) {
+/**
+ * Walk the builder tree, emitting blocks and never descending into a handled
+ * node.
+ *
+ * Exported so fetch-arabic.mjs can run the same logic over the rendered
+ * Arabic pages — the markup inside .btContent is the same bt_bb_* structure
+ * as the REST API returns for English.
+ */
+export function extract(html) {
   const root = parse(html);
   const blocks = [];
   const unhandled = [];
@@ -487,7 +494,11 @@ function tokenRecall(source, extracted) {
 }
 
 async function main() {
-  await rm(CONTENT, { recursive: true, force: true });
+  // Clear ONLY what this script owns. Wiping all of CONTENT also destroys
+  // data/content/ar/, which fetch-arabic.mjs produces — and which is far more
+  // expensive to rebuild because it is scraped from the live site.
+  await rm(join(CONTENT, "pages"), { recursive: true, force: true });
+  await rm(join(CONTENT, "posts"), { recursive: true, force: true });
   await mkdir(join(CONTENT, "pages"), { recursive: true });
   await mkdir(join(CONTENT, "posts"), { recursive: true });
 
@@ -589,4 +600,10 @@ async function main() {
   console.log(`         ${join(OUT, "extraction-report.json")}`);
 }
 
-main().catch((e) => { console.error("extract-content failed:", e); process.exit(1); });
+// Only run when invoked directly. fetch-arabic.mjs imports extract() from
+// this module, and without the guard that import re-runs the entire English
+// extraction as a side effect.
+const isEntryPoint = process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop());
+if (isEntryPoint) {
+  main().catch((e) => { console.error("extract-content failed:", e); process.exit(1); });
+}
