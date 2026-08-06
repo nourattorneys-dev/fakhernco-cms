@@ -257,6 +257,38 @@ const textOfBlocks = (blocks) =>
 const visibleText = (html) =>
   clean(parse(html).text);
 
+const decodeEntities = (s) =>
+  (s ?? "")
+    .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"').replace(/&#0?39;|&#x27;|&apos;/gi, "'")
+    .replace(/&#8211;/g, "–").replace(/&#8212;/g, "—")
+    .replace(/&#8216;|&#8217;/g, "’").replace(/&#8220;|&#8221;/g, '"')
+    .replace(/&nbsp;/g, " ");
+
+/**
+ * Pull the live Yoast metadata into a portable shape.
+ *
+ * The brand suffix is stripped deliberately. Every stored title currently ends
+ * with " - Fakher & Co"; the Next.js layout will apply a title template that
+ * appends the brand itself, and leaving both in place yields
+ * "Fakher & Co | About Us - Fakher & Co".
+ */
+function seoFrom(yoast) {
+  if (!yoast) return null;
+  const title = decodeEntities(yoast.title ?? "")
+    .replace(/\s*[-–|]\s*Fakher\s*&\s*Co\.?\s*$/i, "")
+    .trim();
+  const robots = yoast.robots ?? {};
+  return {
+    metaTitle: title || null,
+    metaDescription: decodeEntities(yoast.description ?? "").trim() || null,
+    canonicalUrl: yoast.canonical ?? null,
+    noIndex: robots.index === "noindex",
+    ogImageUrl: Array.isArray(yoast.og_image) && yoast.og_image[0]?.url
+      ? yoast.og_image[0].url : null,
+  };
+}
+
 /**
  * What fraction of the source's words survived into blocks, counted as a
  * multiset so repeated words must be matched repeatedly.
@@ -307,9 +339,10 @@ async function main() {
       const record = {
         slug: item.slug,
         legacyUrl: new URL(item.link).pathname,
-        title: clean(parse(item.title?.rendered ?? "").text),
+        title: decodeEntities(clean(parse(item.title?.rendered ?? "").text)),
         date: item.date,
         modified: item.modified,
+        seo: seoFrom(item.yoast_head_json),
         ...(kind === "posts" ? {
           excerpt: clean(parse(item.excerpt?.rendered ?? "").text),
           categories: (item.categories ?? []).map((id) => catById.get(id)).filter(Boolean),

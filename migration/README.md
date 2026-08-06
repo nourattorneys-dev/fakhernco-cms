@@ -24,6 +24,7 @@ cutover. `out/` is committed: those are decision artifacts.
 | `build-consolidation-map.mjs` | Classifies all 80 pages and writes `out/consolidation-map.csv` + `out/infra-redirects.json`. |
 | `validate-consolidation.mjs` | Proves the map is shippable: no chains, no self-loops, no dead targets, no dropped pages. `--live` also confirms every target returns 200 today. |
 | `extract-content.mjs` | Converts Bold Builder markup into portable blocks. Writes `data/content/{pages,posts}/<slug>.json` + `out/extraction-report.json`. |
+| `import.mjs` | Loads the extracted content into Strapi, applying the consolidation map. `--dry` reports the plan without writing. |
 
 ## Block contract
 
@@ -73,6 +74,70 @@ paragraph block. Guard with `hasBlockDescendant()`.
 happening**, because all the text *is* present — in one useless blob. Coverage
 is now multiset token recall, which caught it immediately. Never measure
 extraction quality with a ratio that can saturate.
+
+## Import
+
+```bash
+npm run wp:import -- --dry   # plan only
+npm run wp:import            # write (Strapi server must be STOPPED)
+```
+
+The consolidation map decides what happens to each page:
+
+| Map action | Import result |
+|---|---|
+| `keep` | Page — or **Practice area** for the five pillars |
+| `convert` | Insight or Case study, URL preserved |
+| `redirect` | **not imported** — it becomes a 301, and importing it would recreate the duplicate |
+| `delete` | **not imported** |
+| `review` | imported as a **draft**, visible to the firm but not publicly reachable |
+
+Result of the current run:
+
+| | |
+|---|---|
+| Pages | 58 (57 published + `legal-consultations` as draft) |
+| Insights | 146 — 140 blog posts + 6 converted guides |
+| Case studies | 2 |
+| Practice areas | 5 |
+| Categories | 7 |
+| Not imported | 9 (8 redirects + `/footer/`) |
+
+Idempotent: a second run produces 0 creates and 218 updates. Pillar→child
+relations are derived from mega-menu link order (44 children mapped), because
+`/wp-json/wp/v2/menus` returns 401 without authentication.
+
+**Hard rule:** once the firm starts editing in the admin panel, do not run this
+against that database again. It overwrites whole records and would silently
+revert their work. Re-import only into a fresh database.
+
+### SEO metadata
+
+`yoast_head_json` is exposed on the REST API, so meta title, description,
+canonical and robots directives migrate with the content — 220/220 documents
+carry Yoast metadata and 219 have a meta description. Without it the rebuild
+would invent new metadata for 220 ranking pages.
+
+The brand suffix is stripped on the way in. Every stored title currently ends
+with `- Fakher & Co`, and the Next.js title template appends the brand itself,
+so leaving both produces `Fakher & Co | About Us - Fakher & Co`.
+
+### Two Strapi-specific traps
+
+**Strapi's ESM build cannot be imported from an ESM script.** `@strapi/strapi`'s
+`.mjs` entry does a directory import of `lodash/fp`, which Node's ESM resolver
+rejects outright with `ERR_UNSUPPORTED_DIR_IMPORT`. Load the CommonJS entry via
+`createRequire` instead — this is why t4me's importer is CommonJS.
+
+**Use `compileStrapi()`, not a hand-built config object.** Constructing
+`createStrapi({appDir, distDir})` directly leaves `db.config.connection`
+undefined, because `config/database.ts` never gets compiled or read.
+
+## Finding: 222 stray H1s, not 49 documents
+
+The document-level count was 49; the import demoted **222 individual H1 blocks**
+to H2. One "heading" also exceeded 255 characters and was reclassified as a
+paragraph — it was prose the theme happened to render inside a headline block.
 
 ## Finding: 49 documents carry more than one H1
 

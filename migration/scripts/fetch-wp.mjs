@@ -59,7 +59,12 @@ async function collection(type, fields) {
   return out;
 }
 
-const CONTENT_FIELDS = ["id", "slug", "link", "title", "content", "date", "modified"];
+// yoast_head_json carries the live meta title, description, canonical and
+// robots directives. Without it there is no SEO parity to migrate towards -
+// the rebuild would silently invent new metadata for 220 ranking pages.
+const CONTENT_FIELDS = [
+  "id", "slug", "link", "title", "content", "date", "modified", "yoast_head_json",
+];
 
 async function main() {
   await mkdir(RAW, { recursive: true });
