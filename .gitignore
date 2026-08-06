@@ -6,3 +6,4 @@ node_modules/
 dist/
 .DS_Store
 migration/data/raw/
+migration/data/content/

@@ -1,0 +1,3608 @@
+[
+  {
+    "kind": "pages",
+    "slug": "legal-document-drafting-review",
+    "words": 1750,
+    "blocks": 58,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 41,
+      "faq": 1,
+      "list": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "personal-criminal-legal-services",
+    "words": 1983,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 38,
+      "list": 5,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "our-federation-partners",
+    "words": 1107,
+    "blocks": 32,
+    "coverage": 0.9937444146559428,
+    "counts": {
+      "heading": 15,
+      "paragraph": 15,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "the-integrated-service-model",
+    "words": 692,
+    "blocks": 16,
+    "coverage": 0.9885550786838341,
+    "counts": {
+      "heading": 7,
+      "paragraph": 7,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "the-client-advantage",
+    "words": 669,
+    "blocks": 16,
+    "coverage": 0.9853157121879589,
+    "counts": {
+      "heading": 7,
+      "paragraph": 7,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "skp-business-federation",
+    "words": 418,
+    "blocks": 15,
+    "coverage": 0.9811764705882353,
+    "counts": {
+      "heading": 9,
+      "paragraph": 4,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "true-copies-for-documents",
+    "words": 538,
+    "blocks": 29,
+    "coverage": 0.9703153988868275,
+    "counts": {
+      "heading": 9,
+      "paragraph": 6,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "legal-consultations",
+    "words": 603,
+    "blocks": 29,
+    "coverage": 0.9717607973421927,
+    "counts": {
+      "heading": 9,
+      "paragraph": 6,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "criminal-cases-representation",
+    "words": 625,
+    "blocks": 29,
+    "coverage": 0.9713375796178344,
+    "counts": {
+      "heading": 9,
+      "paragraph": 6,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "drafting-and-reviewing-contracts",
+    "words": 568,
+    "blocks": 29,
+    "coverage": 0.9700176366843033,
+    "counts": {
+      "heading": 9,
+      "paragraph": 6,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "private-notary-services",
+    "words": 571,
+    "blocks": 29,
+    "coverage": 0.9701230228471002,
+    "counts": {
+      "heading": 9,
+      "paragraph": 6,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "wills_for_non_muslims",
+    "words": 570,
+    "blocks": 30,
+    "coverage": 0.9706390328151986,
+    "counts": {
+      "heading": 9,
+      "paragraph": 7,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "lawyer-attestation-2",
+    "words": 615,
+    "blocks": 31,
+    "coverage": 0.9724919093851133,
+    "counts": {
+      "heading": 9,
+      "paragraph": 8,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "litigation",
+    "words": 608,
+    "blocks": 29,
+    "coverage": 0.971947194719472,
+    "counts": {
+      "heading": 9,
+      "paragraph": 6,
+      "list": 4,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "privacy-policy-2",
+    "words": 592,
+    "blocks": 24,
+    "coverage": 1,
+    "counts": {
+      "heading": 9,
+      "paragraph": 15
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "case-study-family-business",
+    "words": 663,
+    "blocks": 10,
+    "coverage": 0.9910313901345291,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "case-study-foreign-judgment",
+    "words": 612,
+    "blocks": 12,
+    "coverage": 0.9887820512820513,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6
+    },
+    "h1": 5,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "real-estate-law-buyers-guide",
+    "words": 790,
+    "blocks": 24,
+    "coverage": 0.9925,
+    "counts": {
+      "heading": 9,
+      "paragraph": 9,
+      "list": 4,
+      "button": 2
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "navigating-employment-law",
+    "words": 744,
+    "blocks": 29,
+    "coverage": 0.9920212765957447,
+    "counts": {
+      "heading": 10,
+      "paragraph": 10,
+      "list": 7,
+      "button": 2
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "importance-of-shareholder-agreement",
+    "words": 729,
+    "blocks": 23,
+    "coverage": 0.9892761394101877,
+    "counts": {
+      "heading": 5,
+      "paragraph": 14,
+      "list": 2,
+      "button": 2
+    },
+    "h1": 1,
+    "unhandled": 1,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "choosing-a-company-structure",
+    "words": 716,
+    "blocks": 34,
+    "coverage": 0.9916782246879334,
+    "counts": {
+      "heading": 7,
+      "paragraph": 15,
+      "list": 9,
+      "table": 1,
+      "button": 2
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "litigation-vs-arbitration",
+    "words": 864,
+    "blocks": 13,
+    "coverage": 0.9930715935334873,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "table": 1,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "understanding-legal-costs",
+    "words": 827,
+    "blocks": 20,
+    "coverage": 0.9879807692307693,
+    "counts": {
+      "heading": 9,
+      "paragraph": 9,
+      "button": 2
+    },
+    "h1": 7,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "local-sponsor-service-agent-services",
+    "words": 622,
+    "blocks": 12,
+    "coverage": 0.9870967741935484,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "business-closure-liquidation",
+    "words": 559,
+    "blocks": 12,
+    "coverage": 0.9875,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "commercial-transactions-due-diligence",
+    "words": 590,
+    "blocks": 14,
+    "coverage": 0.984641638225256,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "mergers-acquisitions-advisory",
+    "words": 585,
+    "blocks": 12,
+    "coverage": 0.9864864864864865,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "corporate-governance-restructuring",
+    "words": 507,
+    "blocks": 12,
+    "coverage": 0.9842209072978304,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "offshore-company-formation",
+    "words": 551,
+    "blocks": 12,
+    "coverage": 0.9851851851851852,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "free-zone-company-formation",
+    "words": 586,
+    "blocks": 12,
+    "coverage": 0.9862778730703259,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "mainland-company-formation",
+    "words": 566,
+    "blocks": 12,
+    "coverage": 0.9857142857142858,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "e-commerce-terms-conditions",
+    "words": 545,
+    "blocks": 14,
+    "coverage": 0.9833641404805915,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "legal-document-and-agreement-review",
+    "words": 538,
+    "blocks": 14,
+    "coverage": 0.9849340866290018,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "drafting-declaration-of-heirs",
+    "words": 605,
+    "blocks": 14,
+    "coverage": 0.9851973684210527,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "drafting-consent-letters",
+    "words": 569,
+    "blocks": 13,
+    "coverage": 0.9838709677419355,
+    "counts": {
+      "heading": 6,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "drafting-of-affidavits",
+    "words": 566,
+    "blocks": 14,
+    "coverage": 0.9856115107913669,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "real-estate-contracts",
+    "words": 514,
+    "blocks": 12,
+    "coverage": 0.9882583170254403,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "construction-contracts",
+    "words": 572,
+    "blocks": 12,
+    "coverage": 0.9860383944153578,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "employment-contracts",
+    "words": 594,
+    "blocks": 12,
+    "coverage": 0.986644407345576,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "distribution-agreements",
+    "words": 590,
+    "blocks": 12,
+    "coverage": 0.9866888519134775,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "non-compete-agreements",
+    "words": 565,
+    "blocks": 14,
+    "coverage": 0.9863013698630136,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "non-disclosure-agreements",
+    "words": 568,
+    "blocks": 12,
+    "coverage": 0.9861351819757366,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "master-service-agreements",
+    "words": 552,
+    "blocks": 12,
+    "coverage": 0.985663082437276,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "franchise-agreements",
+    "words": 609,
+    "blocks": 14,
+    "coverage": 0.9851239669421488,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "partnership-agreements",
+    "words": 538,
+    "blocks": 12,
+    "coverage": 0.9853479853479854,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "joint-venture-agreements",
+    "words": 568,
+    "blocks": 12,
+    "coverage": 0.9859154929577465,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "shareholder-agreements",
+    "words": 521,
+    "blocks": 12,
+    "coverage": 0.9867924528301887,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "wills-and-estate-planning",
+    "words": 662,
+    "blocks": 12,
+    "coverage": 0.9894259818731118,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "lawyer-attestation",
+    "words": 498,
+    "blocks": 11,
+    "coverage": 0.9879275653923542,
+    "counts": {
+      "heading": 5,
+      "paragraph": 4,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "document-attestation-services",
+    "words": 619,
+    "blocks": 14,
+    "coverage": 0.9841017488076311,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "certified-true-copy-services",
+    "words": 575,
+    "blocks": 14,
+    "coverage": 0.9876543209876543,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "power-of-attorney",
+    "words": 633,
+    "blocks": 14,
+    "coverage": 0.987220447284345,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "judgment-execution-and-enforcement",
+    "words": 578,
+    "blocks": 12,
+    "coverage": 0.9863713798977853,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "debt-recovery",
+    "words": 571,
+    "blocks": 12,
+    "coverage": 0.9858906525573192,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "compensation-claims",
+    "words": 593,
+    "blocks": 12,
+    "coverage": 0.9866888519134775,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "criminal-cases",
+    "words": 570,
+    "blocks": 12,
+    "coverage": 0.9858906525573192,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "medical-malpractice-claims",
+    "words": 554,
+    "blocks": 12,
+    "coverage": 0.9856373429084381,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "intellectual-property-disputes",
+    "words": 539,
+    "blocks": 12,
+    "coverage": 0.9853747714808044,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "construction-disputes",
+    "words": 545,
+    "blocks": 12,
+    "coverage": 0.9852670349907919,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "insurance-disputes",
+    "words": 569,
+    "blocks": 14,
+    "coverage": 0.9842931937172775,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "banking-and-financial-disputes",
+    "words": 537,
+    "blocks": 12,
+    "coverage": 0.9849906191369606,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "real-estate-and-rental-disputes",
+    "words": 558,
+    "blocks": 12,
+    "coverage": 0.9855334538878843,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "employment-and-labor-disputes",
+    "words": 616,
+    "blocks": 14,
+    "coverage": 0.985553772070626,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "commercial-and-business-disputes",
+    "words": 584,
+    "blocks": 12,
+    "coverage": 0.9864636209813875,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "urgent-and-temporary-measures",
+    "words": 649,
+    "blocks": 12,
+    "coverage": 0.9892141756548536,
+    "counts": {
+      "heading": 5,
+      "paragraph": 5,
+      "button": 2
+    },
+    "h1": 3,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "uae-courts-litigation-process",
+    "words": 739,
+    "blocks": 14,
+    "coverage": 0.99039780521262,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "button": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "contact-us",
+    "words": 478,
+    "blocks": 21,
+    "coverage": 0.9642857142857143,
+    "counts": {
+      "heading": 7,
+      "paragraph": 11,
+      "image": 1,
+      "cards": 2
+    },
+    "h1": 4,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "legal-insights",
+    "words": 394,
+    "blocks": 29,
+    "coverage": 0.907035175879397,
+    "counts": {
+      "heading": 12,
+      "paragraph": 9,
+      "button": 8
+    },
+    "h1": 1,
+    "unhandled": 8,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "private-notary-attestation-services",
+    "words": 2390,
+    "blocks": 63,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 41,
+      "list": 6,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "company-formation-corporate-services",
+    "words": 2410,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 40,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "contracts-legal-document-drafting",
+    "words": 2311,
+    "blocks": 73,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 43,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "litigation-dispute-resolution",
+    "words": 2505,
+    "blocks": 82,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 52,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "why-choose-fakherco",
+    "words": 522,
+    "blocks": 28,
+    "coverage": 0.9829222011385199,
+    "counts": {
+      "heading": 10,
+      "paragraph": 8,
+      "image": 8,
+      "button": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "meet-your-advocates",
+    "words": 137,
+    "blocks": 6,
+    "coverage": 0.9565217391304348,
+    "counts": {
+      "heading": 2,
+      "paragraph": 2,
+      "image": 2
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "our-unwavering-principles",
+    "words": 458,
+    "blocks": 23,
+    "coverage": 0.9639830508474576,
+    "counts": {
+      "heading": 3,
+      "paragraph": 9,
+      "image": 9,
+      "cards": 1,
+      "list": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "about-us",
+    "words": 576,
+    "blocks": 47,
+    "coverage": 0.9948275862068966,
+    "counts": {
+      "heading": 8,
+      "paragraph": 25,
+      "image": 14
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "services",
+    "words": 183,
+    "blocks": 20,
+    "coverage": 0.9385474860335196,
+    "counts": {
+      "heading": 6,
+      "paragraph": 6,
+      "image": 4,
+      "button": 4
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "home",
+    "words": 1223,
+    "blocks": 73,
+    "coverage": 0.9137096774193548,
+    "counts": {
+      "heading": 28,
+      "paragraph": 23,
+      "button": 18,
+      "image": 3,
+      "cards": 1
+    },
+    "h1": 6,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "pages",
+    "slug": "footer",
+    "words": 88,
+    "blocks": 13,
+    "coverage": 0.7525773195876289,
+    "counts": {
+      "heading": 4,
+      "paragraph": 5,
+      "image": 2,
+      "list": 2
+    },
+    "h1": 0,
+    "unhandled": 12,
+    "shape": "layout"
+  },
+  {
+    "kind": "pages",
+    "slug": "legal-articles",
+    "words": 0,
+    "blocks": 0,
+    "coverage": 1,
+    "counts": {},
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "layout"
+  },
+  {
+    "kind": "posts",
+    "slug": "nft-business-legal-structure-uae",
+    "words": 2405,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "paragraph": 28,
+      "heading": 22,
+      "list": 13,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "certified-true-copies-uae",
+    "words": 2313,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 27,
+      "list": 8,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "industrial-design-protection-uae",
+    "words": 1864,
+    "blocks": 61,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 29,
+      "list": 11,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "mortgage-property-financing-uae",
+    "words": 2383,
+    "blocks": 58,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 25,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "probation-period-uae-employment",
+    "words": 2368,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 28,
+      "table": 1,
+      "list": 13,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "shareholder-agreements-uae-guide",
+    "words": 2482,
+    "blocks": 64,
+    "coverage": 0.9984319874558997,
+    "counts": {
+      "heading": 22,
+      "paragraph": 29,
+      "list": 11,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "construction-disputes-uae",
+    "words": 2574,
+    "blocks": 65,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 30,
+      "list": 6,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "smart-contract-legal-review-uae",
+    "words": 2396,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 25,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "notarization-services-uae",
+    "words": 2247,
+    "blocks": 56,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 24,
+      "list": 6,
+      "table": 5,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "software-copyright-uae",
+    "words": 2014,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 29,
+      "list": 7,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "property-title-deed-verification-dubai",
+    "words": 2453,
+    "blocks": 58,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 25,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "contract-termination-uae-law",
+    "words": 2289,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 26,
+      "table": 3,
+      "list": 8,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "corporate-governance-uae",
+    "words": 2645,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 32,
+      "list": 15,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "banking-disputes-uae",
+    "words": 2071,
+    "blocks": 54,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 30,
+      "table": 1,
+      "list": 3,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "token-issuance-legal-framework-uae",
+    "words": 2511,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 20,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "will-registration-uae",
+    "words": 2831,
+    "blocks": 71,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 34,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "counterfeit-goods-uae-legal-action",
+    "words": 2794,
+    "blocks": 72,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 35,
+      "list": 10,
+      "table": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "off-plan-property-dubai",
+    "words": 2545,
+    "blocks": 69,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 31,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "penalty-clauses-uae-contracts",
+    "words": 2097,
+    "blocks": 53,
+    "coverage": 1,
+    "counts": {
+      "heading": 13,
+      "paragraph": 29,
+      "table": 1,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "local-sponsor-requirements-uae",
+    "words": 2201,
+    "blocks": 57,
+    "coverage": 1,
+    "counts": {
+      "heading": 17,
+      "paragraph": 27,
+      "list": 11,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "debt-recovery-uae",
+    "words": 2256,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 29,
+      "list": 12,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "virtual-asset-licensing-vara-uae",
+    "words": 2553,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 25,
+      "table": 2,
+      "list": 12,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "document-attestation-uae",
+    "words": 2141,
+    "blocks": 53,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 22,
+      "table": 3,
+      "list": 7,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "licensing-intellectual-property-uae",
+    "words": 2422,
+    "blocks": 55,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 26,
+      "table": 2,
+      "list": 5,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "freehold-vs-leasehold-uae",
+    "words": 2228,
+    "blocks": 58,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 28,
+      "list": 7,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "force-majeure-uae-contracts",
+    "words": 2496,
+    "blocks": 62,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 31,
+      "list": 13,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "uae-business-license-types",
+    "words": 2125,
+    "blocks": 56,
+    "coverage": 1,
+    "counts": {
+      "paragraph": 26,
+      "heading": 17,
+      "list": 11,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "breach-of-contract-uae",
+    "words": 2704,
+    "blocks": 80,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 44,
+      "list": 12,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "crypto-business-setup-uae",
+    "words": 2719,
+    "blocks": 73,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 33,
+      "table": 2,
+      "list": 14,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "power-of-attorney-uae",
+    "words": 2486,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 30,
+      "list": 8,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "domain-name-disputes-uae",
+    "words": 1938,
+    "blocks": 49,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 26,
+      "table": 2,
+      "list": 5,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "buying-property-dubai-foreigner",
+    "words": 2826,
+    "blocks": 86,
+    "coverage": 1,
+    "counts": {
+      "heading": 31,
+      "paragraph": 38,
+      "table": 2,
+      "list": 14,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "contract-interpretation-uae-law",
+    "words": 2691,
+    "blocks": 74,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 45,
+      "list": 3,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "100-foreign-ownership-uae",
+    "words": 2064,
+    "blocks": 40,
+    "coverage": 1,
+    "counts": {
+      "heading": 16,
+      "paragraph": 18,
+      "table": 2,
+      "list": 3,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "shareholder-disputes-uae",
+    "words": 2704,
+    "blocks": 62,
+    "coverage": 1,
+    "counts": {
+      "heading": 13,
+      "paragraph": 25,
+      "list": 22,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ai-machine-learning-legal-uae",
+    "words": 2657,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 25,
+      "table": 3,
+      "list": 13,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "social-media-law-uae",
+    "words": 2423,
+    "blocks": 78,
+    "coverage": 1,
+    "counts": {
+      "heading": 30,
+      "paragraph": 39,
+      "list": 7,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "trademark-infringement-uae",
+    "words": 2590,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 29,
+      "table": 2,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "software-licensing-agreements-uae",
+    "words": 2245,
+    "blocks": 74,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 31,
+      "list": 14,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "valid-contract-elements-uae",
+    "words": 2169,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 33,
+      "list": 7,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "offshore-company-formation-uae",
+    "words": 2549,
+    "blocks": 56,
+    "coverage": 1,
+    "counts": {
+      "heading": 17,
+      "paragraph": 25,
+      "list": 11,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "judgment-execution-uae",
+    "words": 4635,
+    "blocks": 89,
+    "coverage": 1,
+    "counts": {
+      "heading": 30,
+      "paragraph": 38,
+      "list": 19,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "mobile-app-legal-framework-uae",
+    "words": 2309,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 27,
+      "table": 2,
+      "list": 12,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "cloud-computing-contracts-uae",
+    "words": 2342,
+    "blocks": 64,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 34,
+      "table": 1,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "trade-secret-protection-uae",
+    "words": 2463,
+    "blocks": 61,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 28,
+      "list": 9,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ecommerce-terms-conditions-uae",
+    "words": 2303,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 24,
+      "list": 15,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "uae-commercial-companies-law",
+    "words": 2646,
+    "blocks": 72,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 37,
+      "list": 7,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "freezone-company-formation-uae",
+    "words": 2426,
+    "blocks": 64,
+    "coverage": 0.9991967871485944,
+    "counts": {
+      "heading": 23,
+      "paragraph": 32,
+      "list": 7,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "urgent-court-orders-uae",
+    "words": 3026,
+    "blocks": 81,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 40,
+      "list": 15,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "it-service-agreements-uae",
+    "words": 2741,
+    "blocks": 55,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 22,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ai-regulation-uae",
+    "words": 2788,
+    "blocks": 64,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 29,
+      "list": 10,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "patent-registration-uae",
+    "words": 2247,
+    "blocks": 51,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 24,
+      "table": 2,
+      "list": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "lease-agreements-uae-guide",
+    "words": 2934,
+    "blocks": 77,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 37,
+      "list": 11,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "aml-compliance-uae-guide",
+    "words": 2793,
+    "blocks": 82,
+    "coverage": 1,
+    "counts": {
+      "heading": 30,
+      "paragraph": 38,
+      "list": 11,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "mainland-company-formation-dubai",
+    "words": 2624,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 23,
+      "table": 4,
+      "list": 8,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "uae-court-fees-explained",
+    "words": 2592,
+    "blocks": 79,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 38,
+      "list": 15,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "software-development-agreements-uae",
+    "words": 2796,
+    "blocks": 62,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 22,
+      "table": 2,
+      "list": 18,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "cybersecurity-law-uae",
+    "words": 2521,
+    "blocks": 64,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 33,
+      "table": 2,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "copyright-protection-uae",
+    "words": 2268,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 30,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "audit-compliance-uae",
+    "words": 2556,
+    "blocks": 64,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 29,
+      "table": 3,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "real-estate-sale-agreements-uae",
+    "words": 2438,
+    "blocks": 64,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 31,
+      "list": 10,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "economic-substance-regulations-uae",
+    "words": 2090,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 32,
+      "list": 16,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "mainland-vs-freezone-vs-offshore-uae",
+    "words": 2470,
+    "blocks": 80,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 41,
+      "list": 15,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "litigation-timeline-uae",
+    "words": 2361,
+    "blocks": 71,
+    "coverage": 1,
+    "counts": {
+      "heading": 10,
+      "paragraph": 28,
+      "list": 31,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "franchise-legal-framework-uae",
+    "words": 2612,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 28,
+      "table": 2,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "data-protection-compliance-uae",
+    "words": 2446,
+    "blocks": 57,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 26,
+      "list": 13,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "privacy-policy-uae-pdpl",
+    "words": 2005,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 16,
+      "paragraph": 28,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "commercial-lease-agreements-dubai",
+    "words": 2345,
+    "blocks": 65,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 34,
+      "table": 1,
+      "list": 8,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "probation-period-uae-guide",
+    "words": 2015,
+    "blocks": 62,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 31,
+      "table": 5,
+      "list": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "bankruptcy-insolvency-uae",
+    "words": 2405,
+    "blocks": 57,
+    "coverage": 0.9991826726604005,
+    "counts": {
+      "heading": 20,
+      "paragraph": 27,
+      "list": 8,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "intellectual-property-disputes-uae",
+    "words": 2226,
+    "blocks": 69,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 34,
+      "list": 9,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "market-entry-legal-planning-uae",
+    "words": 2667,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 26,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "technology-contracts-licensing-uae",
+    "words": 2565,
+    "blocks": 78,
+    "coverage": 1,
+    "counts": {
+      "heading": 29,
+      "paragraph": 35,
+      "list": 10,
+      "table": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "data-breach-response-uae",
+    "words": 2244,
+    "blocks": 60,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 33,
+      "list": 6,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "eviction-process-dubai-guide",
+    "words": 2362,
+    "blocks": 61,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 28,
+      "table": 2,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "fixed-term-vs-unlimited-contracts-uae",
+    "words": 2064,
+    "blocks": 70,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 35,
+      "list": 5,
+      "table": 4,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "business-liquidation-uae",
+    "words": 2687,
+    "blocks": 79,
+    "coverage": 1,
+    "counts": {
+      "heading": 32,
+      "paragraph": 35,
+      "table": 2,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "insurance-disputes-uae",
+    "words": 2012,
+    "blocks": 47,
+    "coverage": 1,
+    "counts": {
+      "heading": 17,
+      "paragraph": 23,
+      "list": 5,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "strategic-business-setup-uae",
+    "words": 2466,
+    "blocks": 55,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 24,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "business-valuation-dubai",
+    "words": 2715,
+    "blocks": 62,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 26,
+      "list": 12,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "gdpr-uae-data-protection",
+    "words": 2228,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 32,
+      "list": 10,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "security-deposit-disputes-dubai",
+    "words": 2406,
+    "blocks": 60,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 27,
+      "table": 2,
+      "list": 8,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "employment-contracts-uae",
+    "words": 2642,
+    "blocks": 74,
+    "coverage": 1,
+    "counts": {
+      "heading": 28,
+      "paragraph": 34,
+      "list": 9,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "corporate-restructuring-uae",
+    "words": 2244,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 31,
+      "list": 9,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "medical-malpractice-uae",
+    "words": 2204,
+    "blocks": 82,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 34,
+      "list": 19,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "asset-protection-strategies-uae",
+    "words": 2349,
+    "blocks": 61,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 23,
+      "table": 1,
+      "list": 14,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "transfer-pricing-uae",
+    "words": 2555,
+    "blocks": 80,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 37,
+      "list": 15,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "uae-data-protection-pdpl",
+    "words": 2576,
+    "blocks": 73,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 33,
+      "list": 17,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "rent-increase-dubai-rera",
+    "words": 2259,
+    "blocks": 54,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 24,
+      "list": 5,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "non-compete-agreements-uae",
+    "words": 2200,
+    "blocks": 70,
+    "coverage": 1,
+    "counts": {
+      "heading": 14,
+      "paragraph": 37,
+      "list": 16,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "company-valuation-uae-ma",
+    "words": 2454,
+    "blocks": 59,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 28,
+      "list": 8,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "mediation-uae",
+    "words": 1899,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 30,
+      "table": 1,
+      "list": 13,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "holding-company-formation-uae",
+    "words": 2802,
+    "blocks": 73,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 31,
+      "table": 2,
+      "list": 12,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "law-firm-accounting-uae",
+    "words": 2741,
+    "blocks": 64,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 28,
+      "list": 9,
+      "table": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "nft-legal-framework-uae",
+    "words": 2317,
+    "blocks": 69,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 35,
+      "table": 2,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "nda-agreements-uae",
+    "words": 2237,
+    "blocks": 57,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 28,
+      "table": 1,
+      "list": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "share-vs-asset-purchase-uae",
+    "words": 1995,
+    "blocks": 61,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 28,
+      "list": 9,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "litigation-vs-arbitration-uae",
+    "words": 2138,
+    "blocks": 47,
+    "coverage": 1,
+    "counts": {
+      "heading": 17,
+      "paragraph": 20,
+      "list": 8,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "due-diligence-uae",
+    "words": 2359,
+    "blocks": 49,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 20,
+      "table": 2,
+      "list": 7,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ico-token-issuance-uae-vara",
+    "words": 1592,
+    "blocks": 30,
+    "coverage": 1,
+    "counts": {
+      "heading": 10,
+      "paragraph": 14,
+      "list": 4,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "tenancy-law-dubai-guide",
+    "words": 2485,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 26,
+      "list": 13,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "master-service-agreement-uae",
+    "words": 4454,
+    "blocks": 110,
+    "coverage": 1,
+    "counts": {
+      "heading": 38,
+      "paragraph": 53,
+      "table": 3,
+      "list": 15,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "due-diligence-checklist-uae-ma",
+    "words": 2639,
+    "blocks": 69,
+    "coverage": 0.9992719330178377,
+    "counts": {
+      "heading": 33,
+      "paragraph": 22,
+      "list": 12,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "real-estate-disputes-uae",
+    "words": 2656,
+    "blocks": 67,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 28,
+      "list": 14,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "investment-structuring-uae",
+    "words": 2701,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 26,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "financial-due-diligence-uae-ma",
+    "words": 2724,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 31,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "smart-contracts-uae-law",
+    "words": 2419,
+    "blocks": 53,
+    "coverage": 1,
+    "counts": {
+      "heading": 15,
+      "paragraph": 26,
+      "table": 2,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "escrow-accounts-dubai-property",
+    "words": 2129,
+    "blocks": 53,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 24,
+      "list": 7,
+      "table": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "distribution-agreements-uae",
+    "words": 2682,
+    "blocks": 60,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 30,
+      "table": 1,
+      "list": 9,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "mergers-acquisitions-uae",
+    "words": 2871,
+    "blocks": 71,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 29,
+      "list": 13,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "rental-disputes-dubai-rera",
+    "words": 2726,
+    "blocks": 76,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 37,
+      "list": 11,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "property-dispute-resolution-uae",
+    "words": 2309,
+    "blocks": 55,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 24,
+      "table": 2,
+      "list": 8,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "corporate-tax-planning-uae",
+    "words": 2488,
+    "blocks": 65,
+    "coverage": 1,
+    "counts": {
+      "heading": 25,
+      "paragraph": 33,
+      "list": 5,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "crypto-tax-uae",
+    "words": 2220,
+    "blocks": 54,
+    "coverage": 1,
+    "counts": {
+      "paragraph": 26,
+      "heading": 18,
+      "list": 7,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "power-of-attorney-property-uae",
+    "words": 2284,
+    "blocks": 53,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 18,
+      "list": 15,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "franchise-agreements-uae",
+    "words": 2518,
+    "blocks": 71,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 32,
+      "table": 3,
+      "list": 15,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ejari-registration-dubai",
+    "words": 2536,
+    "blocks": 62,
+    "coverage": 1,
+    "counts": {
+      "heading": 20,
+      "paragraph": 28,
+      "list": 10,
+      "table": 3,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ubo-compliance-uae",
+    "words": 2279,
+    "blocks": 64,
+    "coverage": 0.9991449337323642,
+    "counts": {
+      "heading": 23,
+      "paragraph": 33,
+      "list": 6,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "end-of-service-gratuity-uae",
+    "words": 2254,
+    "blocks": 72,
+    "coverage": 1,
+    "counts": {
+      "heading": 28,
+      "paragraph": 35,
+      "table": 1,
+      "list": 7,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "property-transaction-services-dubai",
+    "words": 2400,
+    "blocks": 63,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 27,
+      "list": 10,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "tax-efficient-company-structures-uae",
+    "words": 2756,
+    "blocks": 82,
+    "coverage": 1,
+    "counts": {
+      "heading": 29,
+      "paragraph": 38,
+      "list": 13,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "cryptocurrency-regulation-uae-vara",
+    "words": 2579,
+    "blocks": 60,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 30,
+      "table": 2,
+      "list": 4,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "dld-registration-dubai-guide",
+    "words": 2411,
+    "blocks": 76,
+    "coverage": 1,
+    "counts": {
+      "heading": 32,
+      "paragraph": 34,
+      "list": 5,
+      "table": 4,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "shareholder-agreements-uae",
+    "words": 2636,
+    "blocks": 71,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 23,
+      "list": 18,
+      "table": 1,
+      "faq": 1,
+      "quote": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "articles-of-association-uae",
+    "words": 2187,
+    "blocks": 70,
+    "coverage": 0.998227735932654,
+    "counts": {
+      "heading": 13,
+      "paragraph": 36,
+      "list": 18,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "employment-disputes-uae",
+    "words": 2465,
+    "blocks": 77,
+    "coverage": 1,
+    "counts": {
+      "heading": 33,
+      "paragraph": 37,
+      "list": 5,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "real-estate-investment-uae",
+    "words": 2580,
+    "blocks": 61,
+    "coverage": 1,
+    "counts": {
+      "heading": 18,
+      "paragraph": 29,
+      "table": 2,
+      "list": 11,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "vat-compliance-uae",
+    "words": 2861,
+    "blocks": 68,
+    "coverage": 1,
+    "counts": {
+      "heading": 26,
+      "paragraph": 29,
+      "table": 2,
+      "list": 10,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "virtual-asset-licensing-dubai-vara",
+    "words": 2565,
+    "blocks": 76,
+    "coverage": 1,
+    "counts": {
+      "heading": 29,
+      "paragraph": 36,
+      "table": 3,
+      "list": 7,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "property-transfer-fees-dubai",
+    "words": 1786,
+    "blocks": 52,
+    "coverage": 1,
+    "counts": {
+      "heading": 19,
+      "paragraph": 25,
+      "list": 6,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "joint-venture-agreements-uae",
+    "words": 2382,
+    "blocks": 72,
+    "coverage": 1,
+    "counts": {
+      "heading": 27,
+      "paragraph": 29,
+      "list": 14,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "board-of-directors-duties-uae",
+    "words": 2898,
+    "blocks": 75,
+    "coverage": 1,
+    "counts": {
+      "heading": 29,
+      "paragraph": 34,
+      "list": 10,
+      "table": 1,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "unfair-dismissal-uae",
+    "words": 2229,
+    "blocks": 71,
+    "coverage": 1,
+    "counts": {
+      "heading": 22,
+      "paragraph": 32,
+      "list": 14,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "cybersecurity-legal-framework-uae",
+    "words": 2391,
+    "blocks": 58,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 23,
+      "table": 2,
+      "list": 8,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "ecommerce-regulation-uae",
+    "words": 2675,
+    "blocks": 81,
+    "coverage": 1,
+    "counts": {
+      "heading": 34,
+      "paragraph": 32,
+      "list": 12,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "trademark-registration-uae",
+    "words": 2405,
+    "blocks": 70,
+    "coverage": 1,
+    "counts": {
+      "heading": 24,
+      "paragraph": 37,
+      "list": 6,
+      "table": 2,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "construction-contracts-uae-fidic",
+    "words": 2357,
+    "blocks": 66,
+    "coverage": 1,
+    "counts": {
+      "heading": 23,
+      "paragraph": 30,
+      "table": 1,
+      "list": 11,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "corporate-tax-uae-2025",
+    "words": 2533,
+    "blocks": 79,
+    "coverage": 0.9992289899768697,
+    "counts": {
+      "heading": 30,
+      "paragraph": 35,
+      "list": 10,
+      "table": 3,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "start-business-uae-guide-2025",
+    "words": 3392,
+    "blocks": 81,
+    "coverage": 1,
+    "counts": {
+      "heading": 29,
+      "paragraph": 36,
+      "list": 9,
+      "table": 6,
+      "faq": 1
+    },
+    "h1": 1,
+    "unhandled": 0,
+    "shape": "prose"
+  },
+  {
+    "kind": "posts",
+    "slug": "uae-court-system-explained",
+    "words": 2391,
+    "blocks": 63,
+    "coverage": 1,
+    "counts": {
+      "heading": 21,
+      "paragraph": 33,
+      "table": 1,
+      "list": 7,
+      "faq": 1
+    },
+    "h1": 0,
+    "unhandled": 0,
+    "shape": "prose"
+  }
+]

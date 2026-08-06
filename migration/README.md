@@ -23,6 +23,64 @@ cutover. `out/` is committed: those are decision artifacts.
 | `fetch-wp.mjs` | Pulls pages, posts, categories, tags, media and both homepages from `wp-json` into `data/raw/`. |
 | `build-consolidation-map.mjs` | Classifies all 80 pages and writes `out/consolidation-map.csv` + `out/infra-redirects.json`. |
 | `validate-consolidation.mjs` | Proves the map is shippable: no chains, no self-loops, no dead targets, no dropped pages. `--live` also confirms every target returns 200 today. |
+| `extract-content.mjs` | Converts Bold Builder markup into portable blocks. Writes `data/content/{pages,posts}/<slug>.json` + `out/extraction-report.json`. |
+
+## Block contract
+
+Every extracted document is `{ slug, legacyUrl, title, date, modified, blocks[], unhandled[] }`
+(posts add `excerpt` and `categories[]`). The block union:
+
+```
+heading    { level: 1-6, text }
+paragraph  { html }                     inline <strong> <em> <a> <u> preserved
+list       { ordered, items[] }
+table      { headers[], rows[][] }
+faq        { items: [{ question, answer }] }
+cards      { items: [{ title, text, href? }] }
+image      { src, alt }                 src resolved to the original upload
+button     { text, href }
+quote      { html }
+```
+
+`unhandled[]` records any visible text that did not land in a block. It must
+stay empty-ish: a page that extracts to nothing still returns 200 and would
+pass every downstream check, so this is the only thing standing between a
+parser regression and silently shipping an empty page.
+
+## Extraction results
+
+| | Documents | Mean text coverage | ≥90% captured | Mean blocks/doc |
+|---|---|---|---|---|
+| Posts | 140 | **100.0%** | 140 | 65.4 |
+| Pages | 80 | **98.0%** | 79 | 21.4 |
+
+The only document below 90% is `/footer/`, which is being deleted anyway. Block
+totals across all 220 documents: 4,933 paragraphs, 3,742 headings, 1,533 lists,
+248 tables, 154 buttons, 146 FAQs, 107 images, 4 card grids, 1 quote.
+
+**No page needs its content re-authored by hand.** The earlier estimate assumed
+~30 layout-heavy pages would. They extract at ≥90% like everything else — what
+they need is a good template, because they are heading / paragraph / card /
+button sequences rather than prose.
+
+### Two bugs worth remembering
+
+**`wpautop` wraps the entire builder output in a single `<p>`.** A naive "bare
+semantic tag is a leaf" rule therefore swallows a whole document into one
+paragraph block. Guard with `hasBlockDescendant()`.
+
+**Text coverage measured as a capped length ratio reads 100% while that is
+happening**, because all the text *is* present — in one useless blob. Coverage
+is now multiset token recall, which caught it immediately. Never measure
+extraction quality with a ratio that can saturate.
+
+## Finding: 49 documents carry more than one H1
+
+Not a migration artifact — it is how the theme renders. `bt_bb_headline_tag` is
+set per headline block, and authors picked `h1` repeatedly.
+`/understanding-legal-costs/` has **seven**. The homepage has six. This is a
+site-wide on-page defect the rebuild fixes by construction: one H1 per page,
+enforced by the template rather than by the editor's choice.
 
 ## Gotchas that are not optional
 
