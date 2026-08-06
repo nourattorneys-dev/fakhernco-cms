@@ -1,8 +1,8 @@
 {
-  "name": "fakhernco-migration",
+  "name": "fakhernco-cms",
   "private": true,
   "type": "module",
-  "description": "Migration tooling for moving fakhernco.com off WordPress",
+  "description": "Strapi 5 CMS for fakhernco.com, plus the WordPress migration tooling",
   "scripts": {
     "wp:fetch": "node migration/scripts/fetch-wp.mjs",
     "wp:map": "node migration/scripts/build-consolidation-map.mjs",
