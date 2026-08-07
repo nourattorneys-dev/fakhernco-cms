@@ -310,7 +310,7 @@ async function main() {
   const pages = await load('pages');
   const posts = await load('posts');
 
-  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, homeArBlocks: 0, created: {}, updated: {}, ignored: [] };
+  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, homeArBlocks: 0, arRelinked: 0, created: {}, updated: {}, ignored: [] };
   const bump = (bucket, uid) => { stats[bucket][uid] = (stats[bucket][uid] ?? 0) + 1; };
 
   if (DRY) {
@@ -544,9 +544,30 @@ async function main() {
             slug: doc.slug,
             legacyUrl: doc.legacyUrl,
             blocks: doc.blocks.map((b) => toComponent(b, stats)).filter(Boolean),
+            // Relations are per-locale on a localised content type, so an
+            // update that omits this leaves the Arabic entry with no parent
+            // even though the English one has it. That is not cosmetic: the
+            // header mega-menu and the services page are both built from
+            // practiceArea.pages, so the Arabic menu was rendering 9 links
+            // against English's 68, and 44 translated service pages were
+            // reachable only by typing the URL.
+            //
+            // Only when the parent itself exists in Arabic. Strapi resolves a
+            // relation within the locale being written, so pointing an Arabic
+            // page at a practice area that has no Arabic localisation fails
+            // the whole import with "Document with id ... locale ar not
+            // found". personal-criminal-legal-services is exactly that case —
+            // it was never translated — so its five children stay unparented
+            // in Arabic rather than taking the import down.
+            ...(uid === 'api::page.page' &&
+            parentOf.get(doc.slug) &&
+            AR_SLUGS.has(parentOf.get(doc.slug))
+              ? { practiceArea: areaId.get(parentOf.get(doc.slug)) ?? null }
+              : {}),
           },
         });
         stats.arImported += 1;
+        if (uid === 'api::page.page' && AR_SLUGS.has(parentOf.get(doc.slug))) stats.arRelinked += 1;
       }
     }
 
@@ -683,6 +704,7 @@ async function main() {
   console.log(`arabic localisations:        ${stats.arImported}`);
   console.log(`arabic nav labels:           ${stats.arLabels}`);
   console.log(`arabic homepage blocks:      ${stats.homeArBlocks}`);
+  console.log(`arabic pages linked to areas:${String(stats.arRelinked).padStart(4)}`);
   if (stats.arSkipped.length) {
     console.log(`  skipped (no english doc):  ${stats.arSkipped.join(', ')}`);
   }
