@@ -28,7 +28,17 @@ public/uploads/*
 
 # Migration cache — a re-fetchable snapshot of the live WordPress site.
 # out/ IS committed: those are decision artifacts.
-migration/data/
+# Scraped and generated migration artifacts — large, and reproducible by
+# re-running the fetch/extract scripts.
+#
+# NOT translations/. That is hand-authored source: the Arabic homepage copy
+# lives there and cannot be regenerated from anything. It was silently
+# untracked, so the whole translation existed on one machine and a fresh
+# clone could not rebuild the Arabic homepage at all. git will not descend
+# into an excluded directory, so the parent has to be `data/*` rather than
+# `data/` for the negation below to be reachable.
+migration/data/*
+!migration/data/translations/
 
 # OS / editor
 .DS_Store
