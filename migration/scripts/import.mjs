@@ -310,7 +310,7 @@ async function main() {
   const pages = await load('pages');
   const posts = await load('posts');
 
-  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, created: {}, updated: {}, ignored: [] };
+  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, homeArBlocks: 0, created: {}, updated: {}, ignored: [] };
   const bump = (bucket, uid) => { stats[bucket][uid] = (stats[bucket][uid] ?? 0) + 1; };
 
   if (DRY) {
@@ -550,6 +550,106 @@ async function main() {
       }
     }
 
+    // 5b. The Arabic homepage.
+    //
+    // The homepage could not be recovered by scraping the way the other 52
+    // Arabic pages were. TranslatePress had only ever translated the strings
+    // that repeat across the site — the buttons, and six headings — so /ar/
+    // served 43 of its 72 blocks as English, including every paragraph.
+    // Half-translated is worse than untranslated: it reads as neglect on the
+    // firm's most-visited page.
+    //
+    // So the copy is written, and lives in a translation file keyed by the
+    // index of the English block it replaces. The English blocks are cloned
+    // and only their text is substituted, which means the two locales cannot
+    // drift structurally — same images, same card grouping, same layout — and
+    // a fix to the English homepage lands on the Arabic one for free.
+    //
+    // The strings TranslatePress had already translated are reused verbatim.
+    // They are the firm's own approved wording.
+    const homeArPath = path.join(MIGRATION, 'data', 'translations', 'home.ar.json');
+    const homeEn = pages.find((p) => p.slug === 'home');
+    if (existsSync(homeArPath) && homeEn) {
+      const tr = JSON.parse(await readFile(homeArPath, 'utf8'));
+
+      // Send Arabic readers to Arabic pages where one exists. Without this the
+      // "read more" buttons drop them onto English practice-area pages that
+      // have a perfectly good Arabic version — the same honest-fallback rule
+      // the front end's href() helper applies.
+      // Normalise BEFORE testing. The extracted hrefs are absolute and
+      // trailing-slashed — https://fakhernco.com/litigation-dispute-resolution/
+      // — so a bare "starts with / and has one segment" test never matches and
+      // every button silently stays English. repairHref also resolves
+      // redirects first, so we never localise a path we are about to 301.
+      const localiseHref = (raw) => {
+        if (typeof raw !== 'string' || !raw) return raw;
+        const path = repairHref(raw);
+        const slug = /^\/([^/#?]+)$/.exec(path)?.[1];
+        return slug && AR_SLUGS.has(slug) ? `/ar${path}` : path;
+      };
+
+      const missing = [];
+      const arBlocks = homeEn.blocks.map((block, i) => {
+        const override = tr.blocks[String(i)];
+        // An explicit null means "this block carries no text" — an image. Any
+        // other absence is an untranslated block, and is reported rather than
+        // silently shipped as English.
+        if (override === null) return block;
+        if (!override) {
+          if (block.type !== 'image') missing.push(`[${i}] ${block.type}`);
+          return block;
+        }
+        const merged = { ...block, ...override };
+        if (block.href) merged.href = localiseHref(block.href);
+        if (block.items && override.items) {
+          merged.items = override.items.map((item, j) => ({
+            ...block.items[j],
+            ...item,
+            href: localiseHref(block.items[j]?.href),
+          }));
+        }
+        return merged;
+      });
+
+      if (missing.length) {
+        console.log(`\n  WARNING — ${missing.length} homepage block(s) have no Arabic:`);
+        for (const m of missing) console.log(`    ${m}`);
+      }
+
+      const enHomePage = await app.documents('api::page.page').findFirst({
+        filters: { slug: 'home' },
+        locale: 'en',
+      });
+      if (enHomePage) {
+        await app.documents('api::page.page').update({
+          documentId: enHomePage.documentId,
+          locale: 'ar',
+          status: 'published',
+          data: {
+            title: tr.title,
+            slug: 'home',
+            legacyUrl: '/ar/',
+            seo: toSeo(tr.seo),
+            blocks: arBlocks.map((b) => toComponent(b, stats)).filter(Boolean),
+          },
+        });
+        stats.arImported += 1;
+      }
+
+      // The hero lives on the Homepage single type, not in the blocks.
+      await upsertSingle('api::homepage.homepage', {
+        ...tr.hero,
+        heroImage: asset('2026/01/business-team-in-dubai-2025-03-18-15-08-40-utc-scaled.jpg'),
+        sectionImages: [
+          asset('2026/01/group-business-people-and-lawyers-legal-contract-2025-03-08-13-26-33-utc-scaled.jpg'),
+          asset('2026/01/close-up-photo-of-business-woman-and-man-signing-a-2025-04-10-00-26-29-utc-scaled.jpg'),
+          asset('2026/01/hand-man-stamping-documents-notary-public-in-offic-2025-03-09-13-11-43-utc-scaled.jpg'),
+          asset('2026/01/business-and-lawyers-discussing-contract-papers-wi-2025-12-22-14-21-12-utc-scaled.jpg'),
+        ].filter(Boolean),
+      }, 'ar');
+      stats.homeArBlocks = arBlocks.length - missing.length;
+    }
+
     // 6. Blog posts.
     for (const p of posts) {
       await upsert('api::post.post', p.slug, {
@@ -582,6 +682,7 @@ async function main() {
   console.log(`images still origin-only:    ${stats.imagesUnlinked}`);
   console.log(`arabic localisations:        ${stats.arImported}`);
   console.log(`arabic nav labels:           ${stats.arLabels}`);
+  console.log(`arabic homepage blocks:      ${stats.homeArBlocks}`);
   if (stats.arSkipped.length) {
     console.log(`  skipped (no english doc):  ${stats.arSkipped.join(', ')}`);
   }
