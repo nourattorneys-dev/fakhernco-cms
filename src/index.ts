@@ -17,6 +17,7 @@ const PUBLIC_READ = [
   'api::team-member.team-member',
   'api::homepage.homepage',
   'api::site-setting.site-setting',
+  'api::landing-page.landing-page',
 ] as const;
 
 const PUBLIC_ACTIONS = ['find', 'findOne'] as const;
