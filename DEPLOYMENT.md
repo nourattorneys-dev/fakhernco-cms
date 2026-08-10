@@ -205,14 +205,41 @@ from this domain that did not come via Microsoft.
 
 ### Setup
 
-1. Create a Resend account and add the domain **`send.fakhernco.com`** —
-   a subdomain, deliberately. It gets its own SPF and DKIM, so the root
-   domain's record, which the firm's real email depends on, is never touched.
-2. Resend shows three DNS records (MX, SPF TXT, DKIM TXT), all on
-   `send.fakhernco.com`. Add them in cPanel → **Zone Editor**.
-   If the domain is proxied through Cloudflare, add them there instead —
-   whichever service is authoritative for DNS.
+1. Create a Resend account and add the domain **`fakhernco.com`** — the root,
+   so the auto-reply a prospective client receives comes from
+   `noreply@fakhernco.com` rather than from something that reads as plumbing.
+
+2. Resend shows the DNS records to add. Read them carefully before touching
+   anything, because one of them is the record the firm's real email depends
+   on:
+
+   - **DKIM** (`resend._domainkey`) — a new TXT record. No conflict. This is
+     what authenticates the From address, and on its own it is usually enough
+     for a root From address to be accepted.
+   - **MX and SPF on a `send.` subdomain** — Resend uses this for bounces and
+     the return-path. New records, nothing existing touched.
+   - **If, and only if, Resend asks for an SPF include on the ROOT domain**,
+     APPEND it to the existing record. Do not retype the line:
+
+     ```
+     v=spf1 include:spf.protection.outlook.com \
+            include:spf-de.emailsignatures365.com \
+            include:_spf.resend.com -all
+     ```
+
+     Keep `-all` at the end. It is the strict setting and it is correct — it
+     is what stops anyone spoofing the firm's address. There is headroom:
+     SPF allows 10 DNS lookups and this record currently uses 2.
+
+   **Never add an MX record to the ROOT domain.** The root MX points at
+   Microsoft 365 and is how the firm receives all of its mail. Resend's MX
+   belongs on the `send.` subdomain only.
+
+   Add the records in cPanel → **Zone Editor**, or in Cloudflare if that is
+   authoritative for DNS.
+
 3. Wait for Resend to show the domain **Verified**.
+
 4. Create an API key, then set on the server:
 
 ```
@@ -220,7 +247,7 @@ SMTP_HOST=smtp.resend.com
 SMTP_PORT=465
 SMTP_USER=resend
 SMTP_PASS=<the API key>
-SMTP_FROM_EMAIL=noreply@send.fakhernco.com
+SMTP_FROM_EMAIL=noreply@fakhernco.com
 CONTACT_NOTIFY_EMAIL=info@fakhernco.com
 ```
 

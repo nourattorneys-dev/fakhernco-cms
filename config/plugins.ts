@@ -71,10 +71,15 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
    *     a per-tenant flag. Building the contact form on a credential type the
    *     vendor is removing is a slow-motion outage.
    *
-   * Resend sends from a SUBDOMAIN with its own SPF and DKIM, so the root
-   * domain's record — the one the firm's real email depends on — is never
-   * touched. Credentials are an API key that can be revoked without affecting
-   * anyone's mailbox.
+   * Resend authenticates the From address with DKIM on the root domain, and
+   * puts its own SPF and return-path on a `send.` subdomain — so
+   * noreply@fakhernco.com is deliverable without rewriting the root SPF that
+   * the firm's real email depends on. Credentials are an API key that can be
+   * revoked without touching anyone's mailbox.
+   *
+   * ONE THING THAT MUST NOT HAPPEN DURING SETUP: no MX record on the ROOT
+   * domain. The root MX is Microsoft 365 and is how the firm receives all of
+   * its mail. Resend's MX belongs on the `send.` subdomain only.
    *
    * SMTP_USER is the literal string "resend"; SMTP_PASS is the API key.
    */
