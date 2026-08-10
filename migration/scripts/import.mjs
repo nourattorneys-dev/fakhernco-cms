@@ -310,7 +310,7 @@ async function main() {
   const pages = await load('pages');
   const posts = await load('posts');
 
-  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, homeArBlocks: 0, arRelinked: 0, created: {}, updated: {}, ignored: [] };
+  const stats = { skipped: [], demotedHeadings: 0, headingsToParagraph: 0, imagesLinked: 0, imagesUnlinked: 0, arImported: 0, arSkipped: [], arLabels: 0, arSkippedEntirely: false, homeArBlocks: 0, arRelinked: 0, created: {}, updated: {}, ignored: [] };
   const bump = (bucket, uid) => { stats[bucket][uid] = (stats[bucket][uid] ?? 0) + 1; };
 
   if (DRY) {
@@ -508,6 +508,20 @@ async function main() {
     // keys off what exists here, so an absent locale simply means no switcher
     // on that page, which is the honest outcome.
     const arDir = path.join(CONTENT, 'ar', 'pages');
+    if (!existsSync(arDir)) {
+      // Loudly. This used to skip in silence, which meant a deployment that
+      // followed the documented sequence produced an English-only site with
+      // no error anywhere — 53 Arabic localisations and the whole Arabic
+      // homepage simply absent, and nothing to indicate they should exist.
+      console.error(
+        '\n  WARNING — no Arabic content found at data/content/ar/pages.\n' +
+          '  The import will produce an ENGLISH-ONLY site.\n' +
+          '  Run these first, while the WordPress site is still reachable:\n' +
+          '      npm run wp:scan-ar\n' +
+          '      npm run wp:fetch-ar\n',
+      );
+      stats.arSkippedEntirely = true;
+    }
     if (existsSync(arDir)) {
       AR_SLUGS = new Set((await readdir(arDir)).map((f) => f.replace(/\.json$/, '')));
       for (const file of await readdir(arDir)) {
@@ -702,6 +716,9 @@ async function main() {
   console.log(`images linked to media:      ${stats.imagesLinked}`);
   console.log(`images still origin-only:    ${stats.imagesUnlinked}`);
   console.log(`arabic localisations:        ${stats.arImported}`);
+  if (stats.arSkippedEntirely) {
+    console.log('  ^^ ZERO — this site has no Arabic. See the warning above.');
+  }
   console.log(`arabic nav labels:           ${stats.arLabels}`);
   console.log(`arabic homepage blocks:      ${stats.homeArBlocks}`);
   console.log(`arabic pages linked to areas:${String(stats.arRelinked).padStart(4)}`);
