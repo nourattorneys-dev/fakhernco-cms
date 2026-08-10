@@ -2,8 +2,16 @@
 /**
  * Import the ad landing pages into Strapi.
  *
- *   npm run wp:landing            # import / update all of them
- *   npm run wp:landing -- --dry   # report what would happen, write nothing
+ *   npm run wp:landing              # import / update all of them
+ *   npm run wp:landing -- --dry     # report what would happen, write nothing
+ *   npm run wp:landing -- --prune   # also DELETE entries the markdown no
+ *                                   # longer has a file for
+ *
+ * Pruning is opt-in, and deliberately so. A slug rename looks identical to
+ * "somebody added a landing page in the admin panel" from in here, and
+ * deleting the firm's work is worse than leaving a stale entry behind. The
+ * orphans are always reported; removing them is a decision someone has to
+ * make on purpose.
  *
  * Boots Strapi in-process, so the server must be STOPPED before running this.
  *
@@ -39,6 +47,7 @@ const { createStrapi, compileStrapi } = require('@strapi/strapi');
 const MIGRATION = path.join(import.meta.dirname, '..');
 const OUT = path.join(MIGRATION, 'out');
 const DRY = process.argv.includes('--dry');
+const PRUNE = process.argv.includes('--prune');
 
 /**
  * The markdown lives in the WEB repo, beside the pages it was written for.
@@ -174,6 +183,7 @@ async function main() {
   const UID = 'api::landing-page.landing-page';
   let created = 0;
   let updated = 0;
+  let orphans = [];
 
   try {
     for (const [i, d] of docs.entries()) {
@@ -201,11 +211,33 @@ async function main() {
         created += 1;
       }
     }
+
+    // Anything in the CMS with no markdown behind it. Usually a slug rename;
+    // occasionally a page the firm added themselves, which is exactly why
+    // this does not delete without being asked.
+    const seeded = new Set(docs.map((d) => d.slug));
+    const all = await app.documents(UID).findMany({ locale: 'en', fields: ['slug'], limit: 500 });
+    orphans = all.filter((r) => !seeded.has(r.slug));
+
+    if (orphans.length && PRUNE) {
+      for (const o of orphans) {
+        await app.documents(UID).delete({ documentId: o.documentId });
+      }
+    }
   } finally {
     await app.destroy();
   }
 
   console.log(`\ncreated ${created}, updated ${updated}`);
+  if (orphans.length) {
+    console.log(
+      PRUNE
+        ? `pruned ${orphans.length}: ${orphans.map((o) => o.slug).join(', ')}`
+        : `\n  ${orphans.length} entr(y/ies) in the CMS have no markdown file:\n` +
+            orphans.map((o) => `    ${o.slug}`).join('\n') +
+            '\n  Left in place. Re-run with --prune to delete them.',
+    );
+  }
   const withImage = docs.filter((d) => fileIdFor(d.imageIndex)).length;
   console.log(`hero images linked: ${withImage}/${docs.length}`);
   if (withImage < docs.length) {
