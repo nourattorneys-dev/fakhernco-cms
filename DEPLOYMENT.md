@@ -178,6 +178,69 @@ import finished — it should be 53.
 against that database again.** It overwrites whole records and would silently
 revert their work. Re-import only into a fresh database.
 
+
+## Email (Resend)
+
+The contact form stores every enquiry in the CMS regardless. Email only
+controls the *notification* to the firm and the *auto-reply* to the client —
+but without it nobody learns an enquiry arrived until someone opens the admin
+panel, which for paid traffic means a slow lead.
+
+### Why not Microsoft or cPanel
+
+`fakhernco.com` has MX at Microsoft 365 and this SPF:
+
+```
+v=spf1 include:spf.protection.outlook.com include:spf-de.emailsignatures365.com -all
+```
+
+The trailing `-all` is a hard fail: receiving servers are told to REJECT mail
+from this domain that did not come via Microsoft.
+
+- **cPanel mail** is not in that list. Auto-replies would be rejected or
+  spam-filed.
+- **Microsoft 365 SMTP** is aligned, but basic SMTP AUTH is off by default on
+  modern tenants and is being retired. The endpoint advertises `AUTH LOGIN`;
+  whether a mailbox may use it is a per-tenant flag only an admin can read.
+
+### Setup
+
+1. Create a Resend account and add the domain **`send.fakhernco.com`** —
+   a subdomain, deliberately. It gets its own SPF and DKIM, so the root
+   domain's record, which the firm's real email depends on, is never touched.
+2. Resend shows three DNS records (MX, SPF TXT, DKIM TXT), all on
+   `send.fakhernco.com`. Add them in cPanel → **Zone Editor**.
+   If the domain is proxied through Cloudflare, add them there instead —
+   whichever service is authoritative for DNS.
+3. Wait for Resend to show the domain **Verified**.
+4. Create an API key, then set on the server:
+
+```
+SMTP_HOST=smtp.resend.com
+SMTP_PORT=465
+SMTP_USER=resend
+SMTP_PASS=<the API key>
+SMTP_FROM_EMAIL=noreply@send.fakhernco.com
+CONTACT_NOTIFY_EMAIL=info@fakhernco.com
+```
+
+`SMTP_USER` really is the literal string `resend`. The API key is the
+password.
+
+### Verifying it works
+
+Submit a real enquiry on the live site and check three things, in this order:
+
+1. The submission appears in the admin panel under **Contact submission**
+2. `CONTACT_NOTIFY_EMAIL` receives the alert, and pressing Reply addresses the
+   client rather than the server
+3. The address used in the form receives the auto-reply, **and it is not in
+   the junk folder** — check that explicitly, since it is the failure this
+   whole setup exists to avoid
+
+If step 1 works and 2 and 3 do not, the credentials are wrong and Strapi will
+have logged it. If none work, the submission itself failed.
+
 ## Things that have actually gone wrong on this stack
 
 **Never use `strapi transfer` to seed a remote instance.** It overwrites

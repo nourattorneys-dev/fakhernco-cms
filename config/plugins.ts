@@ -47,12 +47,36 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
   },
 
   /**
-   * SMTP email via nodemailer.
+   * SMTP email via nodemailer. Configured for Resend.
    *
    * Strapi's default `sendmail` provider cannot reach an external SMTP relay,
    * so contact-form notifications and auto-replies would silently never send.
-   * fakhernco.com's MX points at Microsoft 365, so SMTP_HOST is normally
-   * smtp.office365.com on port 587 with an app credential.
+   *
+   * WHY NOT THE OBVIOUS TWO
+   * fakhernco.com's MX points at Microsoft 365 and its SPF ends in `-all`:
+   *
+   *   v=spf1 include:spf.protection.outlook.com
+   *          include:spf-de.emailsignatures365.com -all
+   *
+   * That is a hard fail. It instructs receiving servers to REJECT mail
+   * claiming to be from this domain that did not come via Microsoft.
+   *
+   *   - cPanel's own mail server is not in that list, so auto-replies sent
+   *     through it would be rejected or spam-filed. For a law firm, an
+   *     auto-reply landing in a prospective client's junk folder is worse
+   *     than sending none.
+   *   - Microsoft 365 SMTP is SPF-aligned, but basic SMTP AUTH is disabled by
+   *     default on modern tenants and Microsoft has been retiring it. The
+   *     endpoint advertises AUTH LOGIN; whether a given mailbox may use it is
+   *     a per-tenant flag. Building the contact form on a credential type the
+   *     vendor is removing is a slow-motion outage.
+   *
+   * Resend sends from a SUBDOMAIN with its own SPF and DKIM, so the root
+   * domain's record — the one the firm's real email depends on — is never
+   * touched. Credentials are an API key that can be revoked without affecting
+   * anyone's mailbox.
+   *
+   * SMTP_USER is the literal string "resend"; SMTP_PASS is the API key.
    */
   email: {
     config: {
