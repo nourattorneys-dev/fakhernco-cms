@@ -22,7 +22,8 @@
     "wp:redirects": "node migration/scripts/build-redirects.mjs",
     "wp:scan-ar": "node migration/scripts/scan-arabic.mjs",
     "wp:fetch-ar": "node migration/scripts/fetch-arabic.mjs",
-    "wp:landing": "node migration/scripts/import-landing.mjs"
+    "wp:landing": "node migration/scripts/import-landing.mjs",
+    "seed:remote": "node scripts/remote-seed.mjs"
   },
   "dependencies": {
     "@strapi/database": "5.51.1",
