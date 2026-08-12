@@ -32,6 +32,14 @@
  * The hero image is resolved from the same media map the rest of the import
  * uses, so a landing page points at the identical uploaded file as the
  * homepage rather than a second copy.
+ *
+ * ARABIC
+ * ------
+ * content/landing/ar/<slug>.md, matched to the English page by slug, and
+ * written as a locale of the SAME Strapi document rather than a second row.
+ * Pages with no Arabic file are reported loudly — an English-only import is
+ * the failure that reaches production looking fine, because the Arabic route
+ * just builds nothing.
  */
 
 import { readFile, readdir } from 'node:fs/promises';
@@ -153,29 +161,67 @@ async function main() {
     process.exit(1);
   }
 
-  const files = (await readdir(LANDING_DIR)).filter((f) => f.endsWith('.md')).sort();
-  if (!files.length) {
+  /** Parse every .md in a directory into { slug, meta, blocks }. */
+  async function readDir(dir) {
+    if (!existsSync(dir)) return [];
+    const files = (await readdir(dir)).filter((f) => f.endsWith('.md')).sort();
+    const out = [];
+    for (const f of files) {
+      const [meta, body] = parseFrontmatter(await readFile(path.join(dir, f), 'utf8'));
+      out.push({
+        slug: meta.slug ?? f.replace(/\.md$/, ''),
+        meta,
+        blocks: toBlocks(body),
+        imageIndex: Number(meta.image) || 0,
+      });
+    }
+    return out;
+  }
+
+  const docs = await readDir(LANDING_DIR);
+  if (!docs.length) {
     console.error(`No .md files in ${LANDING_DIR}`);
     process.exit(1);
   }
+
+  // Arabic lives in a subdirectory, matched to English by slug. Slugs are
+  // identical either side across this whole site, so the filename is the join
+  // key and there is nothing to configure.
+  const AR_DIR = path.join(LANDING_DIR, 'ar');
+  const arabic = new Map((await readDir(AR_DIR)).map((d) => [d.slug, d]));
 
   const mediaPath = path.join(OUT, 'media-map.json');
   const MEDIA = existsSync(mediaPath) ? JSON.parse(await readFile(mediaPath, 'utf8')) : {};
   const fileIdFor = (i) => MEDIA[`https://fakhernco.com/wp-content/uploads/${PHOTOS[i] ?? PHOTOS[0]}`] ?? null;
 
-  const docs = [];
-  for (const f of files) {
-    const [meta, body] = parseFrontmatter(await readFile(path.join(LANDING_DIR, f), 'utf8'));
-    const slug = meta.slug ?? f.replace(/\.md$/, '');
-    const blocks = toBlocks(body);
-    docs.push({ slug, meta, blocks, imageIndex: Number(meta.image) || 0 });
+  for (const d of docs) {
     console.log(
-      `  ${slug.padEnd(34)} ${String(blocks.length).padStart(3)} blocks   "${(meta.h1 ?? '').slice(0, 46)}"`,
+      `  ${d.slug.padEnd(24)} ${String(d.blocks.length).padStart(3)} blocks` +
+        `  ${arabic.has(d.slug) ? `+ ar ${String(arabic.get(d.slug).blocks.length).padStart(3)}` : '   —   '}` +
+        `  "${(d.meta.h1 ?? '').slice(0, 40)}"`,
     );
   }
 
+  // Loud, because a silently English-only import is the failure mode that
+  // reaches production looking fine: the Arabic route simply builds zero
+  // pages and nobody notices until an Arabic ad clicks through to a 404.
+  const missingAr = docs.filter((d) => !arabic.has(d.slug)).map((d) => d.slug);
+  if (missingAr.length) {
+    console.log(
+      `\n  !! ${missingAr.length} page(s) have NO Arabic translation:\n` +
+        missingAr.map((s) => `       ${s}`).join('\n') +
+        `\n     Add content/landing/ar/<slug>.md. /ar/legal-services will not list them.`,
+    );
+  }
+  const strayAr = [...arabic.keys()].filter((s) => !docs.some((d) => d.slug === s));
+  if (strayAr.length) {
+    console.log(`\n  !! Arabic files with no English page: ${strayAr.join(', ')}`);
+  }
+
   if (DRY) {
-    console.log(`\n--dry: ${docs.length} landing page(s) would be written. Nothing changed.`);
+    console.log(
+      `\n--dry: ${docs.length} landing page(s), ${arabic.size} translation(s). Nothing changed.`,
+    );
     return;
   }
 
@@ -183,6 +229,7 @@ async function main() {
   const UID = 'api::landing-page.landing-page';
   let created = 0;
   let updated = 0;
+  let translated = 0;
   let orphans = [];
 
   try {
@@ -206,14 +253,50 @@ async function main() {
       };
 
       const existing = await app.documents(UID).findFirst({ filters: { slug: d.slug }, locale: 'en' });
+      let documentId;
       if (existing) {
         await app.documents(UID).update({
           documentId: existing.documentId, locale: 'en', status: 'published', data,
         });
+        documentId = existing.documentId;
         updated += 1;
       } else {
-        await app.documents(UID).create({ locale: 'en', status: 'published', data });
+        const row = await app.documents(UID).create({ locale: 'en', status: 'published', data });
+        documentId = row.documentId;
         created += 1;
+      }
+
+      /*
+        The Arabic version is a LOCALE OF THE SAME DOCUMENT, not a second row —
+        update() against an existing documentId with locale 'ar' creates it.
+        Creating it separately would give the pair different documentIds, and
+        Strapi would then treat them as two unrelated pages: the admin panel
+        would show two entries with the same slug and no way to switch between
+        the languages.
+
+        Only the localized fields are sent. heroImage and order are shared
+        across locales by the schema, so writing them here would be a no-op at
+        best and, if the two files disagreed, a way for the Arabic file to
+        silently reorder the English index.
+      */
+      const ar = arabic.get(d.slug);
+      if (ar) {
+        await app.documents(UID).update({
+          documentId,
+          locale: 'ar',
+          status: 'published',
+          data: {
+            title: ar.meta.title ?? d.slug,
+            slug: ar.meta.slug ?? d.slug,
+            h1: ar.meta.h1 ?? ar.meta.title ?? d.slug,
+            subhead: ar.meta.subhead ?? null,
+            seo: ar.meta.description
+              ? { metaTitle: ar.meta.h1 ?? ar.meta.title, metaDescription: ar.meta.description }
+              : null,
+            blocks: ar.blocks,
+          },
+        });
+        translated += 1;
       }
     }
 
@@ -233,7 +316,7 @@ async function main() {
     await app.destroy();
   }
 
-  console.log(`\ncreated ${created}, updated ${updated}`);
+  console.log(`\ncreated ${created}, updated ${updated}, arabic ${translated}/${docs.length}`);
   if (orphans.length) {
     console.log(
       PRUNE
