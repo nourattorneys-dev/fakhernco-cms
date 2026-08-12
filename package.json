@@ -24,7 +24,8 @@
     "wp:fetch-ar": "node migration/scripts/fetch-arabic.mjs",
     "wp:landing": "node migration/scripts/import-landing.mjs",
     "seed:remote": "node scripts/remote-seed.mjs",
-    "verify:email-dns": "node scripts/verify-email-dns.mjs"
+    "verify:email-dns": "node scripts/verify-email-dns.mjs",
+    "verify:email": "node scripts/verify-email.mjs"
   },
   "dependencies": {
     "@strapi/database": "5.51.1",
