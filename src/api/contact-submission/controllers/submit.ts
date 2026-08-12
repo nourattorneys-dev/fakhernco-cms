@@ -10,6 +10,63 @@
 const MAX = { name: 120, email: 200, phone: 40, subject: 200, service: 120, message: 8000 };
 
 /**
+ * Send one email, over HTTPS where possible.
+ *
+ * WHY NOT JUST SMTP
+ * The production host blocks every outbound SMTP port — 25, 465, 587, 2465 and
+ * 2587 all refuse the connection, which was verified from the server itself:
+ *
+ *   connect ECONNREFUSED 54.157.71.137:465
+ *
+ * That is normal for shared hosting, which blocks SMTP so a compromised
+ * account cannot send spam. No SMTP configuration can work there, however
+ * correct — and it presents as silence, because the send is attempted after
+ * the enquiry is safely stored and the failure is only logged.
+ *
+ * Resend also accepts mail over its HTTPS API on port 443, the same port the
+ * site is already served on. So when an API key is present that is the route
+ * taken, and SMTP remains the fallback for environments where it works.
+ *
+ * No new dependency: Node 18+ has fetch built in.
+ */
+async function deliver(msg: {
+  to: string;
+  subject: string;
+  html: string;
+  replyTo?: string;
+}): Promise<void> {
+  const from = process.env.SMTP_FROM_EMAIL || 'noreply@fakhernco.com';
+  const fromHeader = /</.test(from) ? from : `Fakher & Co <${from}>`;
+
+  // SMTP_PASS holds the Resend API key in this deployment, so either name works.
+  const raw = process.env.RESEND_API_KEY || process.env.SMTP_PASS || '';
+  const apiKey = raw.startsWith('re_') ? raw : '';
+
+  if (apiKey) {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: fromHeader,
+        to: [msg.to],
+        subject: msg.subject,
+        html: msg.html,
+        ...(msg.replyTo ? { reply_to: msg.replyTo } : {}),
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`resend ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    }
+    return;
+  }
+
+  await strapi.plugin('email').service('email').send({ ...msg, from });
+}
+
+/**
  * Per-IP rate limit, in-process.
  *
  * Deliberately simple. This is a brochure site behind Cloudflare, so this is a
@@ -128,7 +185,7 @@ export default {
     const notify = process.env.CONTACT_NOTIFY_EMAIL;
     if (notify) {
       try {
-        await strapi.plugin('email').service('email').send({
+        await deliver({
           to: notify,
           replyTo: data.email,
           subject: `[fakhernco.com] ${data.subject || 'New enquiry'} — ${data.name}`,
@@ -153,10 +210,18 @@ export default {
     }
 
     // 6. Auto-reply to the enquirer, in the language they wrote in.
-    if (process.env.SMTP_HOST) {
+    /*
+      Gated on "can we send at all", not on SMTP_HOST specifically. With the
+      HTTPS route an API key is sufficient and no SMTP settings need exist —
+      keying this on SMTP_HOST would silently skip every acknowledgement.
+    */
+    const canSend =
+      (process.env.RESEND_API_KEY || process.env.SMTP_PASS || '').startsWith('re_') ||
+      Boolean(process.env.SMTP_HOST);
+    if (canSend) {
       const copy = REPLY[data.submittedLocale as 'en' | 'ar'];
       try {
-        await strapi.plugin('email').service('email').send({
+        await deliver({
           to: data.email,
           /*
             Replies must reach a human.
