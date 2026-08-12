@@ -192,7 +192,12 @@ async function main() {
         slug: d.slug,
         h1: d.meta.h1 ?? d.meta.title ?? d.slug,
         subhead: d.meta.subhead ?? null,
-        order: i,
+        // Filename order by default, which is how the first eight were seeded.
+        // A frontmatter `order:` overrides it, because otherwise adding a file
+        // silently reshuffles the index — `app-website-terms.md` sorts first
+        // alphabetically and would have pushed the firm's headline services
+        // down a row.
+        order: d.meta.order !== undefined ? Number(d.meta.order) : i,
         heroImage: fileIdFor(d.imageIndex),
         seo: d.meta.description
           ? { metaTitle: d.meta.h1 ?? d.meta.title, metaDescription: d.meta.description }
