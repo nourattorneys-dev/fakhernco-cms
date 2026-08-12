@@ -158,6 +158,17 @@ export default {
       try {
         await strapi.plugin('email').service('email').send({
           to: data.email,
+          /*
+            Replies must reach a human.
+
+            Without this the acknowledgement inherits defaultReplyTo, which is
+            SMTP_FROM_EMAIL — noreply@fakhernco.com. A prospective client who
+            hits Reply on it, which is the natural thing to do when you have
+            just been told someone will be in touch, would send their answer to
+            an address nobody reads and that may not accept mail at all. For a
+            law firm that is a lost instruction, not a lost email.
+          */
+          replyTo: notify || undefined,
           subject: copy.subject,
           html: copy.body(data.name),
         });
