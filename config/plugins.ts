@@ -91,6 +91,16 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
         port: env.int('SMTP_PORT', 587),
         // Port 465 = implicit TLS; anything else (587) = STARTTLS.
         secure: env.int('SMTP_PORT', 587) === 465,
+        /*
+          On 587, nodemailer's default is OPPORTUNISTIC STARTTLS: if the server
+          does not advertise it, it carries on in the clear and sends the
+          username and password as plaintext on the wire. That is the exact
+          failure mode basic auth is being retired over.
+
+          requireTLS makes it fail the send instead. No effect on 465, where
+          the socket is already encrypted before the greeting.
+        */
+        requireTLS: true,
         auth: {
           user: env('SMTP_USER'),
           pass: env('SMTP_PASS'),
