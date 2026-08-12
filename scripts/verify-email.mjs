@@ -107,6 +107,72 @@ if (relay === 'microsoft' && V.SMTP_USER.toLowerCase() !== V.SMTP_FROM_EMAIL.toL
   failures += 1;
 }
 
+/**
+ * Does this machine's own public IP satisfy the domain's SPF?
+ *
+ * The question when the mail server is your own box rather than a provider.
+ * Walks ip4/ip6/a/mx and recurses into include:, bounded at SPF's own limit of
+ * ten DNS lookups.
+ */
+async function spfCoversThisMachine(domain) {
+  let ip = null;
+  try {
+    // DNS rather than an HTTP echo service: no payload leaves the machine.
+    const { stdout } = await import('node:child_process').then(({ execFile }) =>
+      new Promise((res, rej) =>
+        execFile('dig', ['+short', 'myip.opendns.com', '@resolver1.opendns.com'],
+          { timeout: 10000 }, (e, so) => (e ? rej(e) : res({ stdout: so })))));
+    ip = stdout.trim().split('\n')[0] || null;
+  } catch { /* dig unavailable or blocked */ }
+  if (!ip || !/^\d+\.\d+\.\d+\.\d+$/.test(ip)) return { ip: null };
+
+  const toInt = (a) => a.split('.').reduce((n, o) => (n << 8 >>> 0) + Number(o), 0) >>> 0;
+  const inCidr = (addr, cidr) => {
+    const [net, bitsRaw] = cidr.split('/');
+    if (!/^\d+\.\d+\.\d+\.\d+$/.test(net)) return false;
+    const bits = bitsRaw === undefined ? 32 : Number(bitsRaw);
+    if (bits === 0) return true;
+    const mask = (0xffffffff << (32 - bits)) >>> 0;
+    return (toInt(addr) & mask) >>> 0 === (toInt(net) & mask) >>> 0;
+  };
+
+  let lookups = 0;
+  const seen = new Set();
+  const evaluate = async (d) => {
+    if (lookups > 10 || seen.has(d)) return false;
+    seen.add(d);
+    lookups += 1;
+    let rec = '';
+    try {
+      rec = (await dns.resolveTxt(d)).map((r) => r.join('')).find((r) => /^v=spf1/i.test(r)) ?? '';
+    } catch { return false; }
+    if (!rec) return false;
+    for (const term of rec.split(/\s+/)) {
+      const t = term.toLowerCase();
+      if (t.startsWith('ip4:') && inCidr(ip, term.slice(4))) return true;
+      if (t === 'a' || t.startsWith('a:')) {
+        lookups += 1;
+        try {
+          const h = t === 'a' ? d : term.slice(2).split('/')[0];
+          if ((await dns.resolve4(h)).includes(ip)) return true;
+        } catch { /* ignore */ }
+      }
+      if (t === 'mx' || t.startsWith('mx:')) {
+        lookups += 1;
+        try {
+          const h = t === 'mx' ? d : term.slice(3);
+          for (const r of await dns.resolveMx(h)) {
+            try { if ((await dns.resolve4(r.exchange)).includes(ip)) return true; } catch { /* ignore */ }
+          }
+        } catch { /* ignore */ }
+      }
+      if (t.startsWith('include:') && (await evaluate(term.slice(8)))) return true;
+    }
+    return false;
+  };
+  return { ip, covered: await evaluate(domain) };
+}
+
 // ------------------------------------------------------------ SPF sanity check
 if (fromDomain) {
   console.log('\nWill the recipient accept it?\n');
