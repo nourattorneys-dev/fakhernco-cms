@@ -18,10 +18,39 @@
  *
  * Everything else here is a warning. That one is a hard failure.
  */
-import { promises as dns } from 'node:dns';
+import { promises as dnsDefault } from 'node:dns';
+// The PROMISE-based Resolver. `node:dns`'s Resolver is callback-based, and its
+// methods reject with ERR_INVALID_ARG_TYPE when awaited — which the catch-all
+// helpers below reported as "record missing", i.e. a correctly configured
+// domain looking completely broken.
+import { Resolver } from 'node:dns/promises';
 
 const DOMAIN = process.env.MAIL_DOMAIN ?? 'fakhernco.com';
 const SUB = `send.${DOMAIN}`;
+
+/**
+ * Ask the domain's OWN nameservers, not whatever resolver this machine uses.
+ *
+ * This script is run at exactly the moment records are being added, and public
+ * resolvers cache NEGATIVE answers — "no TXT here" is remembered for minutes
+ * after the record appears. That made a correctly configured domain report
+ * four missing records, which is worse than useless when the whole point is to
+ * tell someone whether they got it right.
+ */
+let dns = dnsDefault;
+try {
+  const ns = await dnsDefault.resolveNs(DOMAIN);
+  const ips = (await Promise.all(ns.map((h) => dnsDefault.resolve4(h).catch(() => [])))).flat();
+  if (ips.length) {
+    const r = new Resolver();
+    r.setServers(ips);
+    dns = r;
+    console.log(`  (asking ${ns[0]} directly)`);
+  }
+} catch {
+  // No authoritative lookup available — fall back to the system resolver and
+  // accept that a freshly added record may not show yet.
+}
 
 const ok = (m) => console.log(`  \x1b[32m✓\x1b[0m ${m}`);
 const warn = (m) => console.log(`  \x1b[33m!\x1b[0m ${m}`);
@@ -30,10 +59,26 @@ const bad = (m) => console.log(`  \x1b[31m✗\x1b[0m ${m}`);
 let failures = 0;
 let warnings = 0;
 
-const mx = async (h) => { try { return await dns.resolveMx(h); } catch { return []; } };
-const txt = async (h) => {
-  try { return (await dns.resolveTxt(h)).map((r) => r.join('')); } catch { return []; }
-};
+/*
+  ENOTFOUND and ENODATA genuinely mean "no such record". Anything else is a
+  lookup that FAILED, and reporting that as an absent record is how this script
+  once told a correctly configured domain its inbound mail was broken. Real
+  errors are surfaced, not swallowed.
+*/
+const NO_RECORD = new Set(['ENOTFOUND', 'ENODATA', 'NOTFOUND']);
+async function lookup(fn, host, label) {
+  try {
+    return await fn(host);
+  } catch (err) {
+    if (NO_RECORD.has(err.code)) return [];
+    console.log(`  \x1b[33m?\x1b[0m ${label} lookup for ${host} failed: ${err.code ?? err.message}`);
+    lookupFailures += 1;
+    return [];
+  }
+}
+let lookupFailures = 0;
+const mx = (h) => lookup((x) => dns.resolveMx(x), h, 'MX');
+const txt = async (h) => (await lookup((x) => dns.resolveTxt(x), h, 'TXT')).map((r) => r.join(''));
 
 console.log(`\nEmail DNS for ${DOMAIN}\n`);
 
@@ -129,6 +174,13 @@ if (!dmarc.length) {
 } else {
   console.log(`      ${dmarc[0]}`);
   ok('DMARC present');
+}
+
+if (lookupFailures) {
+  console.log(
+    `\n  \x1b[33m${lookupFailures} lookup(s) errored.\x1b[0m Those are NOT reported as missing records —` +
+      `\n  re-run before believing anything above them.`,
+  );
 }
 
 console.log(
