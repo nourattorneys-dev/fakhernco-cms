@@ -1,0 +1,138 @@
+# Build the admin panel in CI, ship it to cPanel.
+#
+# WHY THIS EXISTS
+# The build was never the slow part — it is ~25 seconds. The problems it
+# solves are:
+#
+#   1. Peak RSS. `strapi build` wants ~1.7GB against a 2GB box already running
+#      Passenger and MySQL. That is what produces `spawn node EAGAIN` and why
+#      DEPLOYMENT.md says the build does not happen on the server.
+#   2. The uplink. node_modules is ~862MB full, and it was going up a home
+#      connection by hand on every deploy.
+#   3. Native binaries. Building on a Mac produces a darwin-arm64 node_modules.
+#      `sharp` is a hard dependency of @strapi/upload and a darwin-arm64 .node
+#      cannot be dlopen'd on Linux — so a deploy could look completely
+#      successful and leave a CMS that will not boot.
+#
+# A Linux runner with 16GB fixes all three at once.
+
+name: Deploy CMS to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force_deps:
+        description: 'Re-sync node_modules even if the lockfile did not change'
+        type: boolean
+        default: false
+
+# Two overlapping rsyncs into the same directory would interleave files and
+# leave a half-written tree that still answers requests.
+concurrency:
+  group: deploy-cms
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   # linux-x64 must match the SERVER, never a Mac.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # the lockfile diff below needs history
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'   # must match the cPanel Node.js selector
+          cache: npm
+
+      # Full install — the admin build needs the dev toolchain.
+      - run: npm ci
+
+      - name: Build admin panel
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      # typescript survives this: @strapi/typescript-utils depends on it, and
+      # app.js calls compileStrapi() at boot.
+      - name: Prune to production dependencies
+        run: npm prune --omit=dev
+
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "${{ secrets.CPANEL_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # CI reinstalls node_modules from scratch every run, so every file has a
+      # fresh mtime and rsync's default size+mtime check would retransmit all
+      # ~800MB on every commit. Only sync it when the lockfile actually moved.
+      - name: Did dependencies change?
+        id: deps
+        run: |
+          if [ "${{ inputs.force_deps }}" = "true" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          BEFORE='${{ github.event.before }}'
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = '0000000000000000000000000000000000000000' ]; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if git diff --name-only "$BEFORE" '${{ github.sha }}' | grep -qE '^(package-lock\.json|package\.json)$'; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      # Source plus the compiled admin.
+      #
+      # EVERY --exclude BELOW IS ALSO PROTECTED FROM --delete. That is rsync's
+      # rule, and for public/uploads/ it is the only thing standing between a
+      # deploy and the firm's entire media library — 154 files that are
+      # gitignored, live only on that disk, and have no undo.
+      #
+      # NEVER add --delete-excluded.
+      - name: Sync application
+        run: |
+          rsync -az --delete --human-readable \
+            -e "ssh -p ${{ secrets.CPANEL_PORT }} -o StrictHostKeyChecking=yes" \
+            --exclude '.git/' --exclude '.github/' \
+            --exclude '.env' --exclude '.env.*' \
+            --exclude '.tmp/' --exclude 'tmp/' --exclude 'logs/' \
+            --exclude 'node_modules/' \
+            --exclude 'public/uploads/' \
+            --exclude 'migration/data/' --exclude '.seed-token' \
+            ./ '${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:${{ secrets.CPANEL_APP_PATH }}/'
+
+      - name: Sync node_modules (only when the lockfile changed)
+        if: steps.deps.outputs.changed == 'true'
+        run: |
+          rsync -az --delete --human-readable \
+            -e "ssh -p ${{ secrets.CPANEL_PORT }} -o StrictHostKeyChecking=yes" \
+            ./node_modules/ \
+            '${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:${{ secrets.CPANEL_APP_PATH }}/node_modules/'
+
+      # Passenger ignores `npm start` entirely and watches tmp/restart.txt.
+      # cPanel does not create that directory, so mkdir -p first or the touch
+      # silently no-ops and the old code keeps serving a green deploy.
+      - name: Restart Passenger
+        run: |
+          ssh -p ${{ secrets.CPANEL_PORT }} \
+            '${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}' \
+            'mkdir -p ${{ secrets.CPANEL_APP_PATH }}/tmp ${{ secrets.CPANEL_APP_PATH }}/public/uploads && touch ${{ secrets.CPANEL_APP_PATH }}/tmp/restart.txt'
+
+      # Passenger restarts lazily, on the next request — so this both triggers
+      # and verifies the restart. /_health returns 204 on the live instance.
+      - name: Verify
+        run: |
+          for i in $(seq 1 20); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://cms.fakhernco.com/_health || true)
+            if [ "$code" = '204' ]; then echo 'CMS healthy'; exit 0; fi
+            echo "attempt $i: /_health -> $code"
+            sleep 6
+          done
+          echo 'CMS did not come back healthy'
+          exit 1

@@ -6,20 +6,21 @@ on the same account.
 ## The constraint that shapes everything
 
 The cPanel account caps at **2 GB physical memory** and **9.77 GB disk**, with
-20 entry processes. `strapi build` compiles the admin panel with webpack and
-routinely exceeds that ceiling — the Node.js selector's "Run NPM Install"
-button hits the same wall.
+20 entry processes. `strapi build` compiles the admin panel and routinely
+exceeds that ceiling — the Node.js selector's "Run NPM Install" button hits
+the same wall.
 
-**So the build does not happen on the server.** Build locally or in CI, then
-upload `dist/` and `node_modules/` alongside the source. `app.js` boots from
-the compiled output and does no compilation of its own.
+**So the build does not happen on the server.** It happens in GitHub Actions —
+see *Deploying* below. `app.js` boots from the compiled output and does no
+compilation of its own.
 
-If you ever do try building on-box, cap the heap first and expect it to be
-slow:
+Measured, so the numbers are not guesswork: `strapi build` takes **13.9s** and
+peaks at **1.69 GB RSS**. The build was never slow. It simply does not fit
+beside Passenger and MySQL in 2 GB, which is what produces `spawn node EAGAIN`.
 
-```bash
-NODE_OPTIONS=--max-old-space-size=1536 npm run build
-```
+Do **not** reach for `NODE_OPTIONS=--max-old-space-size=1536`, which this file
+used to advise. It caps the heap *below* the 1.69 GB the build actually wants,
+which converts a tight build into a heap OOM — the opposite of the intent.
 
 ## One-time setup
 
@@ -92,8 +93,18 @@ SMTP_PASS=…
 SMTP_FROM_EMAIL=…
 CONTACT_NOTIFY_EMAIL=…
 
-REVALIDATE_SECRET=…   # must match the front end
 ```
+
+**`REVALIDATE_SECRET` is deliberately not in that list.** Nothing in this
+repo reads it — grep `src/`, `config/`, `scripts/` and `app.js` and you will
+find no reference. Setting it here does nothing at all.
+
+The value that matters lives in the **webhook row in the database**, typed by
+hand into Settings → Webhooks → Headers as `x-revalidate-secret`. That is the
+string the front end compares against, so read it out of the admin panel and
+paste that exact value into Vercel. Assuming the two are wired through the
+environment gets you a 401 on every publish until Strapi disables the webhook
+for repeated failures.
 
 **`PUBLIC_URL` and `IS_PROXIED` are not optional.** Unset, Strapi emits
 `localhost:1337` media URLs so every image on the site 404s, and it refuses to
@@ -108,20 +119,59 @@ node -e "console.log(require('crypto').randomBytes(16).toString('base64'))"
 
 ## Deploying
 
-```bash
-# Locally
-npm ci
-npm run build                     # produces dist/
-rsync -az --delete \
-  --exclude .git --exclude .env --exclude '.tmp' \
-  ./ fakhernco@158.220.82.191:~/cms/
+**Push to `main`.** `.github/workflows/deploy.yml` builds the admin panel on a
+Linux runner, prunes to production dependencies, rsyncs to the box, touches
+`tmp/restart.txt` and then polls `/_health` until it answers 204. There is
+nothing to run by hand.
 
-# Then in cPanel: Node.js App -> Restart
+`node_modules` is only re-synced when `package-lock.json` or `package.json`
+changed — CI reinstalls it fresh every run, so every file has a new mtime and
+an unconditional sync would push ~800 MB on every commit. Force one with the
+workflow's **Run workflow → force_deps** input.
+
+### Why not build on your own machine
+
+The command this section used to document was:
+
+```bash
+rsync -az --delete --exclude .git --exclude .env --exclude '.tmp' ./ fakhernco@…:~/cms/
 ```
 
-`public/uploads/` is gitignored and must NOT be part of a `--delete` sync, or
-you will wipe the media library. Either exclude it explicitly or sync it
-separately.
+**Do not run it.** It has `--delete` and no `public/uploads/` exclude, so it
+deletes the media library — 154 files, ~9.4 MB, gitignored, present on that
+disk and nowhere else. The warning against exactly this was already two lines
+further down; the command and the prose contradicted each other, and the
+command is the half people paste.
+
+There is a second reason, and it is quieter. A build on an Apple Silicon Mac
+produces a **darwin-arm64** `node_modules`. `sharp` is a hard dependency of
+`@strapi/upload`, and a darwin-arm64 `.node` cannot be loaded on Linux — so
+the deploy completes, reports success, and leaves a CMS that will not boot.
+CI builds on `ubuntu-latest` for the same reason the server runs Linux.
+
+If you ever must sync by hand, mirror the workflow's exclude list exactly, and
+never add `--delete-excluded` — in rsync, an excluded path is also protected
+from deletion, and that is the whole safety mechanism.
+
+### Repository secrets
+
+Settings → Secrets and variables → Actions:
+
+| Secret | Value |
+|---|---|
+| `CPANEL_SSH_KEY` | a **new** ed25519 private key — `ssh-keygen -t ed25519 -C github-actions -f deploy_key -N ''`, with `deploy_key.pub` appended to the server's `~/.ssh/authorized_keys` via cPanel → SSH Access. Do not reuse a personal key. |
+| `CPANEL_KNOWN_HOSTS` | `ssh-keyscan -p <port> 158.220.82.191`, run from a machine you trust. Pinned, so `StrictHostKeyChecking=yes` is meaningful. |
+| `CPANEL_HOST` | `158.220.82.191` |
+| `CPANEL_USER` | `fakhernco` |
+| `CPANEL_PORT` | the SSH port |
+| `CPANEL_APP_PATH` | `~/cms` |
+
+Confirm the target once before the first run — if it reports `aarch64`, change
+`runs-on` to `ubuntu-24.04-arm`:
+
+```bash
+ssh fakhernco@158.220.82.191 'uname -m && node -v'   # expect x86_64 and v22.x
+```
 
 ## First boot
 
