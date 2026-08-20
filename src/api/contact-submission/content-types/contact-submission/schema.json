@@ -39,7 +39,7 @@
     },
     "submittedLocale": {
       "type": "string",
-      "description": "en or ar, so the auto-reply matches"
+      "description": "en, ar or de \u2014 which acknowledgement the enquirer receives"
     },
     "consent": {
       "type": "boolean",

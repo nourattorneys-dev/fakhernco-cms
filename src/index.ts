@@ -23,7 +23,10 @@ const PUBLIC_READ = [
 const PUBLIC_ACTIONS = ['find', 'findOne'] as const;
 
 /** Locales the site ships. `en` is Strapi's default and always exists. */
-const LOCALES = [{ code: 'ar', name: 'Arabic (ar)' }];
+const LOCALES = [
+  { code: 'ar', name: 'Arabic (ar)' },
+  { code: 'de', name: 'German (de)' },
+];
 
 export default {
   register(_: { strapi: Core.Strapi }) {},
@@ -33,8 +36,13 @@ export default {
    *
    * Both steps below are otherwise manual admin-panel clicking that is easy to
    * forget, and both fail in ways that look like front-end bugs: a missing
-   * locale makes every Arabic request 404, and missing public permissions make
-   * every collection return 403 while the CMS itself looks perfectly healthy.
+   * locale makes every request in that language 404, and missing public
+   * permissions make every collection return 403 while the CMS itself looks
+   * perfectly healthy.
+   *
+   * Adding a locale here is safe on an existing database: ensureLocales
+   * set-diffs against what already exists, and permissions carry no locale
+   * dimension — a `find` grant already covers `?locale=de`.
    *
    * Doing it here rather than in a seed script matters because the REST API
    * cannot grant its own permissions - so on a remote deploy this is otherwise

@@ -135,6 +135,35 @@ const REPLY = {
         </p>
       </div>`,
   },
+  /*
+    German. LTR, so no dir attribute — unlike the Arabic block above.
+
+    "Guten Tag" rather than "Sehr geehrte/r": the form does not collect a
+    salutation, and German's gendered forms cannot be guessed from a name.
+    "Mandatsverhältnis" is the term of art for the lawyer-client relationship,
+    and is what makes the disclaimer mean the same thing it means in English.
+
+    WRITTEN BY A NON-NATIVE HAND — have a German speaker read this before the
+    first German enquiry arrives. It is the firm's voice, not plumbing.
+  */
+  de: {
+    subject: 'Wir haben Ihre Anfrage erhalten — Fakher & Co',
+    body: (name: string) => `
+      <div style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1a1a1a">
+        <p>Guten Tag ${escapeHtml(name)},</p>
+        <p>vielen Dank für Ihre Nachricht an Fakher &amp; Co. Wir haben Ihre Anfrage
+           erhalten und ein Mitglied unseres Teams wird sich innerhalb eines
+           Werktages bei Ihnen melden.</p>
+        <p>In dringenden Angelegenheiten erreichen Sie uns direkt unter
+           <a href="tel:+971502057209">+971 50 205 7209</a>.</p>
+        <p>Mit freundlichen Grüßen,<br><strong>Fakher &amp; Co</strong><br>
+           Spezialisten für Prozessführung<br>Abu Dhabi · Ägypten · Indien</p>
+        <p style="font-size:12px;color:#767676;margin-top:24px">
+          Dies ist eine automatische Empfangsbestätigung. Sie begründet kein
+          Mandatsverhältnis und stellt keine Rechtsberatung dar.
+        </p>
+      </div>`,
+  },
 };
 
 export default {
@@ -163,7 +192,16 @@ export default {
       service: clean(body.service, MAX.service),
       message: clean(body.message, MAX.message),
       sourcePage: clean(body.sourcePage, 300),
-      submittedLocale: clean(body.locale, 5) === 'ar' ? 'ar' : 'en',
+      /*
+        Whitelist, not a ternary. The old form collapsed every locale that was
+        not 'ar' to 'en', so a German enquirer was recorded as English and
+        received the English acknowledgement.
+      */
+      submittedLocale: (['ar', 'de'] as const).includes(
+        clean(body.locale, 5) as 'ar' | 'de',
+      )
+        ? (clean(body.locale, 5) as 'ar' | 'de')
+        : 'en',
       consent: body.consent === true,
       handled: false,
     };
@@ -219,7 +257,10 @@ export default {
       (process.env.RESEND_API_KEY || process.env.SMTP_PASS || '').startsWith('re_') ||
       Boolean(process.env.SMTP_HOST);
     if (canSend) {
-      const copy = REPLY[data.submittedLocale as 'en' | 'ar'];
+      // Fall back rather than fail: an acknowledgement in the wrong language is
+      // a poor outcome, but a locale added here without matching copy would
+      // otherwise take the whole acknowledgement down.
+      const copy = REPLY[data.submittedLocale as keyof typeof REPLY] ?? REPLY.en;
       try {
         await deliver({
           to: data.email,
