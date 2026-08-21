@@ -119,59 +119,127 @@ node -e "console.log(require('crypto').randomBytes(16).toString('base64'))"
 
 ## Deploying
 
-**Push to `main`.** `.github/workflows/deploy.yml` builds the admin panel on a
-Linux runner, prunes to production dependencies, rsyncs to the box, touches
-`tmp/restart.txt` and then polls `/_health` until it answers 204. There is
-nothing to run by hand.
+**Push to `main`.** GitHub Actions builds the admin panel on a Linux runner and
+force-pushes a `deploy` branch; the server pulls it within five minutes on a
+cPanel cron job. Nothing to run by hand.
 
-`node_modules` is only re-synced when `package-lock.json` or `package.json`
-changed — CI reinstalls it fresh every run, so every file has a new mtime and
-an unconditional sync would push ~800 MB on every commit. Force one with the
-workflow's **Run workflow → force_deps** input.
+```
+  push to main
+      |
+      v
+  GitHub Actions ── npm ci ── strapi build ── force-push `deploy` branch
+                                                        |
+                                    (server reaches OUT, every 5 min)
+                                                        v
+  cPanel cron ── scripts/cpanel-pull.sh ── rsync into ~/cms ── touch tmp/restart.txt
+                                                        |
+                                                        v
+                                          poll /_health until 204
+```
 
-### Why not build on your own machine
+### Why the server pulls instead of CI pushing
 
-The command this section used to document was:
+The obvious shape is `rsync` over SSH from the runner. It cannot work on this
+account, and this was established the hard way:
+
+| Channel | Result |
+|---|---|
+| SSH port 22 | **connection refused** — nothing listening |
+| SSH port 2222 | timed out — firewalled |
+| FTP (21) | closed |
+| WHM (2087) | reachable, but not accessible to this account |
+| cPanel (2083) | reachable |
+
+Nothing inbound is available, and a GitHub runner has no fixed IP to whitelist
+even if it were. So the direction is reversed: the box reaches out to GitHub.
+cPanel cron is the only scheduler the account reliably exposes, and it runs
+shell as the account user, which is all this needs.
+
+The repository is **public**, so the clone needs no credentials. If it is ever
+made private this breaks, and the fix is a token — which must not be pasted
+into the script, since it would be world-readable on a shared box.
+
+### `NODE_ENV=production` is not optional
+
+```bash
+npm run build                      # dist/ = 300KB, NO admin panel
+NODE_ENV=production npm run build  # dist/ = 12MB, dist/build/index.html
+```
+
+Both print `✔ Building admin panel`. Only the second one actually emits it into
+`dist/`. A deploy built without it leaves `cms.fakhernco.com/admin` dead while
+the API keeps working — so the CMS looks half-alive and the cause is one
+environment variable. The workflow sets it; do not remove it.
+
+### The `deploy` branch
+
+An **orphan** branch, force-pushed as a single rootless commit. `dist/` is 12MB
+and would otherwise be appended to history on every push; flat, the branch stays
+constant and the server's `--depth=1` clone stays small.
+
+`node_modules` is **not** in it — ~800MB does not belong in git. The server runs
+`npm ci --omit=dev` itself, and only when `package-lock.json` actually moves.
+That is a download-and-unpack rather than a compile, so it is far lighter than
+the build this whole arrangement exists to avoid.
+
+Because the branch is force-pushed with no shared history, `cpanel-pull.sh` uses
+`fetch` + `reset --hard`. A `git pull` would fail with "refusing to merge
+unrelated histories" on every deploy.
+
+### One-time setup on the box
+
+**cPanel → Cron Jobs**, every five minutes:
+
+```
+*/5 * * * * /bin/bash "$HOME/cms-deploy/scripts/cpanel-pull.sh" >> "$HOME/cms-deploy.log" 2>&1
+```
+
+That is the whole setup. The script clones itself on first run, so there is
+nothing to prepare — though you can bootstrap it immediately from
+cPanel → Terminal if you would rather not wait:
+
+```bash
+git clone --depth=1 -b deploy https://github.com/nourattorneys-dev/fakhernco-cms.git "$HOME/cms-deploy"
+```
+
+There are no repository secrets. Nothing to rotate, nothing to leak.
+
+### Watching a deploy
+
+```bash
+tail -f ~/cms-deploy.log          # on the box
+cat ~/.cms-deployed-sha           # what is actually live
+curl -sI https://cms.fakhernco.com/_health   # expect 204
+```
+
+The script is quiet when there is nothing to do — it runs 288 times a day, and
+logging "no change" every time would bury the one line that matters. It stamps
+`~/.cms-deployed-sha` only after `/_health` returns 204, so a failed deploy is
+retried on the next tick rather than being recorded as successful.
+
+### Why not build on the box
+
+`strapi build` peaks at **1.69 GB RSS**. The account has 2 GB, shared with
+Passenger and MySQL. That is what `spawn node EAGAIN` has been saying.
+
+There is a quieter reason too. Building on an Apple Silicon Mac produces a
+**darwin-arm64** `node_modules`, and `sharp` — a hard dependency of
+`@strapi/upload` — cannot be loaded on Linux. A hand deploy could complete,
+report success, and leave a CMS that will not boot. CI builds on the same
+platform the server runs.
+
+### Never run the old rsync
+
+An earlier version of this file documented:
 
 ```bash
 rsync -az --delete --exclude .git --exclude .env --exclude '.tmp' ./ fakhernco@…:~/cms/
 ```
 
-**Do not run it.** It has `--delete` and no `public/uploads/` exclude, so it
-deletes the media library — 154 files, ~9.4 MB, gitignored, present on that
-disk and nowhere else. The warning against exactly this was already two lines
-further down; the command and the prose contradicted each other, and the
-command is the half people paste.
-
-There is a second reason, and it is quieter. A build on an Apple Silicon Mac
-produces a **darwin-arm64** `node_modules`. `sharp` is a hard dependency of
-`@strapi/upload`, and a darwin-arm64 `.node` cannot be loaded on Linux — so
-the deploy completes, reports success, and leaves a CMS that will not boot.
-CI builds on `ubuntu-latest` for the same reason the server runs Linux.
-
-If you ever must sync by hand, mirror the workflow's exclude list exactly, and
-never add `--delete-excluded` — in rsync, an excluded path is also protected
-from deletion, and that is the whole safety mechanism.
-
-### Repository secrets
-
-Settings → Secrets and variables → Actions:
-
-| Secret | Value |
-|---|---|
-| `CPANEL_SSH_KEY` | a **new** ed25519 private key — `ssh-keygen -t ed25519 -C github-actions -f deploy_key -N ''`, with `deploy_key.pub` appended to the server's `~/.ssh/authorized_keys` via cPanel → SSH Access. Do not reuse a personal key. |
-| `CPANEL_KNOWN_HOSTS` | `ssh-keyscan -p <port> 158.220.82.191`, run from a machine you trust. Pinned, so `StrictHostKeyChecking=yes` is meaningful. |
-| `CPANEL_HOST` | `158.220.82.191` |
-| `CPANEL_USER` | `fakhernco` |
-| `CPANEL_PORT` | the SSH port |
-| `CPANEL_APP_PATH` | `~/cms` |
-
-Confirm the target once before the first run — if it reports `aarch64`, change
-`runs-on` to `ubuntu-24.04-arm`:
-
-```bash
-ssh fakhernco@158.220.82.191 'uname -m && node -v'   # expect x86_64 and v22.x
-```
+**Do not.** It has `--delete` and no `public/uploads/` exclude, so it deletes
+the media library — 154 files, gitignored, on that disk and nowhere else. In
+rsync an excluded path is also protected from deletion, which is the entire
+safety mechanism; never add `--delete-excluded`.
 
 ## First boot
 
