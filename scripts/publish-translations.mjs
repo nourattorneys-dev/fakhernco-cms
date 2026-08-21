@@ -37,6 +37,7 @@ const LIVE = process.argv.includes('--live');
 const MANIFEST = {
   locale: 'de',
   entries: [
+    // ---- batch 1 (published 2026-08-21) — kept for re-runs; PUT is idempotent
     {
       type: 'pages',
       slug: 'contact-us',
@@ -55,6 +56,39 @@ const MANIFEST = {
       documentId: 'vm9ozpp16sxqftmfkr0eknuu',
       file: '/tmp/de-contracts-legal-document-drafting.json',
     },
+    // ---- batch 2: the homepage cluster + remaining practice areas
+    {
+      type: 'practice-areas',
+      slug: 'litigation-dispute-resolution',
+      documentId: 'taxx6odwk8jco3qr98cwuvx5',
+      file: '/tmp/de-litigation-dispute-resolution.json',
+    },
+    {
+      type: 'practice-areas',
+      slug: 'personal-criminal-legal-services',
+      documentId: 'z7vjo01yik9vz0ax7ba0xtzu',
+      file: '/tmp/de-personal-criminal-legal-services.json',
+    },
+    {
+      type: 'practice-areas',
+      slug: 'private-notary-attestation-services',
+      documentId: 'b90m0wsr11l0eooa5xebhv5b',
+      file: '/tmp/de-private-notary-attestation-services.json',
+    },
+    {
+      type: 'pages',
+      slug: 'home',
+      documentId: 'dxc8srh83xl51x8tvnfulysg',
+      file: '/tmp/de-home.json',
+    },
+    /*
+      Single types: no documentId in the path and no slug to pin — Strapi
+      addresses them by name. Media relations (heroImage, sectionImages, logo)
+      are numeric ids copied from the English locale; media itself is not
+      localised, so the same photographs serve every language.
+    */
+    { type: 'homepage', singleType: true, file: '/tmp/de-homepage-single.json' },
+    { type: 'site-setting', singleType: true, file: '/tmp/de-site-setting.json' },
   ],
 };
 
@@ -112,25 +146,29 @@ for (const entry of entries) {
     continue;
   }
 
-  const data = stripIds({
-    ...translated,
-    slug: entry.slug, // ALWAYS the English slug — see the header.
-    legacyUrl: null, // German has no legacy WordPress URLs.
-  });
+  const data = entry.singleType
+    ? stripIds(translated)
+    : stripIds({
+        ...translated,
+        slug: entry.slug, // ALWAYS the English slug — see the header.
+        legacyUrl: null, // German has no legacy WordPress URLs.
+      });
 
   const blocks = Array.isArray(data.blocks) ? data.blocks.length : 0;
+  const label = entry.singleType ? entry.type : `${entry.type}/${entry.slug}`;
   console.log(
-    `  ${LIVE ? '→' : '·'} ${entry.type}/${entry.slug} [${locale}] — ` +
-      `"${data.title}", ${blocks} blocks${LIVE ? '' : ' (dry)'}`,
+    `  ${LIVE ? '→' : '·'} ${label} [${locale}] — ` +
+      `"${data.title ?? data.siteName ?? data.heroTitle ?? ''}"` +
+      `${blocks ? `, ${blocks} blocks` : ''}${LIVE ? '' : ' (dry)'}`,
   );
 
   if (!LIVE) continue;
 
   try {
-    await put(
-      `${entry.type}/${entry.documentId}?locale=${locale}&status=published`,
-      { data },
-    );
+    const pathname = entry.singleType
+      ? `${entry.type}?locale=${locale}&status=published`
+      : `${entry.type}/${entry.documentId}?locale=${locale}&status=published`;
+    await put(pathname, { data });
     console.log(`    published`);
   } catch (err) {
     console.error(`    ✗ ${err.message}`);
