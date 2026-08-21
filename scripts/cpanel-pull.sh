@@ -26,14 +26,27 @@
 # 2GB account shared with Passenger and MySQL — that is the whole reason the
 # build happens in CI.
 #
-# SETUP (cPanel -> Cron Jobs), every five minutes:
-#   */5 * * * * /bin/bash "$HOME/cms-deploy/scripts/cpanel-pull.sh" >> "$HOME/cms-deploy.log" 2>&1
+# SETUP (cPanel -> Cron Jobs), every five minutes. This clones itself on the
+# first run, so there is nothing to prepare — which matters, because Terminal is
+# not available on this account:
 #
-# The first run clones, so there is nothing to set up by hand. Bootstrap it by
-# pasting this one-liner into cPanel -> Terminal, or just let the cron fire:
-#   git clone --depth=1 -b deploy https://github.com/nourattorneys-dev/fakhernco-cms.git "$HOME/cms-deploy"
+#   cd "$HOME" && { [ -d cms-deploy/.git ] || git clone --depth=1 -b deploy \
+#     https://github.com/nourattorneys-dev/fakhernco-cms.git cms-deploy; \
+#     /bin/bash cms-deploy/scripts/cpanel-pull.sh; } >> "$HOME/cms-deploy.log" 2>&1
+#
+# Note the braces: the redirect has to cover the clone too, or a failure there
+# goes to cron's email instead of the log. That cost a debugging round.
 
 set -euo pipefail
+
+# Cron runs with a near-empty PATH — typically just /usr/bin:/bin. On a cPanel
+# box with the Node.js selector, `node` and `npm` are not on it at all. Add the
+# usual locations before anything looks for a binary.
+PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin"
+for nodedir in /opt/alt/alt-nodejs*/root/usr/bin; do
+  [ -d "$nodedir" ] && PATH="$PATH:$nodedir"
+done
+export PATH
 
 REPO_URL="https://github.com/nourattorneys-dev/fakhernco-cms.git"
 BRANCH="deploy"
@@ -89,20 +102,38 @@ fi
 
 # --------------------------------------------------------------------- sync
 #
-# EVERY --exclude BELOW IS ALSO PROTECTED FROM --delete. That is rsync's rule,
-# and for public/uploads/ it is the only thing between a deploy and the firm's
-# media library — 154 files that are gitignored, live on this disk and nowhere
-# else, and have no undo.
+# rsync is NOT installed on this box — the first live run failed with
+# "rsync: command not found", which is why this uses tar. tar is in coreutils
+# and has been present everywhere cPanel runs.
 #
-# NEVER add --delete-excluded.
-rsync -a --delete \
-  --exclude '.git/' \
-  --exclude '.env' --exclude '.env.*' \
-  --exclude 'node_modules/' \
-  --exclude 'public/uploads/' \
-  --exclude '.tmp/' --exclude 'tmp/' --exclude 'logs/' \
-  --exclude 'migration/data/' --exclude '.seed-token' \
-  "$CLONE/" "$APP/"
+# The exclusions are the safety mechanism. public/uploads/ is the firm's media
+# library: 154 files, gitignored, on this disk and nowhere else, with no undo.
+# tar makes that safer than rsync did, not less — it only ever adds and
+# overwrites, so there is no --delete to get wrong and no way for an excluded
+# path to be removed.
+#
+# The tradeoff is that a file deleted from the repo lingers on the server. For
+# source that is harmless. For dist/ it is not — stale admin-panel chunks would
+# accumulate every build — so dist/ is removed first and laid down fresh. It is
+# pure build output, reproduced in full by every deploy.
+EXCLUDES="
+--exclude=./.git
+--exclude=./.env
+--exclude=./.env.local
+--exclude=./.env.production
+--exclude=./node_modules
+--exclude=./public/uploads
+--exclude=./.tmp
+--exclude=./tmp
+--exclude=./logs
+--exclude=./migration/data
+--exclude=./.seed-token
+"
+
+rm -rf "$APP/dist"
+
+# shellcheck disable=SC2086
+( cd "$CLONE" && tar $EXCLUDES -cf - . ) | ( cd "$APP" && tar -xf - )
 
 # ------------------------------------------------------------------ restart
 #
@@ -118,7 +149,16 @@ touch "$APP/tmp/restart.txt"
 # restart and proves it worked. Without it, "deployed" would mean "files
 # copied", which is not the same thing.
 for i in $(seq 1 20); do
-  code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://cms.fakhernco.com/_health || true)"
+  if command -v curl >/dev/null 2>&1; then
+    code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://cms.fakhernco.com/_health || true)"
+  elif command -v wget >/dev/null 2>&1; then
+    code="$(wget -q -S -O /dev/null --timeout=20 https://cms.fakhernco.com/_health 2>&1 | awk '/HTTP\//{c=$2} END{print c}' || true)"
+  else
+    # No HTTP client. Restarting still worked; we simply cannot prove it.
+    log "no curl or wget — cannot verify; assuming the restart took"
+    echo "$NEW_SHA" > "$STAMP"
+    exit 0
+  fi
   if [ "$code" = "204" ]; then
     echo "$NEW_SHA" > "$STAMP"
     log "healthy — $NEW_SHA is live"

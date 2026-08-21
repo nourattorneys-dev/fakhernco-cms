@@ -191,16 +191,30 @@ unrelated histories" on every deploy.
 **cPanel → Cron Jobs**, every five minutes:
 
 ```
-*/5 * * * * /bin/bash "$HOME/cms-deploy/scripts/cpanel-pull.sh" >> "$HOME/cms-deploy.log" 2>&1
+cd "$HOME" && { [ -d cms-deploy/.git ] || git clone --depth=1 -b deploy https://github.com/nourattorneys-dev/fakhernco-cms.git cms-deploy; /bin/bash cms-deploy/scripts/cpanel-pull.sh; } >> "$HOME/cms-deploy.log" 2>&1
 ```
 
-That is the whole setup. The script clones itself on first run, so there is
-nothing to prepare — though you can bootstrap it immediately from
-cPanel → Terminal if you would rather not wait:
+That is the whole setup — it clones itself on the first run, which matters
+because **Terminal is not available on this account**.
 
-```bash
-git clone --depth=1 -b deploy https://github.com/nourattorneys-dev/fakhernco-cms.git "$HOME/cms-deploy"
-```
+The braces are load-bearing. Without them the redirect covers only the last
+command, so a failure in the `git clone` goes to cron's email rather than the
+log, and the log stays empty while nothing works.
+
+### Two things this box does not have
+
+Both found the hard way, on the first live run:
+
+**`rsync` is not installed.** The script uses `tar` instead. That is safer here
+rather than less: tar only adds and overwrites, so there is no `--delete` to get
+wrong and no way for an excluded path to be removed. `dist/` is deleted and laid
+down fresh before extraction, because stale admin-panel chunks would otherwise
+accumulate on every deploy; it is pure build output and reproduced in full each
+time.
+
+**Cron's `PATH` is nearly empty** — typically just `/usr/bin:/bin`, and on a
+cPanel box with the Node.js selector `node` and `npm` are not on it at all. The
+script extends `PATH` itself, including `/opt/alt/alt-nodejs*/root/usr/bin`.
 
 There are no repository secrets. Nothing to rotate, nothing to leak.
 
