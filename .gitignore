@@ -26,6 +26,19 @@ public/uploads/*
 !.env.example
 .seed-token
 
+# SSH deploy keys. Generated locally, pasted into GitHub Secrets, then deleted
+# from disk. Never committed — THIS REPOSITORY IS PUBLIC, so a private key here
+# is a private key on the internet, and a deploy key is write access to the
+# production server. The pattern is deliberately broad: the cost of ignoring a
+# key nobody meant to commit is zero.
+deploy_key
+deploy_key.pub
+*.pem
+id_ed25519
+id_ed25519.pub
+id_rsa
+id_rsa.pub
+
 # Migration cache — a re-fetchable snapshot of the live WordPress site.
 # out/ IS committed: those are decision artifacts.
 # Scraped and generated migration artifacts — large, and reproducible by
