@@ -202,7 +202,15 @@ export default {
       )
         ? (clean(body.locale, 5) as 'ar' | 'de')
         : 'en',
-      consent: body.consent === true,
+      /*
+      Accept the boolean and the string form. The form used to send FormData's
+      literal "true", and `=== true` recorded consent: false for every enquiry
+      ever submitted. The front end now sends a real boolean, but this stays
+      tolerant so a form change can never silently zero the consent record
+      again — that column is the firm's evidence that storing the enquiry was
+      agreed to.
+      */
+      consent: body.consent === true || body.consent === 'true',
       handled: false,
     };
 
