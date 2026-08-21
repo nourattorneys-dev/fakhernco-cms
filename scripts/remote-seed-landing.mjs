@@ -88,14 +88,32 @@ const localised = (p) => ({
 });
 
 // ---------------------------------------------------------------------- read
+/*
+  Locales that are translations of the English baseline.
+
+  One list rather than 'ar' spelled out. These nine landing pages are the
+  ad-spend surface — the pages the firm actually buys traffic for — so a locale
+  missing from here is a language that can never receive a campaign, and nothing
+  would have said so.
+*/
+const TRANSLATED = ['ar', 'de'];
+
 const localEn = (await get(SRC, `landing-pages?${POPULATE}&locale=en`)).data;
-const localAr = (await get(SRC, `landing-pages?${POPULATE}&locale=ar`)).data;
-const arBySlug = new Map(localAr.map((p) => [p.slug, p]));
+
+/** slug -> page, per translated locale. A locale with none yields an empty map. */
+const localBySlug = new Map();
+for (const locale of TRANSLATED) {
+  const rows = (await get(SRC, `landing-pages?${POPULATE}&locale=${locale}`)).data;
+  localBySlug.set(locale, new Map(rows.map((p) => [p.slug, p])));
+}
 
 const remoteEn = (await get(DST, `landing-pages?${POPULATE}&locale=en`, true)).data;
 const remoteBySlug = new Map(remoteEn.map((p) => [p.slug, p]));
 
-console.log(`\nlocal:      ${localEn.length} en, ${localAr.length} ar`);
+console.log(
+  `\nlocal:      ${localEn.length} en, ` +
+    TRANSLATED.map((l) => `${localBySlug.get(l).size} ${l}`).join(', '),
+);
 console.log(`production: ${remoteEn.length} en\n`);
 
 // A production media id for each photograph, keyed by filename, learned from
@@ -138,16 +156,22 @@ for (const [i, en] of localEn.entries()) {
     updated += 1;
   }
 
-  const ar = arBySlug.get(en.slug);
-  if (ar) {
+  for (const locale of TRANSLATED) {
+    const row = localBySlug.get(locale).get(en.slug);
+    if (!row) {
+      console.log(`      ! no ${locale} for ${en.slug}`);
+      continue;
+    }
     const target = remoteBySlug.get(en.slug);
     if (!DRY && target?.documentId) {
-      await send('PUT', `landing-pages/${target.documentId}?locale=ar&status=published`, { data: localised(ar) });
+      await send(
+        'PUT',
+        `landing-pages/${target.documentId}?locale=${locale}&status=published`,
+        { data: localised(row) },
+      );
     }
-    console.log(`      + ar  ${ar.h1.slice(0, 44)}`);
+    console.log(`      + ${locale}  ${row.h1.slice(0, 44)}`);
     translated += 1;
-  } else {
-    console.log(`      ! NO ARABIC for ${en.slug}`);
   }
 }
 

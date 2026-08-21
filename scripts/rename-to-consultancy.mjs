@@ -155,7 +155,13 @@ console.log(`\n${DRY ? 'DRY RUN — ' : ''}target: ${BASE}\n`);
 let touched = 0;
 
 for (const type of TYPES) {
-  for (const locale of ['en', 'ar']) {
+  /*
+    Every locale the site ships. A locale absent from this list keeps the old
+    wording silently — the script reports success having skipped it entirely.
+    A locale with no content yet simply yields no rows, so listing one early
+    costs nothing.
+  */
+  for (const locale of ['en', 'ar', 'de']) {
     let rows;
     try {
       rows = await fetchAll(type, locale);

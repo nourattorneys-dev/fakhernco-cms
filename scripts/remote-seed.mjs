@@ -415,9 +415,20 @@ for (const l of await readAll('landing-pages', { ...POPULATE, 'populate[heroImag
 summary.landingPages = landingId.size;
 console.log(`  landing pages ${landingId.size}`);
 
+/*
+  Locales that are translations of the English baseline.
+
+  One list rather than 'ar' written out in five places. German was added to the
+  CMS before this script knew about it, so a seed would have carried English and
+  Arabic to a fresh database and silently left German behind — the kind of gap
+  that only shows up when someone rebuilds production and wonders where a
+  language went.
+*/
+const TRANSLATED = ['ar', 'de'];
+
 // ---- single types ------------------------------------------------------------
 if (!DRY) {
-  for (const locale of ['en', 'ar']) {
+  for (const locale of ['en', ...TRANSLATED]) {
     const home = await src(`homepage?${q({ locale, 'populate[heroImage]': 'true', 'populate[sectionImages]': 'true' })}`, { allow: [404] });
     if (home?.data) {
       await dst('PUT', `homepage?${q({ locale, status: 'published' })}`, {
@@ -434,37 +445,45 @@ if (!DRY) {
     }
   }
 }
-summary.singleTypes = 'homepage + site-setting, en + ar';
+summary.singleTypes = `homepage + site-setting, en + ${TRANSLATED.join(' + ')}`;
 console.log('  single types');
 
-/* ---------------------------------------------------------- arabic localisations */
+/* ---------------------------------------------------------- localisations */
 
 /**
  * A localisation attaches to the SAME document as its English counterpart, so
  * the English entry has to exist first — which is why this runs last and reuses
  * the documentIds collected above.
+ *
+ * A locale with no content yet is not an error: readAll simply returns nothing
+ * and the count is zero. German will be in exactly that state for a while.
  */
-console.log('  arabic…');
-let ar = 0;
-for (const [type, ids] of [
-  ['practice-areas', areaId],
-  ['pages', pageId],
-  ['posts', postId],
-  ['case-studies', caseId],
-]) {
-  const rows = await readAll(type, { ...POPULATE, locale: 'ar' });
-  for (const r of rows) {
-    const documentId = ids.get(r.slug);
-    if (!documentId) continue;
-    await upsert(type, r.slug, {
-      title: r.title, slug: r.slug, legacyUrl: r.legacyUrl ?? null,
-      seo: stripIds(r.seo, mediaMap), blocks: stripIds(r.blocks, mediaMap),
-    }, { locale: 'ar', documentId });
-    ar += 1;
+let localised = 0;
+for (const locale of TRANSLATED) {
+  console.log(`  ${locale}…`);
+  let n = 0;
+  for (const [type, ids] of [
+    ['practice-areas', areaId],
+    ['pages', pageId],
+    ['posts', postId],
+    ['case-studies', caseId],
+  ]) {
+    const rows = await readAll(type, { ...POPULATE, locale });
+    for (const r of rows) {
+      const documentId = ids.get(r.slug);
+      if (!documentId) continue;
+      await upsert(type, r.slug, {
+        title: r.title, slug: r.slug, legacyUrl: r.legacyUrl ?? null,
+        seo: stripIds(r.seo, mediaMap), blocks: stripIds(r.blocks, mediaMap),
+      }, { locale, documentId });
+      n += 1;
+    }
   }
+  summary[`localisations_${locale}`] = n;
+  console.log(`  ${locale} ${n}`);
+  localised += n;
 }
-summary.arabicLocalisations = ar;
-console.log(`  arabic ${ar}`);
+summary.localisations = localised;
 
 console.log(`\nDONE — ${calls} API calls`);
 for (const [k, v] of Object.entries(summary)) console.log(`  ${k}: ${v}`);
