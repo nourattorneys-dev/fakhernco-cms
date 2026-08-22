@@ -1,0 +1,77 @@
+[
+  {
+    "from": "/category/company-formation-corporate-services/",
+    "to": "/legal-insights/company-formation-corporate-services/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/category/contracts-real-estate/",
+    "to": "/legal-insights/contracts-real-estate/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/category/corporate-compliance-contracts/",
+    "to": "/legal-insights/corporate-compliance-contracts/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/category/emerging-areas-private-notary-integration/",
+    "to": "/legal-insights/emerging-areas-private-notary-integration/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/category/ip-emerging-legal-areas/",
+    "to": "/legal-insights/ip-emerging-legal-areas/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/category/litigation-dispute-resolution/",
+    "to": "/legal-insights/litigation-dispute-resolution/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/category/skp-business-federation-integration/",
+    "to": "/legal-insights/skp-business-federation-integration/",
+    "note": "Category archive, 20 posts."
+  },
+  {
+    "from": "/author/fakher/",
+    "to": "/about-us/",
+    "note": "Author archive — single author, thin. 301 rather than rebuild."
+  },
+  {
+    "from": "/sitemap_index.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast index registered in Search Console."
+  },
+  {
+    "from": "/page-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/post-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/category-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/author-sitemap.xml",
+    "to": "/sitemap.xml",
+    "note": "Yoast child sitemap."
+  },
+  {
+    "from": "/feed/",
+    "to": "/rss.xml",
+    "note": "RSS — serves 200 today; third-party readers still request it."
+  },
+  {
+    "from": "/comments/feed/",
+    "to": "/rss.xml",
+    "note": "Comment feed."
+  }
+]

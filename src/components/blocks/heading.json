@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blocks_headings",
+  "info": {
+    "displayName": "Heading",
+    "icon": "text",
+    "description": "Section heading. H1 is deliberately excluded - the page template owns it, because 49 documents on the WordPress site carry more than one H1."
+  },
+  "options": {},
+  "attributes": {
+    "level": {
+      "type": "integer",
+      "min": 2,
+      "max": 4,
+      "default": 2,
+      "required": true
+    },
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,1 @@
+import{r as e,g as t}from"./strapi-DV8wrgUs.js";const o=()=>{const r=e.useRef(null);return r.current===null&&(r.current=new AbortController),e.useEffect(()=>()=>{r.current.abort()},[]),e.useMemo(()=>t({signal:r.current.signal}),[])};export{o as u};

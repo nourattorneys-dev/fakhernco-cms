@@ -1,0 +1,107 @@
+{
+    "kind": "collectionType",
+    "collectionName": "posts",
+    "info": {
+        "singularName": "post",
+        "pluralName": "posts",
+        "displayName": "Insight",
+        "description": "Blog articles and editorial guides"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {
+        "i18n": {
+            "localized": true
+        }
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
+            "required": true
+        },
+        "slug": {
+            "type": "uid",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
+            "targetField": "title",
+            "required": true
+        },
+        "excerpt": {
+            "type": "text",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
+            "maxLength": 500
+        },
+        "publishedDate": {
+            "type": "date",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": false
+                }
+            }
+        },
+        "legacyUrl": {
+            "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": false
+                }
+            }
+        },
+        "categories": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::category.category",
+            "inversedBy": "posts"
+        },
+        "featuredImage": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "seo": {
+            "type": "component",
+            "repeatable": false,
+            "component": "shared.seo",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        },
+        "blocks": {
+            "type": "dynamiczone",
+            "components": [
+                "blocks.heading",
+                "blocks.paragraph",
+                "blocks.list",
+                "blocks.data-table",
+                "blocks.faq",
+                "blocks.cards",
+                "blocks.image",
+                "blocks.button",
+                "blocks.quote",
+                "blocks.gallery"
+            ],
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        }
+    }
+}

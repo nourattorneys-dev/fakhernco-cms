@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocks_paragraphs",
+  "info": {
+    "displayName": "Paragraph",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "html": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

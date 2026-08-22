@@ -1,0 +1,1 @@
+import{b2 as u,r as c}from"./strapi-DV8wrgUs.js";function f({enabled:t}={enabled:!0}){const{data:e,isError:a,isLoading:i}=u(void 0,{skip:!t}),r=c.useCallback(n=>{const s=e?.data?.features.find(o=>o.name===n);return s&&"options"in s?s.options:{}},[e]);return{license:e?.data,getFeature:r,isError:a,isLoading:i,isTrial:e?.data?.isTrial??!1}}export{f as u};
