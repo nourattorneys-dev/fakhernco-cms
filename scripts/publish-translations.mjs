@@ -33,6 +33,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const TARGET = process.env.STRAPI_URL?.trim() || 'https://cms.fakhernco.com';
 const LIVE = process.argv.includes('--live');
+const FROM_TMP = process.argv.includes('--from-tmp');
 
 const MANIFEST = {
   locale: 'de',
@@ -133,7 +134,14 @@ async function put(pathname, body) {
   return res.json();
 }
 
-const { locale, entries } = MANIFEST;
+/*
+  --from-tmp reads /tmp/de-manifest.json instead of the built-in list — the
+  shape the bulk-translation pipeline writes. The built-in manifest stays for
+  the reviewed batches 1–2.
+*/
+const { locale, entries } = FROM_TMP
+  ? JSON.parse(readFileSync('/tmp/de-manifest.json', 'utf8'))
+  : MANIFEST;
 let failures = 0;
 
 for (const entry of entries) {
@@ -151,7 +159,10 @@ for (const entry of entries) {
     : stripIds({
         ...translated,
         slug: entry.slug, // ALWAYS the English slug — see the header.
-        legacyUrl: null, // German has no legacy WordPress URLs.
+        // German has no legacy WordPress URLs. landing-pages has no such
+        // field at all, and Strapi rejects unknown keys rather than ignoring
+        // them.
+        ...(entry.type === 'landing-pages' ? {} : { legacyUrl: null }),
       });
 
   const blocks = Array.isArray(data.blocks) ? data.blocks.length : 0;
