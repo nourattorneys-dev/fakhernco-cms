@@ -53,8 +53,39 @@ BRANCH="deploy"
 CLONE="$HOME/cms-deploy"
 APP="$HOME/cms"
 STAMP="$HOME/.cms-deployed-sha"
+SYNC_STAMP="$HOME/.cms-synced-sha"
 
 log() { echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] $*"; }
+
+# ------------------------------------------------------------------- lock
+#
+# One run at a time.
+#
+# The health loop below is 20 attempts of (curl --max-time 20 + sleep 6), so a
+# failing deploy runs for up to 8.7 minutes — while cron fires every 5. A
+# deploy that could not go healthy therefore overlapped ITSELF, and each
+# concurrent run executed `rm -rf "$APP/dist"` and untarred into the same
+# directory. Strapi was being asked to boot out of a folder that two other
+# processes were deleting and rewriting underneath it, which guaranteed the
+# failure the runs were retrying. It cost a two-hour outage: 40+ redeploys of
+# one commit, every one of them logging the same "deploying be8a927 -> f573b7b"
+# because the stamp is only written on success.
+#
+# mkdir is the atomic primitive here. flock is not installed on this box.
+LOCK="$HOME/.cms-pull.lock"
+if ! mkdir "$LOCK" 2>/dev/null; then
+  # A lock older than 30 minutes cannot belong to a live run: the longest
+  # possible run is the 8.7-minute health loop plus an npm ci. Treat it as a
+  # crashed holder rather than blocking deploys forever.
+  if [ -n "$(find "$LOCK" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then
+    log "stale lock — previous run died, taking over"
+    rmdir "$LOCK" 2>/dev/null || true
+    mkdir "$LOCK" 2>/dev/null || exit 0
+  else
+    exit 0
+  fi
+fi
+trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
 
 # ---------------------------------------------------------------- bootstrap
 if [ ! -d "$CLONE/.git" ]; then
@@ -130,10 +161,21 @@ EXCLUDES="
 --exclude=./.seed-token
 "
 
-rm -rf "$APP/dist"
+#
+# "The files are in place" and "the app is healthy" are separate facts, and
+# conflating them is what made a failed health check destructive. The stamp
+# further down is only written on a 204, so a boot failure meant the next tick
+# re-ran this whole block — deleting a dist/ that was already correct. Recording
+# the sync separately means a retry restarts and re-checks, and stops there.
+if [ "$(cat "$SYNC_STAMP" 2>/dev/null || true)" = "$NEW_SHA" ]; then
+  log "$NEW_SHA is already on disk — restarting and re-checking health only"
+else
+  rm -rf "$APP/dist"
 
-# shellcheck disable=SC2086
-( cd "$CLONE" && tar $EXCLUDES -cf - . ) | ( cd "$APP" && tar -xf - )
+  # shellcheck disable=SC2086
+  ( cd "$CLONE" && tar $EXCLUDES -cf - . ) | ( cd "$APP" && tar -xf - )
+  echo "$NEW_SHA" > "$SYNC_STAMP"
+fi
 
 # ------------------------------------------------------------------ restart
 #
