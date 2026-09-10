@@ -1,0 +1,22 @@
+{
+    "collectionName": "components_shared_ctas",
+    "info": {
+        "displayName": "Call to action",
+        "icon": "bell"
+    },
+    "options": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "text": {
+            "type": "text"
+        },
+        "buttonLabel": {
+            "type": "string"
+        },
+        "buttonHref": {
+            "type": "string"
+        }
+    }
+}

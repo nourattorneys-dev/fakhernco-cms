@@ -1,0 +1,609 @@
+#!/usr/bin/env node
+/**
+ * Turn Bold Page Builder markup into a clean, portable block union.
+ *
+ * The live site stores content as proprietary `bt_bb_*` markup tied to the
+ * Avantage theme. The REST API returns it rendered, which is usable — but the
+ * chrome has to come off before anything can go into Strapi.
+ *
+ * There are two content shapes, and the extractor handles both:
+ *
+ *   PROSE   (all 140 posts, the 5 pillar pages)
+ *           Real semantic HTML inside `div.bt_bb_text` wrappers, plus
+ *           `div.bt_bb_accordion_item` pairs that are really FAQs.
+ *
+ *   LAYOUT  (the ~40 menu children, the federation pages)
+ *           Almost no <p>. Text lives in `header.bt_bb_headline` — a heading
+ *           span plus a `bt_bb_headline_subheadline` — with separators for
+ *           spacing and `bt_bb_button` CTAs.
+ *
+ * Every run reports text coverage per document: what fraction of the visible
+ * text ended up inside a block. Anything that did not is listed in `unhandled`
+ * so it cannot be silently lost — a page that extracts to an empty body would
+ * otherwise still return 200 and pass every downstream check.
+ *
+ *   node migration/scripts/extract-content.mjs
+ */
+
+import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { parse } from "node-html-parser";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const RAW = join(ROOT, "data", "raw");
+const OUT = join(ROOT, "out");
+const CONTENT = join(ROOT, "data", "content");
+
+const INLINE_OK = new Set(["strong", "b", "em", "i", "a", "u", "br", "sup", "sub", "code", "span"]);
+
+/**
+ * Decode the typographic entities WordPress stores, and only those.
+ *
+ * Content arrives with curly quotes, dashes and apostrophes as numeric
+ * entities: "&#8220;Fakher &#038; Co stood by us...&#8221;". Browsers render
+ * them correctly so it is invisible on screen, but it makes the stored text
+ * hostile to work with — pattern matching on quotation marks fails, and an
+ * editor in the Strapi admin sees the entity rather than the character.
+ *
+ * Deliberately does NOT decode &lt; &gt; or &amp;: those would inject literal
+ * angle brackets into HTML that is later rendered as markup. &#038; becomes
+ * &amp; for the same reason.
+ */
+const decodeTypography = (s) =>
+  (s ?? "")
+    .replace(/&#8216;|&#8217;|&#x2019;/g, "\u2019")
+    .replace(/&#8220;|&#x201C;/g, "\u201C")
+    .replace(/&#8221;|&#x201D;/g, "\u201D")
+    .replace(/&#8211;/g, "\u2013")
+    .replace(/&#8212;/g, "\u2014")
+    .replace(/&#8230;/g, "\u2026")
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?38;/g, "&amp;");
+
+const clean = (s) =>
+  decodeTypography(s)
+    .replace(/&nbsp;/gi, " ")
+    .replace(/ /g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+/**
+ * Resolve a WordPress derivative filename back to the original upload.
+ *   foo-640x224.png       -> foo.png       (generated size)
+ *   foo.png.webp          -> foo.png       (Robin Image Optimizer sibling)
+ *   foo-scaled.jpg        -> foo-scaled.jpg (kept: -scaled IS the stored file)
+ * Without this the migration points at files that were never uploaded to Strapi.
+ */
+export function originalUpload(url) {
+  if (!url) return url;
+  let out = url.replace(/\.(jpe?g|png|gif)\.webp$/i, ".$1");
+  out = out.replace(/-\d{2,4}x\d{2,4}(\.(?:jpe?g|png|gif|webp))$/i, "$1");
+  return out;
+}
+
+const hasClass = (n, c) => (n.getAttribute?.("class") ?? "").split(/\s+/).includes(c);
+const classOf = (n) => n.getAttribute?.("class") ?? "";
+
+/**
+ * Theme decoration that must never become content.
+ *
+ * Avantage paints section backgrounds and edge treatments with real <img>
+ * tags — `bgn-triangle-bottom.png` and friends, whose alt attribute is
+ * literally the CSS class that positions them. Extracted naively they become
+ * full-width figures in the middle of an article.
+ */
+const DECORATIVE_CLASS = /coverage_image|background_image_holder|bt_bb_separator/;
+const DECORATIVE_FILE = /^(bgn-|bg-|pattern|triangle|shape[-_])/i;
+
+function isDecorative(node, src, alt) {
+  if (/^bt_bb_/.test(alt ?? "")) return true;
+  const file = (src ?? "").split("/").pop() ?? "";
+  if (DECORATIVE_FILE.test(file)) return true;
+  let n = node.parentNode;
+  for (let depth = 0; n && depth < 6; depth += 1, n = n.parentNode) {
+    if (DECORATIVE_CLASS.test(classOf(n))) return true;
+  }
+  return false;
+}
+
+/**
+ * Recover lists that the theme authored as one paragraph.
+ *
+ * Bold Builder subheadlines carry bullet lists as plain text separated by
+ * <br><br>, each item prefixed with a bullet glyph and a tab:
+ *
+ *   ...our approach is meticulous.<br><br> •\tImmediate Intervention: ...
+ *   <br><br> •\tThorough Investigation: ...
+ *
+ * Collapsing <br> to a space — which is right for a genuine line break —
+ * merges the whole list into a single unreadable paragraph. This affected 77
+ * paragraphs across 47 documents, over half the site.
+ */
+const BULLET = /^\s*[•▪◦●‣·]\s*|^\s*[-–—]\s+/;
+
+function segmentsToBlocks(html, blocks) {
+  const segments = html
+    .split(/<br\s*\/?>/i)
+    .map((s) => clean(s.replace(/<[^>]+>/g, '').replace(/\t/g, ' ')))
+    .filter(Boolean);
+
+  // No <br> structure, but bullet glyphs run inline — split on those instead.
+  if (segments.length <= 1) {
+    const text = segments[0] ?? '';
+    const parts = text.split(/\s*[•▪◦●‣]\s*/).map((s) => s.trim()).filter(Boolean);
+    if (parts.length > 2) {
+      const [lead, ...items] = parts;
+      if (lead) blocks.push({ type: 'paragraph', html: lead });
+      blocks.push({ type: 'list', ordered: false, items });
+      return true;
+    }
+    if (text) blocks.push({ type: 'paragraph', html: text });
+    return Boolean(text);
+  }
+
+  let pending = [];
+  const flush = () => {
+    if (pending.length) {
+      blocks.push({ type: 'list', ordered: false, items: pending });
+      pending = [];
+    }
+  };
+
+  for (const segment of segments) {
+    if (BULLET.test(segment)) {
+      pending.push(segment.replace(BULLET, '').trim());
+    } else {
+      flush();
+      blocks.push({ type: 'paragraph', html: segment });
+    }
+  }
+  flush();
+  return true;
+}
+
+/** Keep light inline markup, drop everything else, so rich text stays rich. */
+function inlineHtml(node) {
+  let out = "";
+  for (const child of node.childNodes) {
+    if (child.nodeType === 3) { out += child.rawText; continue; }
+    if (child.nodeType !== 1) continue;
+    const tag = child.rawTagName?.toLowerCase();
+    if (tag === "br") { out += " "; continue; }
+    if (INLINE_OK.has(tag) && tag !== "span") {
+      const href = tag === "a" ? child.getAttribute("href") : null;
+      const open = href ? `<a href="${href}">` : `<${tag}>`;
+      out += `${open}${inlineHtml(child)}</${tag}>`;
+    } else {
+      out += inlineHtml(child);
+    }
+  }
+  return clean(out).replace(/<(\w+)( [^>]*)?>\s*<\/\1>/g, "");
+}
+
+/** Parse the standard semantic HTML found inside a bt_bb_text wrapper. */
+function blocksFromProse(node, blocks) {
+  for (const el of node.childNodes) {
+    if (el.nodeType === 3) {
+      const t = clean(el.rawText);
+      if (t) blocks.push({ type: "paragraph", html: t });
+      continue;
+    }
+    if (el.nodeType !== 1) continue;
+    const tag = el.rawTagName?.toLowerCase();
+
+    if (/^h[1-6]$/.test(tag)) {
+      const text = clean(el.text);
+      if (text) blocks.push({ type: "heading", level: Number(tag[1]), text });
+    } else if (tag === "p") {
+      const html = inlineHtml(el);
+      if (html) blocks.push({ type: "paragraph", html });
+    } else if (tag === "ul" || tag === "ol") {
+      const items = el.querySelectorAll("li").map((li) => inlineHtml(li)).filter(Boolean);
+      if (items.length) blocks.push({ type: "list", ordered: tag === "ol", items });
+    } else if (tag === "table") {
+      const headers = el.querySelectorAll("th").map((th) => clean(th.text));
+      const rows = el.querySelectorAll("tr")
+        .map((tr) => tr.querySelectorAll("td").map((td) => inlineHtml(td)))
+        .filter((r) => r.length);
+      if (rows.length || headers.length) blocks.push({ type: "table", headers, rows });
+    } else if (tag === "img") {
+      const src = originalUpload(el.getAttribute("src"));
+      const alt = clean(el.getAttribute("alt"));
+      if (src && !isDecorative(el, src, alt)) blocks.push({ type: "image", src, alt });
+    } else if (tag === "blockquote") {
+      const html = inlineHtml(el);
+      if (html) blocks.push({ type: "quote", html });
+    } else {
+      blocksFromProse(el, blocks);
+    }
+  }
+}
+
+/**
+ * Walk the builder tree, emitting blocks and never descending into a handled
+ * node.
+ *
+ * Exported so fetch-arabic.mjs can run the same logic over the rendered
+ * Arabic pages — the markup inside .btContent is the same bt_bb_* structure
+ * as the REST API returns for English.
+ */
+export function extract(html) {
+  const root = parse(html);
+  const blocks = [];
+  const unhandled = [];
+  let duplicates = 0;
+
+  const visit = (node) => {
+    if (node.nodeType === 3) {
+      const t = clean(node.rawText);
+      if (t.length > 1) unhandled.push({ kind: "loose-text", text: t.slice(0, 120) });
+      return;
+    }
+    if (node.nodeType !== 1) return;
+
+    const cls = classOf(node);
+    const tag = node.rawTagName?.toLowerCase();
+
+    // Pure spacing / decoration.
+    if (hasClass(node, "bt_bb_separator") || hasClass(node, "bt_bb_background_image_holder_wrapper")) return;
+
+    // NOTE: responsive duplicates are NOT skipped here by their
+    // `bt_bb_hidden_*` classes. That was tried and dropped real content —
+    // page coverage fell from 98% to 90.9% — because those classes also sit
+    // on columns holding copy that appears nowhere else. They are removed
+    // after the walk instead, by exact-match dedup, which cannot lose
+    // anything that is genuinely unique.
+
+    // FAQ accordions.
+    if (hasClass(node, "bt_bb_accordion")) {
+      const items = node.querySelectorAll(".bt_bb_accordion_item").map((it) => ({
+        question: clean(it.querySelector(".bt_bb_accordion_item_title")?.text),
+        answer: clean(it.querySelector(".bt_bb_accordion_item_content")?.text),
+      })).filter((i) => i.question && i.answer);
+      if (items.length) blocks.push({ type: "faq", items });
+      return;
+    }
+
+    // LAYOUT shape: headline + optional subheadline.
+    if (hasClass(node, "bt_bb_headline")) {
+      const tagEl = node.querySelector("[class*=bt_bb_headline_tag]");
+      const level = tagEl && /^h[1-6]$/.test(tagEl.rawTagName?.toLowerCase() ?? "")
+        ? Number(tagEl.rawTagName[1]) : 2;
+      const text = clean(node.querySelector(".bt_bb_headline_content")?.text ?? node.text);
+      if (text) blocks.push({ type: "heading", level, text });
+      const subEl = node.querySelector(".bt_bb_headline_subheadline");
+      if (subEl) {
+        const subText = clean(subEl.text);
+        if (subText && subText !== text) segmentsToBlocks(subEl.innerHTML, blocks);
+      }
+      return;
+    }
+
+    // Icon cards — the theme's `service` component. Used for value grids
+    // (/our-unwavering-principles/) and the contact tiles (/contact-us/).
+    // Left unhandled these fall through as loose text and the grid structure
+    // is lost, which is how they were being silently dropped.
+    if (hasClass(node, "bt_bb_service")) {
+      const title = clean(node.querySelector(".bt_bb_service_content_title")?.text);
+      const text = clean(node.querySelector(".bt_bb_service_content_text")?.text);
+      const link = node.querySelector("a")?.getAttribute("href") ?? null;
+      if (title || text) blocks.push({ type: "card", title, text, ...(link ? { href: link } : {}) });
+      return;
+    }
+
+    // CTA buttons.
+    if (hasClass(node, "bt_bb_button")) {
+      const a = node.querySelector("a");
+      const text = clean(a?.text);
+      const href = a?.getAttribute("href");
+      if (text && href) blocks.push({ type: "button", text, href });
+      return;
+    }
+
+    // Carousels.
+    //
+    // A slider is ONE piece of content, not N. Flattened naively, the
+    // seven-item slider on /our-unwavering-principles became seven stacked
+    // full-width figures — a wall of images with no text between them.
+    if (hasClass(node, "bt_bb_slider")) {
+      const items = node.querySelectorAll("img")
+        .map((img) => ({
+          src: originalUpload(img.getAttribute("src")),
+          alt: clean(img.getAttribute("alt")),
+        }))
+        .filter((i) => i.src && !isDecorative(node, i.src, i.alt));
+      if (items.length > 1) blocks.push({ type: "gallery", items });
+      else if (items.length === 1) blocks.push({ type: "image", ...items[0] });
+      return;
+    }
+
+    // Images.
+    if (tag === "img") {
+      const src = originalUpload(node.getAttribute("src"));
+      const alt = clean(node.getAttribute("alt"));
+      if (src && !isDecorative(node, src, alt)) blocks.push({ type: "image", src, alt });
+      return;
+    }
+
+    // PROSE shape.
+    if (hasClass(node, "bt_bb_text")) {
+      blocksFromProse(node, blocks);
+      return;
+    }
+
+    // Semantic content sitting outside any builder wrapper.
+    //
+    // Guard: wpautop wraps the ENTIRE builder output in a single <p>, so a
+    // naive match here swallows the whole document into one paragraph block
+    // (and text-coverage still reads 100%, which is why this hid). Only treat
+    // a semantic tag as a leaf when it holds no block-level descendants.
+    if (/^(h[1-6]|p|ul|ol|table|blockquote)$/.test(tag ?? "") && !hasBlockDescendant(node)) {
+      blocksFromProse({ childNodes: [node] }, blocks);
+      return;
+    }
+
+    for (const child of node.childNodes) visit(child);
+  };
+
+  visit(root);
+
+  /**
+   * Remove responsive duplicates.
+   *
+   * The theme ships two copies of some sections — one for small screens, one
+   * for large — and hides each with CSS. Both are in the DOM, so the same
+   * heading, paragraph and CTA get imported twice. Adjacent-only dedup misses
+   * it because a button usually sits between the two copies.
+   *
+   * Exact match across the whole document, and only for text blocks: two
+   * identical paragraphs or headings in one page are always the responsive
+   * pair, never intentional. Buttons and images are left alone — a repeated
+   * CTA is a real editorial choice.
+   *
+   * Coverage is measured BEFORE this runs, so the metric keeps its ability to
+   * catch a parser collapse; duplicates removed are reported separately.
+   */
+  const DEDUPE_TYPES = new Set(["heading", "paragraph", "list", "cards", "faq"]);
+  const seen = new Set();
+  const deduped = blocks.filter((b) => {
+    if (!DEDUPE_TYPES.has(b.type)) return true;
+    const key = JSON.stringify(b);
+    if (seen.has(key)) { duplicates += 1; return false; }
+    seen.add(key);
+    return true;
+  });
+
+  // Cards arrive one per builder column. Collapse each run into a single grid
+  // block so the model stores "a grid of six values", not six loose cards.
+  /**
+   * Collapse consecutive identical blocks of ANY type.
+   *
+   * Runs AFTER the exact-match pass, not before. The responsive pair is
+   * [heading, paragraph, button] twice over; the two buttons only become
+   * adjacent once the duplicate heading and paragraph between them are gone.
+   * Collapsing first therefore missed them entirely.
+   *
+   * Only adjacent repeats are removed, so a CTA deliberately placed at both
+   * the top and the bottom of a long page survives.
+   */
+  const collapsed = deduped.filter(
+    (b, i) => i === 0 || JSON.stringify(b) !== JSON.stringify(deduped[i - 1]),
+  );
+  duplicates += deduped.length - collapsed.length;
+
+  const grouped = [];
+  for (const b of collapsed) {
+    const last = grouped[grouped.length - 1];
+    if (b.type === "card") {
+      const { type, ...item } = b;
+      if (last?.type === "cards") last.items.push(item);
+      else grouped.push({ type: "cards", items: [item] });
+    } else grouped.push(b);
+  }
+  return { blocks: grouped, unhandled, duplicates, rawBlocks: blocks };
+}
+
+const BLOCK_LEVEL = /^(section|div|header|footer|article|aside|nav|table|ul|ol|h[1-6])$/;
+
+function hasBlockDescendant(node) {
+  for (const child of node.childNodes) {
+    if (child.nodeType !== 1) continue;
+    const t = child.rawTagName?.toLowerCase() ?? "";
+    if (BLOCK_LEVEL.test(t)) return true;
+    if (hasBlockDescendant(child)) return true;
+  }
+  return false;
+}
+
+const textOfBlocks = (blocks) =>
+  blocks.map((b) => {
+    switch (b.type) {
+      case "heading": return b.text;
+      case "paragraph": case "quote": return b.html.replace(/<[^>]+>/g, "");
+      case "list": return b.items.join(" ").replace(/<[^>]+>/g, "");
+      case "table": return [...b.headers, ...b.rows.flat()].join(" ").replace(/<[^>]+>/g, "");
+      case "faq": return b.items.map((i) => `${i.question} ${i.answer}`).join(" ");
+      case "cards": return b.items.map((i) => `${i.title} ${i.text}`).join(" ");
+      case "gallery": return b.items.map((i) => i.alt).join(" ");
+      case "button": return b.text;
+      default: return "";
+    }
+  }).join(" ");
+
+const visibleText = (html) =>
+  clean(parse(html).text);
+
+const decodeEntities = (s) =>
+  (s ?? "")
+    .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"').replace(/&#0?39;|&#x27;|&apos;/gi, "'")
+    .replace(/&#8211;/g, "–").replace(/&#8212;/g, "—")
+    .replace(/&#8216;|&#8217;/g, "’").replace(/&#8220;|&#8221;/g, '"')
+    .replace(/&nbsp;/g, " ");
+
+/**
+ * Pull the live Yoast metadata into a portable shape.
+ *
+ * The brand suffix is stripped deliberately. Every stored title currently ends
+ * with " - Fakher & Co"; the Next.js layout will apply a title template that
+ * appends the brand itself, and leaving both in place yields
+ * "Fakher & Co | About Us - Fakher & Co".
+ */
+function seoFrom(yoast) {
+  if (!yoast) return null;
+  const title = decodeEntities(yoast.title ?? "")
+    .replace(/\s*[-–|]\s*Fakher\s*&\s*Co\.?\s*$/i, "")
+    .trim();
+  const robots = yoast.robots ?? {};
+  return {
+    metaTitle: title || null,
+    metaDescription: decodeEntities(yoast.description ?? "").trim() || null,
+    canonicalUrl: yoast.canonical ?? null,
+    noIndex: robots.index === "noindex",
+    ogImageUrl: Array.isArray(yoast.og_image) && yoast.og_image[0]?.url
+      ? yoast.og_image[0].url : null,
+  };
+}
+
+/**
+ * What fraction of the source's words survived into blocks, counted as a
+ * multiset so repeated words must be matched repeatedly.
+ *
+ * A plain length ratio does NOT work here: capped at 1 it reads 100% even when
+ * the extractor collapses an entire page into one paragraph, which is exactly
+ * the failure this is meant to catch.
+ */
+function tokenRecall(source, extracted) {
+  const bag = (s) => {
+    const m = new Map();
+    for (const w of s.toLowerCase().split(/[^\p{L}\p{N}]+/u)) {
+      if (w) m.set(w, (m.get(w) ?? 0) + 1);
+    }
+    return m;
+  };
+  const a = bag(source);
+  const b = bag(extracted);
+  let total = 0, matched = 0;
+  for (const [w, n] of a) {
+    total += n;
+    matched += Math.min(n, b.get(w) ?? 0);
+  }
+  return total ? matched / total : 1;
+}
+
+async function main() {
+  // Clear ONLY what this script owns. Wiping all of CONTENT also destroys
+  // data/content/ar/, which fetch-arabic.mjs produces — and which is far more
+  // expensive to rebuild because it is scraped from the live site.
+  await rm(join(CONTENT, "pages"), { recursive: true, force: true });
+  await rm(join(CONTENT, "posts"), { recursive: true, force: true });
+  await mkdir(join(CONTENT, "pages"), { recursive: true });
+  await mkdir(join(CONTENT, "posts"), { recursive: true });
+
+  const pages = JSON.parse(await readFile(join(RAW, "pages.json"), "utf8"));
+  const posts = JSON.parse(await readFile(join(RAW, "posts.json"), "utf8"));
+  const cats = JSON.parse(await readFile(join(RAW, "categories.json"), "utf8"));
+  const catById = new Map(cats.map((c) => [c.id, c.slug]));
+
+  const report = [];
+
+  async function run(items, kind) {
+    for (const item of items) {
+      const html = item.content?.rendered ?? "";
+      const { blocks, unhandled, duplicates, rawBlocks } = extract(html);
+
+      const src = visibleText(html);
+      // Pre-dedup, so removing a responsive duplicate does not look like lost
+      // content — the source genuinely contains that text twice.
+      const got = clean(textOfBlocks(rawBlocks));
+      const coverage = tokenRecall(src, got);
+
+      const record = {
+        slug: item.slug,
+        legacyUrl: new URL(item.link).pathname,
+        title: decodeEntities(clean(parse(item.title?.rendered ?? "").text)),
+        date: item.date,
+        modified: item.modified,
+        seo: seoFrom(item.yoast_head_json),
+        ...(kind === "posts" ? {
+          excerpt: clean(parse(item.excerpt?.rendered ?? "").text),
+          categories: (item.categories ?? []).map((id) => catById.get(id)).filter(Boolean),
+        } : {}),
+        blocks,
+        unhandled,
+      };
+      await writeFile(join(CONTENT, kind, `${item.slug}.json`), JSON.stringify(record, null, 2));
+
+      const counts = blocks.reduce((a, b) => ({ ...a, [b.type]: (a[b.type] ?? 0) + 1 }), {});
+      const headings = blocks.filter((b) => b.type === "heading");
+      report.push({
+        kind, slug: item.slug, words: src ? src.split(" ").length : 0,
+        blocks: blocks.length, coverage, counts,
+        h1: headings.filter((h) => h.level === 1).length,
+        unhandled: unhandled.length,
+        duplicates,
+        shape: (counts.paragraph ?? 0) >= 8 ? "prose" : "layout",
+      });
+    }
+  }
+
+  await run(pages, "pages");
+  await run(posts, "posts");
+  await writeFile(join(OUT, "extraction-report.json"), JSON.stringify(report, null, 2));
+
+  // ---- Report ----
+  const pct = (n) => `${(n * 100).toFixed(1)}%`;
+  const avg = (rows, f) => rows.reduce((s, r) => s + f(r), 0) / (rows.length || 1);
+
+  for (const kind of ["pages", "posts"]) {
+    const rows = report.filter((r) => r.kind === kind);
+    const clean_ = rows.filter((r) => r.coverage >= 0.9);
+    const partial = rows.filter((r) => r.coverage >= 0.7 && r.coverage < 0.9);
+    const poor = rows.filter((r) => r.coverage < 0.7);
+    console.log(`\n=== ${kind.toUpperCase()} (${rows.length}) ===`);
+    console.log(`  mean text coverage   ${pct(avg(rows, (r) => r.coverage))}`);
+    console.log(`  >=90% captured       ${clean_.length}`);
+    console.log(`  70-90%               ${partial.length}`);
+    console.log(`  <70%  needs review   ${poor.length}`);
+    console.log(`  mean blocks/doc      ${avg(rows, (r) => r.blocks).toFixed(1)}`);
+    const shapes = rows.reduce((a, r) => ({ ...a, [r.shape]: (a[r.shape] ?? 0) + 1 }), {});
+    console.log(`  shape                ${Object.entries(shapes).map(([k, v]) => `${k} ${v}`).join(" · ")}`);
+    if (poor.length) {
+      console.log(`  worst:`);
+      for (const r of poor.sort((a, b) => a.coverage - b.coverage).slice(0, 10)) {
+        console.log(`    ${pct(r.coverage).padStart(6)}  /${r.slug}/  (${r.words}w, ${r.blocks} blocks, ${r.unhandled} unhandled)`);
+      }
+    }
+  }
+
+  const totals = report.reduce((a, r) => {
+    for (const [k, v] of Object.entries(r.counts)) a[k] = (a[k] ?? 0) + v;
+    return a;
+  }, {});
+  console.log(`\n=== BLOCK TYPES ACROSS ALL 220 DOCUMENTS ===`);
+  for (const [k, v] of Object.entries(totals).sort((a, b) => b[1] - a[1])) {
+    console.log(`  ${k.padEnd(10)} ${String(v).padStart(5)}`);
+  }
+
+  const dupTotal = report.reduce((n, r) => n + (r.duplicates ?? 0), 0);
+  const dupDocs = report.filter((r) => (r.duplicates ?? 0) > 0).length;
+  console.log(`\nresponsive duplicates removed: ${dupTotal} block(s) across ${dupDocs} document(s)`);
+
+  const multiH1 = report.filter((r) => r.h1 > 1);
+  console.log(`\ndocuments with more than one H1: ${multiH1.length}`);
+  if (multiH1.length) {
+    console.log(`  e.g. ${multiH1.slice(0, 6).map((r) => `/${r.slug}/ (${r.h1})`).join(", ")}`);
+  }
+  console.log(`\nwritten: ${CONTENT}/{pages,posts}/*.json`);
+  console.log(`         ${join(OUT, "extraction-report.json")}`);
+}
+
+// Only run when invoked directly. fetch-arabic.mjs imports extract() from
+// this module, and without the guard that import re-runs the entire English
+// extraction as a side effect.
+const isEntryPoint = process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop());
+if (isEntryPoint) {
+  main().catch((e) => { console.error("extract-content failed:", e); process.exit(1); });
+}

@@ -1,0 +1,16 @@
+{
+    "collectionName": "components_blocks_cards",
+    "info": {
+        "displayName": "Card grid",
+        "icon": "grid",
+        "description": "Grid of titled cards - the theme's icon-box component, e.g. the six core values on /our-unwavering-principles/ and the contact tiles."
+    },
+    "options": {},
+    "attributes": {
+        "items": {
+            "type": "component",
+            "repeatable": true,
+            "component": "blocks.card-item"
+        }
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "kind": "collectionType",
+    "collectionName": "pages",
+    "info": {
+        "singularName": "page",
+        "pluralName": "pages",
+        "displayName": "Page",
+        "description": "Service and informational pages migrated from WordPress"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {
+        "i18n": {
+            "localized": true
+        }
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
+            "required": true
+        },
+        "slug": {
+            "type": "uid",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
+            "targetField": "title",
+            "required": true
+        },
+        "legacyUrl": {
+            "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": false
+                }
+            },
+            "description": "Original WordPress path, for the redirect map"
+        },
+        "practiceArea": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::practice-area.practice-area",
+            "inversedBy": "pages"
+        },
+        "menuOrder": {
+            "type": "integer",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": false
+                }
+            },
+            "default": 0
+        },
+        "seo": {
+            "type": "component",
+            "repeatable": false,
+            "component": "shared.seo",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        },
+        "blocks": {
+            "type": "dynamiczone",
+            "components": [
+                "blocks.heading",
+                "blocks.paragraph",
+                "blocks.list",
+                "blocks.data-table",
+                "blocks.faq",
+                "blocks.cards",
+                "blocks.image",
+                "blocks.button",
+                "blocks.quote",
+                "blocks.gallery"
+            ],
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        },
+        "cta": {
+            "type": "component",
+            "repeatable": false,
+            "component": "shared.cta",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        }
+    }
+}

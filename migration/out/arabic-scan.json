@@ -1,0 +1,2205 @@
+{
+  "scannedAt": null,
+  "results": [
+    {
+      "kind": "page",
+      "slug": "legal-document-drafting-review",
+      "status": 200,
+      "chars": 11106,
+      "arabic": 1065,
+      "latin": 8044,
+      "share": 0.117,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "personal-criminal-legal-services",
+      "status": 200,
+      "chars": 12571,
+      "arabic": 803,
+      "latin": 9548,
+      "share": 0.078,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "our-federation-partners",
+      "status": 200,
+      "chars": 7720,
+      "arabic": 416,
+      "latin": 6017,
+      "share": 0.065,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "the-integrated-service-model",
+      "status": 200,
+      "chars": 4559,
+      "arabic": 416,
+      "latin": 3354,
+      "share": 0.11,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "the-client-advantage",
+      "status": 200,
+      "chars": 4199,
+      "arabic": 416,
+      "latin": 3046,
+      "share": 0.12,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "skp-business-federation",
+      "status": 200,
+      "chars": 2727,
+      "arabic": 416,
+      "latin": 1863,
+      "share": 0.183,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "true-copies-for-documents",
+      "status": 200,
+      "chars": 3483,
+      "arabic": 397,
+      "latin": 2505,
+      "share": 0.137,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "legal-consultations",
+      "status": 200,
+      "chars": 4062,
+      "arabic": 33,
+      "latin": 3348,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "criminal-cases-representation",
+      "status": 200,
+      "chars": 4005,
+      "arabic": 694,
+      "latin": 2636,
+      "share": 0.208,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "drafting-and-reviewing-contracts",
+      "status": 200,
+      "chars": 3941,
+      "arabic": 33,
+      "latin": 3268,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "private-notary-services",
+      "status": 200,
+      "chars": 3896,
+      "arabic": 33,
+      "latin": 3209,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "wills_for_non_muslims",
+      "status": 200,
+      "chars": 3707,
+      "arabic": 495,
+      "latin": 2587,
+      "share": 0.161,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "lawyer-attestation-2",
+      "status": 200,
+      "chars": 4451,
+      "arabic": 428,
+      "latin": 3360,
+      "share": 0.113,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "litigation",
+      "status": 200,
+      "chars": 4181,
+      "arabic": 230,
+      "latin": 3265,
+      "share": 0.066,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "privacy-policy-2",
+      "status": 200,
+      "chars": 3453,
+      "arabic": 0,
+      "latin": 2794,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "case-study-family-business",
+      "status": 200,
+      "chars": 4244,
+      "arabic": 0,
+      "latin": 3462,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "case-study-foreign-judgment",
+      "status": 200,
+      "chars": 3799,
+      "arabic": 0,
+      "latin": 3086,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "real-estate-law-buyers-guide",
+      "status": 200,
+      "chars": 4605,
+      "arabic": 0,
+      "latin": 3695,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "navigating-employment-law",
+      "status": 200,
+      "chars": 4652,
+      "arabic": 0,
+      "latin": 3775,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "importance-of-shareholder-agreement",
+      "status": 200,
+      "chars": 4621,
+      "arabic": 0,
+      "latin": 3799,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "choosing-a-company-structure",
+      "status": 200,
+      "chars": 4654,
+      "arabic": 0,
+      "latin": 3839,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "litigation-vs-arbitration",
+      "status": 200,
+      "chars": 5606,
+      "arabic": 0,
+      "latin": 4620,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "understanding-legal-costs",
+      "status": 200,
+      "chars": 4826,
+      "arabic": 0,
+      "latin": 3861,
+      "share": 0,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "local-sponsor-service-agent-services",
+      "status": 200,
+      "chars": 2991,
+      "arabic": 2460,
+      "latin": 19,
+      "share": 0.992,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "business-closure-liquidation",
+      "status": 200,
+      "chars": 2989,
+      "arabic": 2503,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "commercial-transactions-due-diligence",
+      "status": 200,
+      "chars": 3163,
+      "arabic": 2653,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "mergers-acquisitions-advisory",
+      "status": 200,
+      "chars": 3238,
+      "arabic": 2694,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "corporate-governance-restructuring",
+      "status": 200,
+      "chars": 2841,
+      "arabic": 2366,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "offshore-company-formation",
+      "status": 200,
+      "chars": 2941,
+      "arabic": 2459,
+      "latin": 25,
+      "share": 0.99,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "free-zone-company-formation",
+      "status": 200,
+      "chars": 3203,
+      "arabic": 2627,
+      "latin": 34,
+      "share": 0.987,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "mainland-company-formation",
+      "status": 200,
+      "chars": 3119,
+      "arabic": 2580,
+      "latin": 19,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "e-commerce-terms-conditions",
+      "status": 200,
+      "chars": 3158,
+      "arabic": 2518,
+      "latin": 144,
+      "share": 0.946,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "legal-document-and-agreement-review",
+      "status": 200,
+      "chars": 2801,
+      "arabic": 2321,
+      "latin": 20,
+      "share": 0.991,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "drafting-declaration-of-heirs",
+      "status": 200,
+      "chars": 3143,
+      "arabic": 2615,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "drafting-consent-letters",
+      "status": 200,
+      "chars": 2822,
+      "arabic": 2313,
+      "latin": 19,
+      "share": 0.992,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "drafting-of-affidavits",
+      "status": 200,
+      "chars": 2934,
+      "arabic": 2435,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "real-estate-contracts",
+      "status": 200,
+      "chars": 2605,
+      "arabic": 2156,
+      "latin": 22,
+      "share": 0.99,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "construction-contracts",
+      "status": 200,
+      "chars": 3054,
+      "arabic": 2538,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "employment-contracts",
+      "status": 200,
+      "chars": 3183,
+      "arabic": 2610,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "distribution-agreements",
+      "status": 200,
+      "chars": 3153,
+      "arabic": 2617,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "non-compete-agreements",
+      "status": 200,
+      "chars": 2992,
+      "arabic": 2468,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "non-disclosure-agreements",
+      "status": 200,
+      "chars": 3069,
+      "arabic": 2521,
+      "latin": 19,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "master-service-agreements",
+      "status": 200,
+      "chars": 3038,
+      "arabic": 2506,
+      "latin": 23,
+      "share": 0.991,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "franchise-agreements",
+      "status": 200,
+      "chars": 3416,
+      "arabic": 2847,
+      "latin": 19,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "partnership-agreements",
+      "status": 200,
+      "chars": 2654,
+      "arabic": 2184,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "joint-venture-agreements",
+      "status": 200,
+      "chars": 3255,
+      "arabic": 2711,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "shareholder-agreements",
+      "status": 200,
+      "chars": 2686,
+      "arabic": 2218,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "wills-and-estate-planning",
+      "status": 200,
+      "chars": 3114,
+      "arabic": 2567,
+      "latin": 20,
+      "share": 0.992,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "lawyer-attestation",
+      "status": 200,
+      "chars": 2546,
+      "arabic": 2109,
+      "latin": 19,
+      "share": 0.991,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "document-attestation-services",
+      "status": 200,
+      "chars": 3118,
+      "arabic": 2559,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "certified-true-copy-services",
+      "status": 200,
+      "chars": 2806,
+      "arabic": 2305,
+      "latin": 19,
+      "share": 0.992,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "power-of-attorney",
+      "status": 200,
+      "chars": 3080,
+      "arabic": 2536,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "judgment-execution-and-enforcement",
+      "status": 200,
+      "chars": 2791,
+      "arabic": 2297,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "debt-recovery",
+      "status": 200,
+      "chars": 3017,
+      "arabic": 2517,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "compensation-claims",
+      "status": 200,
+      "chars": 3082,
+      "arabic": 2545,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "criminal-cases",
+      "status": 200,
+      "chars": 2864,
+      "arabic": 2355,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "medical-malpractice-claims",
+      "status": 200,
+      "chars": 2850,
+      "arabic": 2331,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "intellectual-property-disputes",
+      "status": 200,
+      "chars": 2946,
+      "arabic": 2443,
+      "latin": 16,
+      "share": 0.993,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "construction-disputes",
+      "status": 200,
+      "chars": 3070,
+      "arabic": 2562,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "insurance-disputes",
+      "status": 200,
+      "chars": 2983,
+      "arabic": 2467,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "banking-and-financial-disputes",
+      "status": 200,
+      "chars": 3053,
+      "arabic": 2550,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "real-estate-and-rental-disputes",
+      "status": 200,
+      "chars": 3229,
+      "arabic": 2685,
+      "latin": 30,
+      "share": 0.989,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "employment-and-labor-disputes",
+      "status": 200,
+      "chars": 3532,
+      "arabic": 2923,
+      "latin": 16,
+      "share": 0.995,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "commercial-and-business-disputes",
+      "status": 200,
+      "chars": 3200,
+      "arabic": 2669,
+      "latin": 16,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "urgent-and-temporary-measures",
+      "status": 200,
+      "chars": 3360,
+      "arabic": 2600,
+      "latin": 191,
+      "share": 0.932,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "uae-courts-litigation-process",
+      "status": 200,
+      "chars": 3844,
+      "arabic": 3186,
+      "latin": 12,
+      "share": 0.996,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "contact-us",
+      "status": 200,
+      "chars": 2626,
+      "arabic": 2141,
+      "latin": 14,
+      "share": 0.994,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "legal-insights",
+      "status": 200,
+      "chars": 2592,
+      "arabic": 168,
+      "latin": 1988,
+      "share": 0.078,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "private-notary-attestation-services",
+      "status": 200,
+      "chars": 12939,
+      "arabic": 10722,
+      "latin": 3,
+      "share": 1,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "company-formation-corporate-services",
+      "status": 200,
+      "chars": 14645,
+      "arabic": 12196,
+      "latin": 16,
+      "share": 0.999,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "contracts-legal-document-drafting",
+      "status": 200,
+      "chars": 13146,
+      "arabic": 10994,
+      "latin": 0,
+      "share": 1,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "litigation-dispute-resolution",
+      "status": 200,
+      "chars": 16329,
+      "arabic": 13645,
+      "latin": 0,
+      "share": 1,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "why-choose-fakherco",
+      "status": 200,
+      "chars": 2651,
+      "arabic": 2198,
+      "latin": 12,
+      "share": 0.995,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "meet-your-advocates",
+      "status": 200,
+      "chars": 752,
+      "arabic": 634,
+      "latin": 0,
+      "share": 1,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "our-unwavering-principles",
+      "status": 200,
+      "chars": 2383,
+      "arabic": 1979,
+      "latin": 0,
+      "share": 1,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "about-us",
+      "status": 200,
+      "chars": 3716,
+      "arabic": 2277,
+      "latin": 788,
+      "share": 0.743,
+      "verdict": "partial"
+    },
+    {
+      "kind": "page",
+      "slug": "services",
+      "status": 200,
+      "chars": 979,
+      "arabic": 835,
+      "latin": 0,
+      "share": 1,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "home",
+      "status": 200,
+      "chars": 8193,
+      "arabic": 974,
+      "latin": 5715,
+      "share": 0.146,
+      "verdict": "english"
+    },
+    {
+      "kind": "page",
+      "slug": "footer",
+      "status": 200,
+      "chars": 777,
+      "arabic": 565,
+      "latin": 77,
+      "share": 0.88,
+      "verdict": "translated"
+    },
+    {
+      "kind": "page",
+      "slug": "legal-articles",
+      "status": 200,
+      "chars": 1161,
+      "arabic": 245,
+      "latin": 676,
+      "share": 0.266,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "nft-business-legal-structure-uae",
+      "status": 200,
+      "chars": 16770,
+      "arabic": 82,
+      "latin": 13889,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "certified-true-copies-uae",
+      "status": 200,
+      "chars": 15685,
+      "arabic": 85,
+      "latin": 12911,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "industrial-design-protection-uae",
+      "status": 200,
+      "chars": 12922,
+      "arabic": 96,
+      "latin": 10588,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "mortgage-property-financing-uae",
+      "status": 200,
+      "chars": 15765,
+      "arabic": 227,
+      "latin": 12677,
+      "share": 0.018,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "probation-period-uae-employment",
+      "status": 200,
+      "chars": 16145,
+      "arabic": 122,
+      "latin": 13230,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "shareholder-agreements-uae-guide",
+      "status": 200,
+      "chars": 17141,
+      "arabic": 110,
+      "latin": 14060,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "construction-disputes-uae",
+      "status": 200,
+      "chars": 17420,
+      "arabic": 83,
+      "latin": 14380,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "smart-contract-legal-review-uae",
+      "status": 200,
+      "chars": 16698,
+      "arabic": 50,
+      "latin": 13844,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "notarization-services-uae",
+      "status": 200,
+      "chars": 15395,
+      "arabic": 108,
+      "latin": 12684,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "software-copyright-uae",
+      "status": 200,
+      "chars": 14032,
+      "arabic": 103,
+      "latin": 11504,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "property-title-deed-verification-dubai",
+      "status": 200,
+      "chars": 15855,
+      "arabic": 79,
+      "latin": 12901,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "contract-termination-uae-law",
+      "status": 200,
+      "chars": 15253,
+      "arabic": 89,
+      "latin": 12429,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "corporate-governance-uae",
+      "status": 200,
+      "chars": 18573,
+      "arabic": 119,
+      "latin": 15274,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "banking-disputes-uae",
+      "status": 200,
+      "chars": 14090,
+      "arabic": 113,
+      "latin": 11551,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "token-issuance-legal-framework-uae",
+      "status": 200,
+      "chars": 17823,
+      "arabic": 94,
+      "latin": 14718,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "will-registration-uae",
+      "status": 200,
+      "chars": 18413,
+      "arabic": 85,
+      "latin": 14987,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "counterfeit-goods-uae-legal-action",
+      "status": 200,
+      "chars": 19413,
+      "arabic": 62,
+      "latin": 16029,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "off-plan-property-dubai",
+      "status": 200,
+      "chars": 16735,
+      "arabic": 83,
+      "latin": 13591,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "penalty-clauses-uae-contracts",
+      "status": 200,
+      "chars": 13666,
+      "arabic": 85,
+      "latin": 11079,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "local-sponsor-requirements-uae",
+      "status": 200,
+      "chars": 14859,
+      "arabic": 253,
+      "latin": 11879,
+      "share": 0.021,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "debt-recovery-uae",
+      "status": 200,
+      "chars": 15002,
+      "arabic": 101,
+      "latin": 12261,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "virtual-asset-licensing-vara-uae",
+      "status": 200,
+      "chars": 18687,
+      "arabic": 50,
+      "latin": 15574,
+      "share": 0.003,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "document-attestation-uae",
+      "status": 200,
+      "chars": 14479,
+      "arabic": 81,
+      "latin": 11849,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "licensing-intellectual-property-uae",
+      "status": 200,
+      "chars": 16648,
+      "arabic": 93,
+      "latin": 13755,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "freehold-vs-leasehold-uae",
+      "status": 200,
+      "chars": 14879,
+      "arabic": 121,
+      "latin": 12138,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "force-majeure-uae-contracts",
+      "status": 200,
+      "chars": 16934,
+      "arabic": 101,
+      "latin": 13763,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "uae-business-license-types",
+      "status": 200,
+      "chars": 14951,
+      "arabic": 144,
+      "latin": 12202,
+      "share": 0.012,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "breach-of-contract-uae",
+      "status": 200,
+      "chars": 17414,
+      "arabic": 189,
+      "latin": 14089,
+      "share": 0.013,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "crypto-business-setup-uae",
+      "status": 200,
+      "chars": 19765,
+      "arabic": 66,
+      "latin": 16468,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "power-of-attorney-uae",
+      "status": 200,
+      "chars": 16051,
+      "arabic": 94,
+      "latin": 13042,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "domain-name-disputes-uae",
+      "status": 200,
+      "chars": 12971,
+      "arabic": 125,
+      "latin": 10489,
+      "share": 0.012,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "buying-property-dubai-foreigner",
+      "status": 200,
+      "chars": 18444,
+      "arabic": 78,
+      "latin": 14946,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "contract-interpretation-uae-law",
+      "status": 200,
+      "chars": 17478,
+      "arabic": 159,
+      "latin": 14051,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "100-foreign-ownership-uae",
+      "status": 200,
+      "chars": 14127,
+      "arabic": 152,
+      "latin": 11415,
+      "share": 0.013,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "shareholder-disputes-uae",
+      "status": 200,
+      "chars": 18240,
+      "arabic": 198,
+      "latin": 14814,
+      "share": 0.013,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ai-machine-learning-legal-uae",
+      "status": 200,
+      "chars": 18651,
+      "arabic": 50,
+      "latin": 15401,
+      "share": 0.003,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "social-media-law-uae",
+      "status": 200,
+      "chars": 16466,
+      "arabic": 83,
+      "latin": 13473,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "trademark-infringement-uae",
+      "status": 200,
+      "chars": 17842,
+      "arabic": 81,
+      "latin": 14731,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "software-licensing-agreements-uae",
+      "status": 200,
+      "chars": 15383,
+      "arabic": 110,
+      "latin": 12529,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "valid-contract-elements-uae",
+      "status": 200,
+      "chars": 13924,
+      "arabic": 78,
+      "latin": 11279,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "offshore-company-formation-uae",
+      "status": 200,
+      "chars": 17262,
+      "arabic": 75,
+      "latin": 14168,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "judgment-execution-uae",
+      "status": 200,
+      "chars": 30300,
+      "arabic": 128,
+      "latin": 24809,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "mobile-app-legal-framework-uae",
+      "status": 200,
+      "chars": 16049,
+      "arabic": 54,
+      "latin": 13228,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "cloud-computing-contracts-uae",
+      "status": 200,
+      "chars": 16165,
+      "arabic": 128,
+      "latin": 13251,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "trade-secret-protection-uae",
+      "status": 200,
+      "chars": 17301,
+      "arabic": 81,
+      "latin": 14294,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ecommerce-terms-conditions-uae",
+      "status": 200,
+      "chars": 15301,
+      "arabic": 83,
+      "latin": 12388,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "uae-commercial-companies-law",
+      "status": 200,
+      "chars": 18565,
+      "arabic": 103,
+      "latin": 15237,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "freezone-company-formation-uae",
+      "status": 200,
+      "chars": 16880,
+      "arabic": 83,
+      "latin": 13868,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "urgent-court-orders-uae",
+      "status": 200,
+      "chars": 19337,
+      "arabic": 109,
+      "latin": 15717,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "it-service-agreements-uae",
+      "status": 200,
+      "chars": 19177,
+      "arabic": 70,
+      "latin": 15849,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ai-regulation-uae",
+      "status": 200,
+      "chars": 19214,
+      "arabic": 83,
+      "latin": 15809,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "patent-registration-uae",
+      "status": 200,
+      "chars": 15323,
+      "arabic": 85,
+      "latin": 12583,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "lease-agreements-uae-guide",
+      "status": 200,
+      "chars": 19527,
+      "arabic": 85,
+      "latin": 15964,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "aml-compliance-uae-guide",
+      "status": 200,
+      "chars": 19486,
+      "arabic": 87,
+      "latin": 15971,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "mainland-company-formation-dubai",
+      "status": 200,
+      "chars": 17700,
+      "arabic": 110,
+      "latin": 14285,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "uae-court-fees-explained",
+      "status": 200,
+      "chars": 16062,
+      "arabic": 111,
+      "latin": 12612,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "software-development-agreements-uae",
+      "status": 200,
+      "chars": 19415,
+      "arabic": 70,
+      "latin": 16051,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "cybersecurity-law-uae",
+      "status": 200,
+      "chars": 17533,
+      "arabic": 79,
+      "latin": 14453,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "copyright-protection-uae",
+      "status": 200,
+      "chars": 15445,
+      "arabic": 83,
+      "latin": 12650,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "audit-compliance-uae",
+      "status": 200,
+      "chars": 18007,
+      "arabic": 68,
+      "latin": 14986,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "real-estate-sale-agreements-uae",
+      "status": 200,
+      "chars": 15857,
+      "arabic": 89,
+      "latin": 12816,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "economic-substance-regulations-uae",
+      "status": 200,
+      "chars": 14340,
+      "arabic": 83,
+      "latin": 11736,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "mainland-vs-freezone-vs-offshore-uae",
+      "status": 200,
+      "chars": 17187,
+      "arabic": 136,
+      "latin": 13926,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "litigation-timeline-uae",
+      "status": 200,
+      "chars": 15730,
+      "arabic": 140,
+      "latin": 12745,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "franchise-legal-framework-uae",
+      "status": 200,
+      "chars": 18805,
+      "arabic": 59,
+      "latin": 15666,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "data-protection-compliance-uae",
+      "status": 200,
+      "chars": 17146,
+      "arabic": 128,
+      "latin": 14147,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "privacy-policy-uae-pdpl",
+      "status": 200,
+      "chars": 13511,
+      "arabic": 98,
+      "latin": 11054,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "commercial-lease-agreements-dubai",
+      "status": 200,
+      "chars": 15846,
+      "arabic": 169,
+      "latin": 12839,
+      "share": 0.013,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "probation-period-uae-guide",
+      "status": 200,
+      "chars": 13388,
+      "arabic": 122,
+      "latin": 10972,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "bankruptcy-insolvency-uae",
+      "status": 200,
+      "chars": 16660,
+      "arabic": 101,
+      "latin": 13733,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "intellectual-property-disputes-uae",
+      "status": 200,
+      "chars": 15036,
+      "arabic": 136,
+      "latin": 12315,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "market-entry-legal-planning-uae",
+      "status": 200,
+      "chars": 19002,
+      "arabic": 56,
+      "latin": 15719,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "technology-contracts-licensing-uae",
+      "status": 200,
+      "chars": 17960,
+      "arabic": 56,
+      "latin": 14841,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "data-breach-response-uae",
+      "status": 200,
+      "chars": 15540,
+      "arabic": 77,
+      "latin": 12794,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "eviction-process-dubai-guide",
+      "status": 200,
+      "chars": 15202,
+      "arabic": 96,
+      "latin": 12286,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "fixed-term-vs-unlimited-contracts-uae",
+      "status": 200,
+      "chars": 14123,
+      "arabic": 107,
+      "latin": 11494,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "business-liquidation-uae",
+      "status": 200,
+      "chars": 18604,
+      "arabic": 87,
+      "latin": 15297,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "insurance-disputes-uae",
+      "status": 200,
+      "chars": 12901,
+      "arabic": 103,
+      "latin": 10424,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "strategic-business-setup-uae",
+      "status": 200,
+      "chars": 18221,
+      "arabic": 78,
+      "latin": 15183,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "business-valuation-dubai",
+      "status": 200,
+      "chars": 18452,
+      "arabic": 83,
+      "latin": 15191,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "gdpr-uae-data-protection",
+      "status": 200,
+      "chars": 15269,
+      "arabic": 110,
+      "latin": 12410,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "security-deposit-disputes-dubai",
+      "status": 200,
+      "chars": 15378,
+      "arabic": 119,
+      "latin": 12393,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "employment-contracts-uae",
+      "status": 200,
+      "chars": 17152,
+      "arabic": 85,
+      "latin": 13904,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "corporate-restructuring-uae",
+      "status": 200,
+      "chars": 16314,
+      "arabic": 113,
+      "latin": 13518,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "medical-malpractice-uae",
+      "status": 200,
+      "chars": 14993,
+      "arabic": 214,
+      "latin": 12151,
+      "share": 0.017,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "asset-protection-strategies-uae",
+      "status": 200,
+      "chars": 17280,
+      "arabic": 70,
+      "latin": 14476,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "transfer-pricing-uae",
+      "status": 200,
+      "chars": 17573,
+      "arabic": 66,
+      "latin": 14519,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "uae-data-protection-pdpl",
+      "status": 200,
+      "chars": 17767,
+      "arabic": 105,
+      "latin": 14656,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "rent-increase-dubai-rera",
+      "status": 200,
+      "chars": 14218,
+      "arabic": 176,
+      "latin": 11278,
+      "share": 0.015,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "non-compete-agreements-uae",
+      "status": 200,
+      "chars": 15301,
+      "arabic": 113,
+      "latin": 12534,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "company-valuation-uae-ma",
+      "status": 200,
+      "chars": 16939,
+      "arabic": 105,
+      "latin": 13884,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "mediation-uae",
+      "status": 200,
+      "chars": 12998,
+      "arabic": 79,
+      "latin": 10722,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "holding-company-formation-uae",
+      "status": 200,
+      "chars": 19996,
+      "arabic": 66,
+      "latin": 16641,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "law-firm-accounting-uae",
+      "status": 200,
+      "chars": 18891,
+      "arabic": 150,
+      "latin": 15588,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "nft-legal-framework-uae",
+      "status": 200,
+      "chars": 15934,
+      "arabic": 103,
+      "latin": 13037,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "nda-agreements-uae",
+      "status": 200,
+      "chars": 15161,
+      "arabic": 83,
+      "latin": 12432,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "share-vs-asset-purchase-uae",
+      "status": 200,
+      "chars": 13553,
+      "arabic": 106,
+      "latin": 11030,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "litigation-vs-arbitration-uae",
+      "status": 200,
+      "chars": 14578,
+      "arabic": 79,
+      "latin": 11931,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "due-diligence-uae",
+      "status": 200,
+      "chars": 17041,
+      "arabic": 54,
+      "latin": 14124,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ico-token-issuance-uae-vara",
+      "status": 200,
+      "chars": 11185,
+      "arabic": 128,
+      "latin": 9144,
+      "share": 0.014,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "tenancy-law-dubai-guide",
+      "status": 200,
+      "chars": 15874,
+      "arabic": 105,
+      "latin": 12741,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "master-service-agreement-uae",
+      "status": 200,
+      "chars": 29344,
+      "arabic": 105,
+      "latin": 23975,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "due-diligence-checklist-uae-ma",
+      "status": 200,
+      "chars": 18966,
+      "arabic": 149,
+      "latin": 15569,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "real-estate-disputes-uae",
+      "status": 200,
+      "chars": 17791,
+      "arabic": 197,
+      "latin": 14454,
+      "share": 0.013,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "investment-structuring-uae",
+      "status": 200,
+      "chars": 19940,
+      "arabic": 50,
+      "latin": 16640,
+      "share": 0.003,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "financial-due-diligence-uae-ma",
+      "status": 200,
+      "chars": 19140,
+      "arabic": 93,
+      "latin": 15860,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "smart-contracts-uae-law",
+      "status": 200,
+      "chars": 16343,
+      "arabic": 121,
+      "latin": 13381,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "escrow-accounts-dubai-property",
+      "status": 200,
+      "chars": 14247,
+      "arabic": 87,
+      "latin": 11638,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "distribution-agreements-uae",
+      "status": 200,
+      "chars": 18857,
+      "arabic": 75,
+      "latin": 15602,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "mergers-acquisitions-uae",
+      "status": 200,
+      "chars": 19825,
+      "arabic": 85,
+      "latin": 16248,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "rental-disputes-dubai-rera",
+      "status": 200,
+      "chars": 17501,
+      "arabic": 203,
+      "latin": 14080,
+      "share": 0.014,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "property-dispute-resolution-uae",
+      "status": 200,
+      "chars": 16871,
+      "arabic": 72,
+      "latin": 14053,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "corporate-tax-planning-uae",
+      "status": 200,
+      "chars": 16791,
+      "arabic": 81,
+      "latin": 13692,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "crypto-tax-uae",
+      "status": 200,
+      "chars": 14967,
+      "arabic": 81,
+      "latin": 12193,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "power-of-attorney-property-uae",
+      "status": 200,
+      "chars": 14708,
+      "arabic": 128,
+      "latin": 11920,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "franchise-agreements-uae",
+      "status": 200,
+      "chars": 17563,
+      "arabic": 103,
+      "latin": 14540,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ejari-registration-dubai",
+      "status": 200,
+      "chars": 16772,
+      "arabic": 81,
+      "latin": 13721,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ubo-compliance-uae",
+      "status": 200,
+      "chars": 15538,
+      "arabic": 102,
+      "latin": 12663,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "end-of-service-gratuity-uae",
+      "status": 200,
+      "chars": 14726,
+      "arabic": 103,
+      "latin": 11674,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "property-transaction-services-dubai",
+      "status": 200,
+      "chars": 17136,
+      "arabic": 59,
+      "latin": 14241,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "tax-efficient-company-structures-uae",
+      "status": 200,
+      "chars": 18537,
+      "arabic": 68,
+      "latin": 15182,
+      "share": 0.004,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "cryptocurrency-regulation-uae-vara",
+      "status": 200,
+      "chars": 18302,
+      "arabic": 118,
+      "latin": 15150,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "dld-registration-dubai-guide",
+      "status": 200,
+      "chars": 15962,
+      "arabic": 121,
+      "latin": 12882,
+      "share": 0.009,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "shareholder-agreements-uae",
+      "status": 200,
+      "chars": 17860,
+      "arabic": 121,
+      "latin": 14596,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "articles-of-association-uae",
+      "status": 200,
+      "chars": 15453,
+      "arabic": 99,
+      "latin": 12630,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "employment-disputes-uae",
+      "status": 200,
+      "chars": 16323,
+      "arabic": 165,
+      "latin": 13295,
+      "share": 0.012,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "real-estate-investment-uae",
+      "status": 200,
+      "chars": 18921,
+      "arabic": 74,
+      "latin": 15785,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "vat-compliance-uae",
+      "status": 200,
+      "chars": 19170,
+      "arabic": 108,
+      "latin": 15591,
+      "share": 0.007,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "virtual-asset-licensing-dubai-vara",
+      "status": 200,
+      "chars": 18283,
+      "arabic": 75,
+      "latin": 15027,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "property-transfer-fees-dubai",
+      "status": 200,
+      "chars": 11498,
+      "arabic": 101,
+      "latin": 9063,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "joint-venture-agreements-uae",
+      "status": 200,
+      "chars": 16281,
+      "arabic": 152,
+      "latin": 13233,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "board-of-directors-duties-uae",
+      "status": 200,
+      "chars": 19242,
+      "arabic": 97,
+      "latin": 15743,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "unfair-dismissal-uae",
+      "status": 200,
+      "chars": 14884,
+      "arabic": 146,
+      "latin": 12054,
+      "share": 0.012,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "cybersecurity-legal-framework-uae",
+      "status": 200,
+      "chars": 16824,
+      "arabic": 66,
+      "latin": 13900,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "ecommerce-regulation-uae",
+      "status": 200,
+      "chars": 18857,
+      "arabic": 83,
+      "latin": 15528,
+      "share": 0.005,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "trademark-registration-uae",
+      "status": 200,
+      "chars": 16435,
+      "arabic": 135,
+      "latin": 13372,
+      "share": 0.01,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "construction-contracts-uae-fidic",
+      "status": 200,
+      "chars": 16086,
+      "arabic": 107,
+      "latin": 13142,
+      "share": 0.008,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "corporate-tax-uae-2025",
+      "status": 200,
+      "chars": 16810,
+      "arabic": 154,
+      "latin": 13407,
+      "share": 0.011,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "start-business-uae-guide-2025",
+      "status": 200,
+      "chars": 22971,
+      "arabic": 104,
+      "latin": 18752,
+      "share": 0.006,
+      "verdict": "english"
+    },
+    {
+      "kind": "post",
+      "slug": "uae-court-system-explained",
+      "status": 200,
+      "chars": 15209,
+      "arabic": 240,
+      "latin": 12223,
+      "share": 0.019,
+      "verdict": "english"
+    }
+  ]
+}

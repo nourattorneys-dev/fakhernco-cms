@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_blocks_images",
+  "info": {
+    "displayName": "Image",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "legacySrc": {
+      "type": "string",
+      "description": "Original WordPress URL, kept until media migration is verified"
+    }
+  }
+}

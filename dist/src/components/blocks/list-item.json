@@ -1,0 +1,14 @@
+{
+    "collectionName": "components_blocks_list_items",
+    "info": {
+        "displayName": "List item",
+        "icon": "bulletList"
+    },
+    "options": {},
+    "attributes": {
+        "text": {
+            "type": "text",
+            "required": true
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_blocks_data_tables",
+  "info": {
+    "displayName": "Table",
+    "icon": "grid",
+    "description": "Header row plus body rows, both stored as JSON arrays."
+  },
+  "options": {},
+  "attributes": {
+    "headers": {
+      "type": "json"
+    },
+    "rows": {
+      "type": "json"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "collectionName": "components_blocks_faqs",
+    "info": {
+        "displayName": "FAQ",
+        "icon": "question",
+        "description": "Accordion of question/answer pairs. Rendered with FAQPage structured data."
+    },
+    "options": {},
+    "attributes": {
+        "items": {
+            "type": "component",
+            "repeatable": true,
+            "component": "blocks.faq-item"
+        }
+    }
+}
