@@ -143,8 +143,8 @@ const REPLY = {
     "Mandatsverhältnis" is the term of art for the lawyer-client relationship,
     and is what makes the disclaimer mean the same thing it means in English.
 
-    WRITTEN BY A NON-NATIVE HAND — have a German speaker read this before the
-    first German enquiry arrives. It is the firm's voice, not plumbing.
+    Reviewed by a German speaker. This is the firm's voice, not plumbing, so
+    any edit here wants the same read before it ships.
   */
   de: {
     subject: 'Wir haben Ihre Anfrage erhalten — Fakher & Co',

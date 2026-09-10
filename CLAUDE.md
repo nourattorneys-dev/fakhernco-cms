@@ -42,7 +42,7 @@ pushes to it. The repo is public, so the clone needs no credentials.
   empty). The front end treats that 404 as "not translated yet".
 
 The contact controller (`src/api/contact-submission/controllers/submit.ts`)
-holds per-locale auto-reply copy; German is marked non-native. `consent`
+holds per-locale auto-reply copy in all three languages. `consent`
 accepts boolean **and** the string `"true"` — FormData sends strings, and the
 strict `=== true` comparison once recorded `consent: false` on every enquiry.
 
